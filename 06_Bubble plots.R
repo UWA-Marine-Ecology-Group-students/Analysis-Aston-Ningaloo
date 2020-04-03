@@ -5,6 +5,8 @@ rm(list=ls())
 study <- "ningaloo" 
 
 # Libraries required
+install.packages('ggsn')
+
 install_github("UWAMEGFisheries/GlobalArchive") #to check for updates
 library(GlobalArchive)
 
@@ -50,8 +52,8 @@ theme.larger.text<-theme(
   axis.title.y=element_text(vjust=0.0,size=10),
   axis.text.x=element_text(size=6),
   axis.text.y=element_text(size=6),
-  legend.title = element_text(family="TN",size=8),
-  legend.text = element_text(family="TN",size=8))
+  legend.title = element_text(family="sans",size=8),
+  legend.text = element_text(family="sans",size=8))
 
 theme.species<-theme(
   strip.text.x = element_text(size = 8,angle = 0),
@@ -60,21 +62,21 @@ theme.species<-theme(
   axis.title.y=element_text(vjust=0.0,size=12),
   axis.text.x=element_text(size=8),
   axis.text.y=element_text(size=8),
-  legend.title = element_text(family="TN",size=11),
-  legend.text = element_text(family="TN",size=11))
+  legend.title = element_text(family="sans",size=11),
+  legend.text = element_text(family="sans",size=11))
 
 
 theme_collapse<-theme(      ## the commented values are from theme_grey
   panel.grid.major=element_line(colour = "white"), ## element_line(colour = "white")
-  panel.grid.minor=element_line(colour = "white", size = 0.25),
+  panel.grid.minor=element_line((colour = "white"), size = 0.25),
   strip.text.x = element_text(size = 4,angle = 0),
   strip.text.y = element_text(size = 4),
   axis.title.x=element_text(vjust=-0.0, size=10),
   axis.title.y=element_text(vjust=0.0,size=10),
   axis.text.x=element_text(size=6),
   axis.text.y=element_text(size=6),
-  legend.title = element_text(family="TN",size=6),
-  legend.text = element_text(family="TN",size=4))
+  legend.title = element_text(family="sans",size=6),
+  legend.text = element_text(family="sans",size=4))
 
 # Load fish pictures for plotting ----
 # setwd(images.dir)
@@ -111,6 +113,10 @@ commonwealth.marine.parks<- fortify(commonwealth.marine.parks)
 state.marine.parks <- readOGR(spatial.dir, "WA_MPA_2018")
 state.marine.parks <- fortify(state.marine.parks)
 
+australia.state.waters <-readOGR(spatial.dir, "AustraliaStateWaters")
+australia.state.waters <- fortify(australia.state.waters)
+
+
 # read in maxn
 setwd(tidy.dir)
 dir()
@@ -142,15 +148,17 @@ unique(maxn$scientific)
 
 # TOTAL ABUNDANCE ----
 spatial.ta<-ggplot() +
-  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+ # change colours and add wa state reserves
-  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'darkgreen', fill = 'green4', size= .2)+
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ # change colours and add wa state reserves
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
   geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
   geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Total\nabundance")+
-  # annotate("text",x=193000, y=7606500,label="Total abundance",color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+ # change this to a different lat and lon x=lon, y=lat
-  theme_bw()+
+  annotate("text",x=115, y=-21.6,label="Total abundance",color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+ # change this to a different lat and lon x=lon, y=lat
+  theme_bw()+ 
   theme_collapse+
   theme.larger.text
 
@@ -158,136 +166,314 @@ spatial.ta
 
 # SPECIES RICHNESS ----
 spatial.sr<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ # change colours and add wa state reserves
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
   geom_point(data=filter(maxn.ta.sr,scientific%in%c("species.richness")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
   geom_point(data=filter(maxn.ta.sr,scientific%in%c("species.richness")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Species\nrichness")+
-  annotate("text",x=193000, y=7606500,label="Species richness",color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
-  
+  annotate("text",x=115, y=-21.6,label="Species richness",color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
   theme_bw()+
   theme_collapse+
   theme.larger.text
 
 spatial.sr
 
-# Nemipterus bathybius ----
-species <- c("Nemipterus bathybius")
+# Filter top 10
+top.10.maxn <- dplyr::filter(maxn, grepl('Argyrops spinifer|Carangoides chrysophrys|Carangoides gymnostethus|Decapterus spp|Gymnocranius grandoculis|Lagocephalus sceleratus|Lethrinus miniatus|Lethrinus rubrioperculatus|Pristipomoides multidens|Lutjanus sebae|Lethrinus punctulatus|Diagramma pictum labiosum|Lethrinus ravus', scientific))
+View(top.10.maxn)
+                
+# Decapterus spp ----
+species <- c("Decapterus spp")
 
-spatial.bathybius<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus bathybius")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus bathybius")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+spatial.decapterus<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("spp")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("spp")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
   #labs(size = " ")+
-  annotate("text",x=193000, y=7606500,label=species,color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
-  annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  annotate("text",x=115, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
   theme_bw()+
   theme_collapse+
   theme.species
 
-spatial.bathybius
+spatial.decapterus
 
 
-# Carangoides equula ----
-species <- c("Carangoides equula")
+# Pristipomoides multidens ----
+species <- c("Pristopomoides multidens")
 
-spatial.equula<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Carangoides equula")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Carangoides equula")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+spatial.multidens<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("multidens")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("multidens")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
   #labs(size = " ")+
-  annotate("text",x=193000, y=7606500,label=species,color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
-  annotation_raster(c.e, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
   theme_bw()+
   theme_collapse+
   theme.species
 
+spatial.multidens
 
-spatial.equula
+# Gymnocranius grandoculis ----
+species <- c("Gymnocranius grandoculis")
 
-# Dentex carpenteri ----
-species <- c("Dentex carpenteri")
-
-spatial.carpenteri<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Dentex carpenteri")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Dentex carpenteri")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+spatial.grandoculis<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("grandoculis")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("grandoculis")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
   #labs(size = " ")+
-  annotate("text",x=193000, y=7606500,label=species,color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
-  annotation_raster(d.c, xmin=196800, xmax=198250, ymin=7605800, ymax=7606750)+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
   theme_bw()+
   theme_collapse+
   theme.species
 
 
-spatial.carpenteri
+spatial.grandoculis
 
-# Synodus variegatus ----
-species <- c("Synodus variegatus")
+# Carangoides chrysophrys ----
+species <- c("Carangoides chrysophrys")
 
-spatial.variegatus<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Synodus variegatus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Synodus variegatus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+spatial.chrysophrys<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("chrysophrys")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("chrysophrys")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
   #labs(size = " ")+
-  annotate("text",x=193000, y=7606500,label=species,color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
-  annotation_raster(s.u,xmin=196500, xmax=198250, ymin=7606000, ymax=7606800)+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
   theme_bw()+
   theme_collapse+
   theme.species
 
-spatial.variegatus
+spatial.chrysophrys
 
-# Decapterus tabl ----
-species <- c("Decapterus tabl")
+# Lethrinus miniatus ----
+species <- c("Lethrinus miniatus")
 
-spatial.tabl<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Decapterus tabl")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Decapterus tabl")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+spatial.miniatus<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("miniatus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("miniatus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
-  annotate("text",x=193000, y=7606500,label=species,color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
-  annotation_raster(d.spp, xmin=196250, xmax=198300, ymin=7605500, ymax=7606700)+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
   theme_bw()+
   theme_collapse+
   theme.species
 
-spatial.tabl
+spatial.miniatus
 
 
-# Nemipterus virgatus ----
-species <- c("Nemipterus virgatus")
+# Carangoides gymnostethus ----
+species <- c("Carangoides gymnostethus")
 
-spatial.virgatus<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus virgatus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus virgatus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+spatial.gymnostethus<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("gymnostethus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("gymnostethus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
-  annotate("text",x=193000, y=7606500,label=species,color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
-  annotation_raster(n.v, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
   theme_bw()+
   theme_collapse+
   theme.species
 
-spatial.virgatus
+spatial.gymnostethus
 
+# Lethrinus rubrioperculatus ----
+species <- c("Lethrinus rubrioperculatus")
+
+spatial.rubrioperculatus<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("rubrioperculatus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("rubrioperculatus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  xlab('Longitude')+
+  ylab('Latitude')+
+  labs(size = "Relative \nabundance")+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  theme_bw()+
+  theme_collapse+
+  theme.species
+
+spatial.rubrioperculatus
+
+# Argyrops spinifer ----
+species <- c("Argyrops spinifer")
+
+spatial.spinifer<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("spinifer")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("spinifer")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  xlab('Longitude')+
+  ylab('Latitude')+
+  labs(size = "Relative \nabundance")+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  theme_bw()+
+  theme_collapse+
+  theme.species
+
+spatial.spinifer
+
+# Lagocephalus sceleratus ----
+species <- c("Lagocephalus sceleratus")
+
+spatial.sceleratus<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("sceleratus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("sceleratus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  xlab('Longitude')+
+  ylab('Latitude')+
+  labs(size = "Relative \nabundance")+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  theme_bw()+
+  theme_collapse+
+  theme.species
+
+spatial.sceleratus
+
+# Lutjanus sebae ----
+species <- c("Lutjanus sebae")
+
+spatial.sebae<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("sebae")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("sebae")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  xlab('Longitude')+
+  ylab('Latitude')+
+  labs(size = "Relative \nabundance")+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  theme_bw()+
+  theme_collapse+
+  theme.species
+
+spatial.sebae
+
+# Lethrinus punctulatus ----
+species <- c("Lethrinus punctulatus")
+
+spatial.punctulatus<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("punctulatus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("punctulatus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  xlab('Longitude')+
+  ylab('Latitude')+
+  labs(size = "Relative \nabundance")+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  theme_bw()+
+  theme_collapse+
+  theme.species
+
+spatial.punctulatus
+
+# Diagramma pictum labiosum ----
+species <- c("Diagramma pictum labiosum")
+
+spatial.pictum.labiosum<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("pictum labiosum")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("pictum labiosum")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  xlab('Longitude')+
+  ylab('Latitude')+
+  labs(size = "Relative \nabundance")+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  theme_bw()+
+  theme_collapse+
+  theme.species
+
+spatial.pictum.labiosum
+
+# Lethrinus ravus ----
+species <- c("Lethrinus ravus")
+
+spatial.ravus<-ggplot() +
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'lightblue', size = .2)+ 
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'black', fill = 'palegreen', size= .2)+
+  geom_polygon(data = australia.state.waters, aes(x = long, y = lat, group = group), colour = 'red', fill = 'grey90', size = .2)+
+  coord_cartesian(xlim=c(112.5,116), ylim=c(-23,-21.5), expand = FALSE)+
+  geom_point(data=filter(top.10.maxn,species%in%c("ravus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.10.maxn,species%in%c("ravus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  xlab('Longitude')+
+  ylab('Latitude')+
+  labs(size = "Relative \nabundance")+
+  #labs(size = " ")+
+  annotate("text",x=114.5, y=-21.6,label=species,color="Black",hjust=0,family="sans",cex=3.5,fontface="italic")+
+  # annotation_raster(n.b, xmin=196800, xmax=198250, ymin=7605800, ymax=7606600)+
+  theme_bw()+
+  theme_collapse+
+  theme.species
+
+spatial.ravus
 
 
 # SAVE - Species richness and total abundance combined ----
@@ -299,10 +485,13 @@ ggsave("total.abundance.and.species.richness.potrait.png",ta.sr,dpi=300,width=11
 # ggsave("total.abundance.and.species.richness.landscape1.png",ta.sr,dpi=300,width = 20, height = 5.5,unit="cm") 
 
 # Species specific ----
-species.combined<-plot_grid(spatial.equula, spatial.tabl, 
-                            spatial.carpenteri, spatial.bathybius, 
-                            spatial.virgatus,spatial.variegatus, 
-                            labels = c('A', 'B','C','D','E','F'), label_size = 12,ncol=2)
+species.combined<-plot_grid(spatial.decapterus, spatial.multidens, 
+                            spatial.grandoculis, spatial.chrysophrys, 
+                            spatial.miniatus, spatial.gymnostethus, 
+                            spatial.rubrioperculatus, spatial.spinifer,
+                            spatial.sceleratus, spatial.sebae, spatial.punctulatus,
+                            spatial.pictum.labiosum, spatial.ravus,
+                            labels = c('A','B','C','D','E','F','G','H','I','J','K', 'L', 'M'), label_size = 12,ncol=2)
 ggsave("spatial.species.png",species.combined,dpi=500, width = 21, height = 23,units = "cm")
 
 
@@ -316,25 +505,43 @@ ggsave("spatial.species.png",species.combined,dpi=500, width = 21, height = 23,u
 
 
 # Species specific
-species.combined.land<-plot_grid(spatial.equula, spatial.tabl, 
-                            spatial.carpenteri, spatial.bathybius, 
-                            spatial.virgatus,spatial.variegatus, 
-                            labels = c('A', 'B','C','D','E','F'), label_size = 12,ncol=3)
+species.combined.land<-plot_grid(spatial.decapterus, spatial.multidens, 
+                                 spatial.grandoculis, spatial.chrysophrys, 
+                                 spatial.miniatus, spatial.gymnostethus, 
+                                 spatial.rubrioperculatus, spatial.spinifer,
+                                 spatial.sceleratus, spatial.sebae, spatial.punctulatus,
+                                 spatial.pictum.labiosum, spatial.ravus,
+                                 labels = c('A','B','C','D','E','F','G','H','I','J','K', 'L', 'M'), label_size = 12,ncol=2)
 ggsave("spatial.species.landscape.png",species.combined.land,dpi=100, width = 33, height = 16,units = "cm")
 
-# species.combined1<-plot_grid(spatial.equula, spatial.tabl, 
-#                             labels = c('A', 'B'), label_size = 12,ncol=2)
-# ggsave("spatial.species1.png",species.combined1,dpi=300,width=10,height=3.75)
-# 
-# species.combined2<-plot_grid(spatial.carpenteri, spatial.bathybius, 
-#                              labels = c('C', 'D'), label_size = 12,ncol=2)
-# ggsave("spatial.species2.png",species.combined2,dpi=300,width=10,height=3.75)
-# 
-# species.combined3<-plot_grid(spatial.undosquamis, 
-#                              labels = c('E'), label_size = 12,ncol=2)
-# ggsave("spatial.species3.png",species.combined3,dpi=300,width=15,height=5.75)
+species.combined1<-plot_grid(spatial.decapterus, spatial.multidens,
+                            labels = c('A', 'B'), label_size = 12,ncol=2)
+ggsave("spatial.species1.png",species.combined1,dpi=300,width=10,height=3.75)
 
-  
+species.combined2<-plot_grid(spatial.grandoculis, spatial.chrysophrys,
+                             labels = c('C', 'D'), label_size = 12,ncol=2)
+ggsave("spatial.species2.png",species.combined2,dpi=300,width=10,height=3.75)
+
+species.combined3<-plot_grid(spatial.miniatus, spatial.gymnostethus,
+                             labels = c('E', 'F'), label_size = 12,ncol=2)
+ggsave("spatial.species3.png",species.combined3,dpi=300,width=15,height=5.75)
+
+species.combined4<-plot_grid(spatial.rubrioperculatus, spatial.spinifer,
+                             labels = c('G', 'H'), label_size = 12,ncol=2)
+ggsave("spatial.species3.png",species.combined3,dpi=300,width=15,height=5.75) 
+
+species.combined3<-plot_grid(spatial.sceleratus, spatial.sebae,
+                             labels = c('I', 'J'), label_size = 12,ncol=2)
+ggsave("spatial.species3.png",species.combined3,dpi=300,width=15,height=5.75)
+
+species.combined3<-plot_grid(spatial.punctulatus, spatial.pictum.labiosum,
+                             labels = c('K', 'L'), label_size = 12,ncol=2)
+ggsave("spatial.species3.png",species.combined3,dpi=300,width=15,height=5.75)
+
+species.combined3<-plot_grid(spatial.ravus,
+                             labels = c('M'), label_size = 12,ncol=2)
+ggsave("spatial.species3.png",species.combined3,dpi=300,width=15,height=5.75)
+
 # Habitat bubble plots  ----
 glimpse(habitat)
 
@@ -345,7 +552,8 @@ hab<-habitat%>%
   glimpse()
 
 bedforms <- ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .1)+
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .1)+
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group),color = 'darkgreen', fill = 'green4', size = .1)+
   geom_scatterpie(aes(x=longitude, y=latitude,r=150),
                     data=hab, cols=c("bioturbated","none"), color="black", alpha=.8,legend_name="Bedform")+
   xlab('Longitude')+
@@ -388,7 +596,8 @@ ggsave("hab.combined.potrait.png",hab.combined2,dpi=300,width=12,height=17.5,uni
 
 # Basic Map 
 spatial.deployments<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group),color = 'darkgreen', fill = 'green4', size = .2)+
   geom_point(data=metadata,aes(longitude,latitude),shape=21,colour="black",fill="white",size=4)+
   xlab('Longitude')+
   ylab('Latitude')+
