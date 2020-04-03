@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # Study name ----
-study <- "2020-01_Guardian-Ningaloo_stereoBRUVs" 
+study <- "ningaloo" 
 
 # Libraries required
 install_github("UWAMEGFisheries/GlobalArchive") #to check for updates
@@ -29,11 +29,14 @@ library(scatterpie)
 ## Set your working directory ----
 working.dir<-dirname(rstudioapi::getActiveDocumentContext()$path) # to directory of current file - or type your own
 
+setwd(working.dir)
+dir()
+
 # Set sub directories----
 plots.dir=paste(working.dir,"plots",sep="/")
-tidy.dir=paste(working.dir,"tidy data",sep="/")
+tidy.dir=paste(working.dir,"Tidy data",sep="/")
 images.dir=paste(working.dir,"images",sep="/")
-spatial.dir=paste(working.dir,"spatial",sep="/")
+spatial.dir=paste(working.dir,"Spatial",sep="/")
 
 # functions for summarising data on plots----
 se <- function(x) sd(x) / sqrt(length(x))
@@ -102,20 +105,23 @@ s.l <- as.raster(s.l)
 setwd(spatial.dir)
 dir()
 
-shapefile <- readOGR(spatial.dir, "studypolygon")
-shapefile_df <- fortify(shapefile)
+commonwealth.marine.parks <- readOGR(spatial.dir, "AustraliaNetworkMarineParks")
+commonwealth.marine.parks<- fortify(commonwealth.marine.parks)
+
+state.marine.parks <- readOGR(spatial.dir, "WA_MPA_2018")
+state.marine.parks <- fortify(state.marine.parks)
 
 # read in maxn
 setwd(tidy.dir)
 dir()
 
-maxn <- read.csv("2020-01_Guardian-Ningaloo_stereoBRUVs.complete.maxn.csv")%>%
-  mutate(sample=str_pad(sample,2,side="left",pad="0"))
+maxn <- read.csv("ningaloo.complete.maxn.csv")%>%
+  mutate(sample=as.character(sample))
 
-metadata <- read.csv("2020-01_Guardian-Ningaloo_stereoBRUVs.checked.metadata.csv")%>%
-  mutate(sample=str_pad(sample,2,side="left",pad="0"))
+metadata <- read.csv("ningaloo.checked.metadata.csv")%>%
+  mutate(sample=as.character(sample))
 
-habitat<-read_csv("2020-01_Guardian-Ningaloo_stereoBRUVs._habitat.csv" )%>%
+habitat<-read_csv("2020-01_Guardian-Ningaloo_stereoBRUVs._habitat.csv" )%>% # change this
   ga.clean.names()
 
 # workout total abundance and species richness
@@ -132,30 +138,17 @@ maxn.ta.sr <- maxn%>%
 # Format maxn for species specific plots
 unique(maxn$scientific)
 
-top.5<-c("Nemipterus bathybius",
-         "Dentex carpenteri",
-         "Decapterus tabl",
-         "Carangoides equula",
-         "Synodus variegatus",
-         "Nemipterus virgatus")
 
-top.5.maxn<-maxn%>%
-  mutate(genus.species=paste(genus,species,sep=" "))%>%
-  filter(genus.species%in%c(top.5))
-
-# Practice plots
-world <- ne_countries(scale = "medium", returnclass = "sf")
-class(world)
 
 # TOTAL ABUNDANCE ----
 spatial.ta<-ggplot() +
-  geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+ # change colours and add wa state reserves
+  geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Total\nabundance")+
-  annotate("text",x=193000, y=7606500,label="Total abundance",color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+
+  # annotate("text",x=193000, y=7606500,label="Total abundance",color="Black",hjust=0,family="TN",cex=3.5,fontface="italic")+ # change this to a different lat and lon x=lon, y=lat
   theme_bw()+
   theme_collapse+
   theme.larger.text
@@ -165,8 +158,8 @@ spatial.ta
 # SPECIES RICHNESS ----
 spatial.sr<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(maxn.ta.sr,scientific%in%c("species.richness")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(maxn.ta.sr,scientific%in%c("species.richness")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(maxn.ta.sr,scientific%in%c("species.richness")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(maxn.ta.sr,scientific%in%c("species.richness")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Species\nrichness")+
@@ -183,8 +176,8 @@ species <- c("Nemipterus bathybius")
 
 spatial.bathybius<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus bathybius")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus bathybius")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus bathybius")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus bathybius")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
@@ -203,8 +196,8 @@ species <- c("Carangoides equula")
 
 spatial.equula<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Carangoides equula")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Carangoides equula")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Carangoides equula")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Carangoides equula")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
@@ -223,8 +216,8 @@ species <- c("Dentex carpenteri")
 
 spatial.carpenteri<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Dentex carpenteri")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Dentex carpenteri")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Dentex carpenteri")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Dentex carpenteri")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
@@ -243,8 +236,8 @@ species <- c("Synodus variegatus")
 
 spatial.variegatus<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Synodus variegatus")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Synodus variegatus")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Synodus variegatus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Synodus variegatus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
@@ -262,8 +255,8 @@ species <- c("Decapterus tabl")
 
 spatial.tabl<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Decapterus tabl")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Decapterus tabl")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Decapterus tabl")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Decapterus tabl")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
@@ -281,8 +274,8 @@ species <- c("Nemipterus virgatus")
 
 spatial.virgatus<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus virgatus")&maxn==0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus virgatus")&maxn>0),aes(longitude.zone50,latitude.zone50,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus virgatus")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(top.5.maxn,genus.species%in%c("Nemipterus virgatus")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Relative \nabundance")+
@@ -352,7 +345,7 @@ hab<-habitat%>%
 
 bedforms <- ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .1)+
-  geom_scatterpie(aes(x=longitude.zone50, y=latitude.zone50,r=150),
+  geom_scatterpie(aes(x=longitude, y=latitude,r=150),
                     data=hab, cols=c("bioturbated","none"), color="black", alpha=.8,legend_name="Bedform")+
   xlab('Longitude')+
   ylab('Latitude')+
@@ -367,8 +360,8 @@ hab.sp<-habitat%>%
 
 spatial.sand<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=filter(hab.sp,broad.unconsolidated==0),aes(longitude.zone50,latitude.zone50,size=broad.unconsolidated),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
-  geom_point(data=filter(hab.sp,broad.unconsolidated>0),aes(longitude.zone50,latitude.zone50,size=broad.unconsolidated),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
+  geom_point(data=filter(hab.sp,broad.unconsolidated==0),aes(longitude,latitude,size=broad.unconsolidated),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
+  geom_point(data=filter(hab.sp,broad.unconsolidated>0),aes(longitude,latitude,size=broad.unconsolidated),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
   ylab('Latitude')+
   labs(size = "Percent cover")+
@@ -395,7 +388,7 @@ ggsave("hab.combined.potrait.png",hab.combined2,dpi=300,width=12,height=17.5,uni
 # Basic Map 
 spatial.deployments<-ggplot() +
   geom_polygon(data = shapefile_df, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+
-  geom_point(data=metadata,aes(longitude.zone50,latitude.zone50),shape=21,colour="black",fill="white",size=4)+
+  geom_point(data=metadata,aes(longitude,latitude),shape=21,colour="black",fill="white",size=4)+
   xlab('Longitude')+
   ylab('Latitude')+
   theme_bw()+
