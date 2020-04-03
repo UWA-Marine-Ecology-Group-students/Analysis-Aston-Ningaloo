@@ -77,29 +77,29 @@ theme_collapse<-theme(      ## the commented values are from theme_grey
   legend.text = element_text(family="TN",size=4))
 
 # Load fish pictures for plotting ----
-setwd(images.dir)
-dir()
-
-n.b <- readPNG("Nemipterus_bathybius_nb_GIBBONS.png")
-n.b <- as.raster(n.b)
-
-n.v <- readPNG("Nemipteridae.png")
-n.v <- as.raster(n.v)
-
-d.spp <- readPNG("Decapterus_spp.png")
-d.spp <- as.raster(d.spp)
-
-s.u <- readPNG("Synodus_variegatus_nb.png")
-s.u <- as.raster(s.u)
-
-c.e <- readPNG("Carangoides_equula_nb_GIBBONS.png")
-c.e <- as.raster(c.e)
-
-d.c <- readPNG("Dentex_carpenteri_nb_GIBBONS.png")
-d.c <- as.raster(d.c)
-
-s.l <- readPNG("Sphyrna_lewini_nb_GIBBONS.png")
-s.l <- as.raster(s.l)
+# setwd(images.dir)
+# dir()
+# 
+# n.b <- readPNG("Nemipterus_bathybius_nb_GIBBONS.png")
+# n.b <- as.raster(n.b)
+# 
+# n.v <- readPNG("Nemipteridae.png")
+# n.v <- as.raster(n.v)
+# 
+# d.spp <- readPNG("Decapterus_spp.png")
+# d.spp <- as.raster(d.spp)
+# 
+# s.u <- readPNG("Synodus_variegatus_nb.png")
+# s.u <- as.raster(s.u)
+# 
+# c.e <- readPNG("Carangoides_equula_nb_GIBBONS.png")
+# c.e <- as.raster(c.e)
+# 
+# d.c <- readPNG("Dentex_carpenteri_nb_GIBBONS.png")
+# d.c <- as.raster(d.c)
+# 
+# s.l <- readPNG("Sphyrna_lewini_nb_GIBBONS.png")
+# s.l <- as.raster(s.l)
 
 # Read in shapefile ----
 setwd(spatial.dir)
@@ -121,7 +121,7 @@ maxn <- read.csv("ningaloo.complete.maxn.csv")%>%
 metadata <- read.csv("ningaloo.checked.metadata.csv")%>%
   mutate(sample=as.character(sample))
 
-habitat<-read_csv("2020-01_Guardian-Ningaloo_stereoBRUVs._habitat.csv" )%>% # change this
+habitat<-read_csv("ningaloo.complete.habitat.csv" )%>% # change this
   ga.clean.names()
 
 # workout total abundance and species richness
@@ -143,6 +143,7 @@ unique(maxn$scientific)
 # TOTAL ABUNDANCE ----
 spatial.ta<-ggplot() +
   geom_polygon(data = commonwealth.marine.parks, aes(x = long, y = lat, group = group),color = 'black', fill = 'grey90', size = .2)+ # change colours and add wa state reserves
+  geom_polygon(data = state.marine.parks, aes(x = long, y = lat, group = group), colour = 'darkgreen', fill = 'green4', size= .2)+
   geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn==0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="white",alpha=0.75)+
   geom_point(data=filter(maxn.ta.sr,scientific%in%c("total.abundance")&maxn>0),aes(longitude,latitude,size=maxn),shape=21,colour="dodgerblue4",fill="dodgerblue2",alpha=0.75)+
   xlab('Longitude')+
