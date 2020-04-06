@@ -76,6 +76,12 @@ theme_collapse<-theme(      ## the commented values are from theme_grey
   legend.title = element_text(family="sans",size=6),
   legend.text = element_text(family="sans",size=4))
 
+theme_no_axis <-  theme(axis.text.x = element_blank(),
+                        axis.title.x = element_blank(),
+                        axis.title.y = element_blank(),
+                        axis.text.y = element_blank(),
+                        axis.ticks = element_blank())
+
 # Load fish pictures for plotting ----
 # setwd(images.dir)
 # dir()
@@ -164,6 +170,7 @@ spatial.ta<-ggplot() +
   theme.larger.text
 
 spatial.ta
+
 
 # SPECIES RICHNESS ----
 spatial.sr<-ggplot() +
@@ -615,6 +622,26 @@ spatial.deployments<-ggplot() +
   theme.species
 
 spatial.deployments
+
+# Inset map
+inset <- ggplot() +
+  geom_polygon(data = wa.coastline, aes(x=long, y=lat, group=group), colour='black', fill='grey90', size= .2)+
+  geom_rect(data = wa.coastline, mapping=aes(xmin=113, xmax=115, ymin=-21.5, ymax=-23), colour='red', alpha=0, size= .2)+
+  coord_cartesian(xlim=c(105,130), ylim=c(-36,-12), expand=FALSE)+
+  annotate("text",x=120, y=-25,label="Western Australia",color="Black",hjust=0,family="sans",cex=2.5)+
+  theme_no_axis+
+  theme_bw()+ 
+  theme_collapse+
+  theme.larger.text
+inset
+
+# Basic map with inset
+
+spatial.deployments.inset <- ggdraw() +
+  draw_plot(spatial.deployments) +
+  draw_plot(inset, x = 0.692, y = 0.052, width = 0.3, height = 0.3)
+
+spatial.deployments.inset
 setwd(plots.dir)
 ggsave("deployment.map.png",spatial.deployments,dpi=300)
 
