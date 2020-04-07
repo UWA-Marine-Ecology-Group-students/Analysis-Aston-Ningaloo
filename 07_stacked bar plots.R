@@ -78,8 +78,8 @@ theme.larger.text<-theme(
 setwd(tidy.dir)
 dir()
 
-maxn <- read.csv("2020-01_Guardian-Ningaloo_stereoBRUVs.complete.maxn.csv")
-metadata <- read.csv("2020-01_Guardian-Ningaloo_stereoBRUVs.checked.metadata.csv")
+maxn <- read.csv("ningaloo.complete.maxn.csv")
+metadata <- read.csv("ningaloo.checked.metadata.csv")
 
 # workout total maxn for each species ---
 maxn.sum<-maxn%>%
