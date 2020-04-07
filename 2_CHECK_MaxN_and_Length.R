@@ -35,6 +35,7 @@ library(plyr)
 library(dplyr)
 library(readr)
 library(ggplot2)
+library(stringr)
 
 ## Set Study Name ----
 # Change this to suit your study name. This will also be the prefix on your final saved files.
@@ -51,6 +52,7 @@ study<-"ningaloo"
 
 ## Set your working directory ----
 working.dir<-dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to that of this script - or type your own
+dir()
 
 ## Save these directory names to use later----
 to.be.checked.dir<-paste(working.dir,"Data to be checked",sep="/") 

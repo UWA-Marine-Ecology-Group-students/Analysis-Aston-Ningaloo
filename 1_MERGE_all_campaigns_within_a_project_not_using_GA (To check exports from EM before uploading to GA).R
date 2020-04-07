@@ -23,7 +23,7 @@ library(purrr)
 library(readr)
 library(stringr)
 # to connect to googlesheets
-library(googlesheets)
+library(googlesheets4)
 
 ## Set Study Name ----
 # Change this to suit your study name. This will also be the prefix on your final saved files.
