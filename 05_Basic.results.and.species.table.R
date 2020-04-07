@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # Study name ----
-study <- "2020-01_Guardian-Ningaloo_stereoBRUVs" 
+study <- "ningaloo" 
 
 # Libraries required
 install_github("UWAMEGFisheries/GlobalArchive") #to check for updates
@@ -25,21 +25,21 @@ tidy.dir=paste(working.dir,"tidy data",sep="/")
 setwd(tidy.dir)
 dir()
 
-maxn <- read_csv("2020-01_Guardian-Ningaloo_stereoBRUVs.complete.maxn.csv")%>%
+maxn <- read_csv("ningaloo.complete.maxn.csv")%>%
   mutate(scientific=paste(family,genus,species,sep=" "))%>%
   glimpse()
 
 # Read in habitat ----
-habitat<-read_csv("2020-01_Guardian-Ningaloo_stereoBRUVs._habitat.csv" )
+habitat<-read_csv("ningaloo.complete.habitat.csv" )
 
 # Read in metadata ----
-metadata<-read_csv("2020-01_Guardian-Ningaloo_stereoBRUVs.checked.metadata.csv")%>%
+metadata<-read_csv("ningaloo.checked.metadata.csv")%>%
   dplyr::select(sample,latitude,longitude,date,time,site,depth)
 
 # Read in life history
 url <- "https://docs.google.com/spreadsheets/u/1/d/1SMLvR9t8_F-gXapR2EemQMEPSw_bUbPLcXd3lJ5g5Bo/edit?usp=drive_web&ouid=100340010373917954123"
 
-master<-read_sheet(url)%>%
+master<-googlesheets4::read_sheet(url)%>%
   ga.clean.names()%>%
   filter(grepl('Australia', global.region))%>%
   filter(grepl('NW', marine.region))%>%
@@ -53,7 +53,7 @@ names(master)
 
 species.table <- maxn%>%
   group_by(family,genus,species,scientific)%>%
-  summarise_at(vars(matches("maxn")),funs(sum,mean,sd,se=sd(.)/sqrt(n())))%>%
+  summarise_at(vars("maxn"),funs(sum,mean,sd,se=sd(.)/sqrt(n())))%>%
   ungroup()%>%
   mutate(mean=round(mean,digits=2))%>%
   mutate(sd=round(sd,digits=2))%>%
@@ -91,7 +91,7 @@ length(unique(maxn$genus)) # 14 genus
 summary<-maxn%>%
   #filter(species%in%c("bathybius","carpenteri","tabl","equula","virgatus","variegatus"))%>%
   group_by(sample,scientific)%>%
-  dplyr::summarise_at(vars(matches("maxn")),funs(sum))%>%
+  dplyr::summarise_at(vars("maxn"),funs(sum))%>%
   mutate(presence=as.integer(maxn != 0))
   
 presence<-summary%>%
@@ -102,12 +102,12 @@ maxn.summary<-summary%>%
   dplyr::select(-c(presence))%>%
   spread(scientific,value=maxn)
 
-anita.presence<-left_join(metadata,habitat)%>%
+ningaloo.presence<-left_join(metadata,habitat)%>%
   left_join(presence)
 
-anita.maxn<-left_join(metadata,habitat)%>%
+ningaloo.maxn<-left_join(metadata,habitat)%>%
   left_join(maxn.summary)
 
 setwd(tidy.dir)
-write.csv(anita.presence,"presence.spatial.model.csv",row.names = FALSE)
-write.csv(anita.maxn,"maxn.spatial.model.csv",row.names = FALSE)
+write.csv(ningaloo.presence,"presence.spatial.model.csv",row.names = FALSE)
+write.csv(ningaloo.maxn,"maxn.spatial.model.csv",row.names = FALSE)

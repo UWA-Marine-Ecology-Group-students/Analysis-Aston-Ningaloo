@@ -499,11 +499,11 @@ species.combined<-plot_grid(spatial.decapterus, spatial.multidens,
 ggsave("spatial.species.png",species.combined,dpi=500, width = 21, height = 23,units = "cm")
 
 
-species.combined<-plot_grid(spatial.bathybius, spatial.carpenteri, 
-                            spatial.equula, spatial.tabl, 
-                            spatial.variegatus, spatial.virgatus,
-                            labels = c('A', 'B','C','D','E','F'), label_size = 12,ncol=2)
-ggsave("spatial.species.png",species.combined,dpi=500, width = 21, height = 23,units = "cm")
+# species.combined<-plot_grid(spatial.bathybius, spatial.carpenteri, 
+#                             spatial.equula, spatial.tabl, 
+#                             spatial.variegatus, spatial.virgatus,
+#                             labels = c('A', 'B','C','D','E','F'), label_size = 12,ncol=2)
+# ggsave("spatial.species.png",species.combined,dpi=500, width = 21, height = 23,units = "cm")
 
 
 
