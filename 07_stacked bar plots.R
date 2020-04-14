@@ -113,7 +113,7 @@ allbarlabs<-c('Argyrops spinifer|Carangoides chrysophrys|Carangoides gymnostethu
 ## Top ten plot ----
 bar.top.10<-ggplot(maxn.10, aes(x=reorder(scientific,maxn), y=maxn)) +   
   geom_bar(stat="identity",colour="black",fill="lightgrey",position=position_dodge())+
-  ylim (0, 1000)+
+  ylim (0, 900)+
   coord_flip()+
   xlab("Species")+
   ylab(expression(Overall~abundance~(Sigma~MaxN)))+

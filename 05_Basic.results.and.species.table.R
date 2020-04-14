@@ -79,11 +79,11 @@ unique(cleaned$fishing.type)
 # Descriptive stats
 
 # total abundance
-sum(maxn$maxn) # 504
-length(unique(maxn$scientific)) # 16
+sum(maxn$maxn) # 3689
+length(unique(maxn$scientific)) # 166
 
-length(unique(maxn$family)) # 13 families
-length(unique(maxn$genus)) # 14 genus
+length(unique(maxn$family)) # 45 families
+length(unique(maxn$genus)) # 93 genus
 
 
 
