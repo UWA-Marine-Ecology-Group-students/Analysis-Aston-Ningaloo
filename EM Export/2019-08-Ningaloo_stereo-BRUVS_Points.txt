@@ -1990,7 +1990,7 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 4.03	7	4.03_L369.avi	21586	14.39067	Time Seabed	4.37933	1674.62144	574.29494	Microdesmidae	Ptereleotris	sp1		1	AD	Passing			
 4.03	8	4.03_L369.avi	21586	14.39067	Time Seabed	4.37933	1501.34464	485.94187	Microdesmidae	Ptereleotris	sp1		1	AD	Passing			
 4.03	9	4.03_L369.avi	21586	14.39067	Time Seabed	4.37933	1139.67293	508.03014	Microdesmidae	Ptereleotris	sp1		1	AD	Passing			
-4.03	10	4.03_L369.avi	21837	14.55800	Time Seabed	4.54667	775.67535	792.85253	Lethrinidae	Lethrinus	sp1		1	AD	Passing			
+4.03	10	4.03_L369.avi	21837	14.55800	Time Seabed	4.54667	757.83102	794.26009	Serranidae	Pseudanthias	georgei	37311093	1	AD	Passing			
 4.03	11	4.03_L369.avi	22511	15.00733	Time Seabed	4.99600	484.94246	366.20022	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
 4.03	12	4.03_L369.avi	23160	15.44000	Time Seabed	5.42867	1461.80497	297.61033	Carangidae	Carangoides	caeruleopinnatus	37337021	1	AD	Passing			
 4.03	13	4.03_L369.avi	25076	16.71733	Time Seabed	6.70600	309.33979	499.89236	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
@@ -1999,7 +1999,7 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 4.03	16	4.03_L369.avi	27633	18.42200	Time Seabed	8.41067	138.38886	442.92788	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
 4.03	17	4.03_L369.avi	27633	18.42200	Time Seabed	8.41067	476.80194	347.59957	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
 4.03	18	4.03_L369.avi	27633	18.42200	Time Seabed	8.41067	889.64264	427.81485	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
-4.03	19	4.03_L369.avi	28844	19.22933	Time Seabed	9.21800	600.07268	790.52745	Lethrinidae	Lethrinus	sp1		1	AD	Passing			
+4.03	19	4.03_L369.avi	28844	19.22933	Time Seabed	9.21800	607.71753	806.36771	Serranidae	Pseudanthias	georgei	37311093	1	AD	Passing			
 4.03	20	4.03_L369.avi	30516	20.34400	Time Seabed	10.33267	123.27075	692.87406	Pinguipedidae	Parapercis	sp1		1	AD	Passing			
 4.03	21	4.03_L369.avi	31623	21.08200	Time Seabed	11.07067	101.17505	468.50377	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Passing			
 4.03	22	4.03_L369.avi	36066	24.04400	Time Seabed	14.03267	45.35433	398.75135	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
@@ -2012,8 +2012,8 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 4.03	29	4.03_L369.avi	36378	24.25200	Time Seabed	14.24067	596.58389	230.18299	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
 4.03	30	4.03_L369.avi	36378	24.25200	Time Seabed	14.24067	136.06299	302.26050	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
 4.03	31	4.03_L369.avi	36378	24.25200	Time Seabed	14.24067	40.70260	347.59957	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
-4.03	32	4.03_L369.avi	37430	24.95333	Time Seabed	14.94200	844.28831	977.69645	Lethrinidae	Lethrinus	sp1		1	J	Passing			
-4.03	33	4.03_L369.avi	37460	24.97333	Time Seabed	14.96200	669.84858	982.34661	Lethrinidae	Lethrinus	sp1		1	J	Passing			
+4.03	32	4.03_L369.avi	37430	24.95333	Time Seabed	14.94200	844.99369	990.40359	Serranidae	Pseudanthias	georgei	37311093	1	AD	Passing			
+4.03	33	4.03_L369.avi	37460	24.97333	Time Seabed	14.96200	669.84858	982.34661	Serranidae	Pseudanthias	georgei	37311093	1	J	Passing			
 4.03	34	4.03_L369.avi	40886	27.25733	Time Seabed	17.24600	376.78982	38.36383	Sphyraenidae	Sphyraena	qenie	37382009	1	AD	Passing			
 4.03	35	4.03_L369.avi	48238	32.15867	Time Seabed	22.14733	104.66384	489.42949	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Passing			
 4.03	36	4.03_L369.avi	48238	32.15867	Time Seabed	22.14733	233.74924	544.06889	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Passing			
@@ -9898,7 +9898,7 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 10.15	7	10.15_L373.avi	26517	17.67800	1	8.63200	1127.69620	617.14286	Lethrinidae	Lethrinus	miniatus	37351009	1	AD	Feeding			
 10.15	8	10.15_L373.avi	27627	18.41800	1	9.37200	438.68354	374.17323	Carangidae	Carangoides	fulvoguttatus	37337037	1	AD	Passing			
 10.15	9	10.15_L373.avi	28030	18.68667	1	9.64067	167.69620	150.64117	Labridae	Bodianus	solatus	37384201	1	AD	Passing			
-10.15	10	10.15_L373.avi	30534	20.35600	1	11.31000	1476.45570	1033.83577	Labridae	Suezichthys	sp1		1	AD	Passing			
+10.15	10	10.15_L373.avi	30534	20.35600	1	11.31000	1476.45570	1033.83577	Labridae	Suezichthys	cyanolaemus	37384161	1	AD	Passing			
 10.15	11	10.15_L373.avi	31970	21.31333	1	12.26733	81.41772	284.27447	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
 10.15	12	10.15_L373.avi	34772	23.18133	1	14.13533	710.88608	346.23172	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
 10.15	13	10.15_L373.avi	35886	23.92400	1	14.87800	157.97468	280.62992	Sparidae	Argyrops	spinifer	37353006	1	AD	Passing			
@@ -9909,7 +9909,7 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 10.15	18	10.15_L373.avi	42462	28.30800	1	19.26200	480.00000	235.68054	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
 10.15	19	10.15_L373.avi	42716	28.47733	1	19.43133	347.54430	276.98538	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
 10.15	20	10.15_L373.avi	42716	28.47733	1	19.43133	60.75949	125.12936	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
-10.15	21	10.15_L373.avi	44627	29.75133	1	20.70533	1382.92866	1003.11457	Labridae	Suezichthys	sp1		1	AD	Passing			
+10.15	21	10.15_L373.avi	44627	29.75133	1	20.70533	1382.92866	1003.11457	Labridae	Suezichthys	cyanolaemus	37384161	1	AD	Passing			
 10.15	22	10.15_L373.avi	48891	32.59400	1	23.54800	1683.03797	918.42520	Cirrhitidae	Cyprinocirrhites	polyactis	37374006	1	AD	Passing			
 10.15	23	10.15_L373.avi	49073	32.71533	1	23.66933	1766.88608	912.35096	Cirrhitidae	Cyprinocirrhites	polyactis	37374006	1	AD	Passing			
 10.15	24	10.15_L373.avi	49391	32.92733	1	23.88133	783.79747	450.70866	Lutjanidae	Lutjanus	sebae	37346004	1	AD	Passing			
@@ -13510,357 +13510,6 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 18.07	348	18.07_L373.avi	92103	61.40200	1	57.73133	1147.13924	699.75253	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Feeding			
 18.07	349	18.07_L373.avi	92367	61.57800	1	57.90733	1246.78481	692.46344	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Feeding			
 18.07	350	18.07_L373.avi	92470	61.64667	1	57.97600	823.89873	263.62205	Labridae	Choerodon	zamboangae	37384011	1	AD	Passing			
-18.08	0	18.07_L373.avi	7520	5.01333	1	1.34267	459.34177	393.61080	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Passing			
-18.08	1	18.07_L373.avi	8080	5.38667	1	1.71600	1198.17722	639.01012	Balistidae	Abalistes	filamentosus	37465089	1	AD	Passing			
-18.08	2	18.07_L373.avi	8499	5.66600	1	1.99533	861.56962	798.15523	Balistidae	Abalistes	filamentosus	37465089	1	AD	Passing			
-18.08	3	18.07_L373.avi	9434	6.28933	1	2.61867	255.18987	539.39258	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
-18.08	4	18.07_L373.avi	9779	6.51933	1	2.84867	1766.88608	810.30371	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	5	18.07_L373.avi	9779	6.51933	1	2.84867	994.02532	569.76378	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	6	18.07_L373.avi	9779	6.51933	1	2.84867	967.29114	688.81890	Mullidae	Parupeneus	heptacanthus	37355004	1	AD	Passing			
-18.08	7	18.07_L373.avi	9994	6.66267	1	2.99200	825.11392	715.54556	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	8	18.07_L373.avi	10200	6.80000	1	3.12933	72.91139	620.78740	Pomacanthidae	Apolemichthys	trimaculatus	37365016	1	AD	Passing			
-18.08	9	18.07_L373.avi	10440	6.96000	1	3.28933	736.40506	629.29134	Mullidae	Parupeneus	heptacanthus	37355004	1	AD	Passing			
-18.08	10	18.07_L373.avi	10932	7.28800	1	3.61733	1740.15190	873.47582	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	11	18.07_L373.avi	10932	7.28800	1	3.61733	1737.72152	725.26434	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	12	18.07_L373.avi	10932	7.28800	1	3.61733	475.13924	683.95951	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	13	18.07_L373.avi	12866	8.57733	1	4.90667	267.34177	648.72891	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	14	18.07_L373.avi	12866	8.57733	1	4.90667	964.86076	451.92351	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	15	18.07_L373.avi	12866	8.57733	1	4.90667	1760.81013	700.96738	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	16	18.07_L373.avi	13018	8.67867	1	5.00800	418.02532	793.29584	Labridae		sp8		1	AD	Passing			
-18.08	17	18.07_L373.avi	13397	8.93133	1	5.26067	343.89873	671.81102	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	18	18.07_L373.avi	13397	8.93133	1	5.26067	691.44304	728.90889	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	19	18.07_L373.avi	13397	8.93133	1	5.26067	1282.02532	707.04162	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	20	18.07_L373.avi	13397	8.93133	1	5.26067	1562.73418	563.68954	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	21	18.07_L373.avi	14491	9.66067	1	5.99000	1515.34177	997.39033	Pinguipedidae	Parapercis	nebulosa	37390005	1	AD	Passing			
-18.08	22	18.07_L373.avi	14798	9.86533	1	6.19467	1351.29114	992.53093	Pinguipedidae	Parapercis	nebulosa	37390005	1	AD	Passing			
-18.08	23	18.07_L373.avi	14798	9.86533	1	6.19467	1546.93671	1032.62092	Pinguipedidae	Parapercis	nebulosa	37390005	1	AD	Passing			
-18.08	24	18.07_L373.avi	16264	10.84267	1	7.17200	583.29114	793.29584	Labridae		sp8		1	AD	Passing			
-18.08	25	18.07_L373.avi	16264	10.84267	1	7.17200	1263.79747	898.98763	Mullidae	Parupeneus	heptacanthus	37355004	1	AD	Passing			
-18.08	26	18.07_L373.avi	16325	10.88333	1	7.21267	698.73418	856.46794	Mullidae	Parupeneus	heptacanthus	37355004	1	AD	Passing			
-18.08	27	18.07_L373.avi	18670	12.44667	1	8.77600	1762.02532	262.40720	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	28	18.07_L373.avi	18670	12.44667	1	8.77600	1346.43038	634.15073	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	29	18.07_L373.avi	18670	12.44667	1	8.77600	843.34177	583.12711	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	30	18.07_L373.avi	18670	12.44667	1	8.77600	349.97468	433.70079	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	31	18.07_L373.avi	18950	12.63333	1	8.96267	230.88608	510.23622	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	32	18.07_L373.avi	18950	12.63333	1	8.96267	352.40506	720.40495	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	33	18.07_L373.avi	18950	12.63333	1	8.96267	650.12658	505.37683	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	34	18.07_L373.avi	18950	12.63333	1	8.96267	1011.03797	546.68166	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	35	18.07_L373.avi	19963	13.30867	1	9.63800	243.03797	358.38020	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	36	18.07_L373.avi	19963	13.30867	1	9.63800	390.07595	540.60742	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	37	18.07_L373.avi	19963	13.30867	1	9.63800	1353.72152	584.34196	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	38	18.07_L373.avi	19963	13.30867	1	9.63800	1708.55696	460.42745	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	39	18.07_L373.avi	20863	13.90867	1	10.23800	1740.15190	705.82677	Labridae	Bodianus	solatus	37384201	1	AD	Passing			
-18.08	40	18.07_L373.avi	21101	14.06733	1	10.39667	939.34177	615.92801	Labridae	Bodianus	solatus	37384201	1	AD	Passing			
-18.08	41	18.07_L373.avi	21497	14.33133	1	10.66067	1104.60759	591.63105	Balistidae	Abalistes	filamentosus	37465089	1	AD	Passing			
-18.08	42	18.07_L373.avi	21717	14.47800	1	10.80733	888.30380	585.55681	Labridae	Bodianus	solatus	37384201	1	AD	Passing			
-18.08	43	18.07_L373.avi	22595	15.06333	1	11.39267	566.27848	541.82227	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Passing			
-18.08	44	18.07_L373.avi	22868	15.24533	1	11.57467	1113.11392	476.22047	Labridae	Bodianus	solatus	37384201	1	AD	Passing			
-18.08	45	18.07_L373.avi	22868	15.24533	1	11.57467	455.69620	284.27447	Labridae	Bodianus	solatus	37384201	1	AD	Passing			
-18.08	46	18.07_L373.avi	23053	15.36867	1	11.69800	1859.24051	609.85377	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Passing			
-18.08	47	18.07_L373.avi	23053	15.36867	1	11.69800	777.72152	549.11136	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Passing			
-18.08	48	18.07_L373.avi	23252	15.50133	1	11.83067	407.08861	338.94263	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	49	18.07_L373.avi	23252	15.50133	1	11.83067	421.67089	611.06862	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	50	18.07_L373.avi	23252	15.50133	1	11.83067	1045.06329	665.73678	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	51	18.07_L373.avi	23252	15.50133	1	11.83067	877.36709	439.77503	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	52	18.07_L373.avi	23290	15.52667	1	11.85600	99.64557	263.62205	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	53	18.07_L373.avi	23290	15.52667	1	11.85600	777.72152	725.26434	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	54	18.07_L373.avi	23290	15.52667	1	11.85600	963.64557	657.23285	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	55	18.07_L373.avi	23290	15.52667	1	11.85600	842.12658	352.30596	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	56	18.07_L373.avi	23290	15.52667	1	11.85600	1608.91139	471.36108	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	57	18.07_L373.avi	23290	15.52667	1	11.85600	280.70886	619.57255	Lethrinidae	Lethrinus	miniatus	37351009	1	AD	Passing			
-18.08	58	18.07_L373.avi	24744	16.49600	1	12.82533	1284.45570	741.05737	Lethrinidae	Lethrinus	miniatus	37351009	1	AD	Feeding			
-18.08	59	18.07_L373.avi	25112	16.74133	1	13.07067	561.41772	584.34196	Balistidae	Abalistes	filamentosus	37465089	1	AD	Passing			
-18.08	60	18.07_L373.avi	26566	17.71067	1	14.04000	1263.79747	625.64679	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Passing			
-18.08	61	18.07_L373.avi	26566	17.71067	1	14.04000	1233.41772	681.52981	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Passing			
-18.08	62	18.07_L373.avi	26566	17.71067	1	14.04000	1275.94937	671.81102	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Passing			
-18.08	63	18.07_L373.avi	28252	18.83467	1	15.16400	703.59494	739.84252	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	64	18.07_L373.avi	28252	18.83467	1	15.16400	905.31646	750.77615	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	65	18.07_L373.avi	28252	18.83467	1	15.16400	1804.55696	713.11586	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	66	18.07_L373.avi	28252	18.83467	1	15.16400	1743.79747	878.33521	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	67	18.07_L373.avi	28252	18.83467	1	15.16400	1899.34177	420.33746	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	68	18.07_L373.avi	28973	19.31533	1	15.64467	1760.81013	442.20472	Lethrinidae	Lethrinus	olivaceus	37351004	1	AD	Passing			
-18.08	69	18.07_L373.avi	31799	21.19933	1	17.52867	554.12658	550.32621	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	70	18.07_L373.avi	31799	21.19933	1	17.52867	960.00000	748.34646	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	71	18.07_L373.avi	31799	21.19933	1	17.52867	1115.54430	670.59618	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	72	18.07_L373.avi	31799	21.19933	1	17.52867	1512.91139	994.96063	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	73	18.07_L373.avi	31799	21.19933	1	17.52867	1752.30380	850.39370	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	74	18.07_L373.avi	32382	21.58800	1	17.91733	359.69620	583.12711	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
-18.08	75	18.07_L373.avi	32382	21.58800	1	17.91733	454.48101	611.06862	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
-18.08	76	18.07_L373.avi	32746	21.83067	1	18.16000	1285.67089	637.79528	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Passing			
-18.08	77	18.07_L373.avi	33317	22.21133	1	18.54067	18.22785	549.11136	Pomacanthidae	Apolemichthys	trimaculatus	37365016	1	AD	Passing			
-18.08	78	18.07_L373.avi	33317	22.21133	1	18.54067	115.44304	590.41620	Pomacanthidae	Apolemichthys	trimaculatus	37365016	1	AD	Passing			
-18.08	79	18.07_L373.avi	33359	22.23933	1	18.56867	942.98734	614.71316	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
-18.08	80	18.07_L373.avi	33359	22.23933	1	18.56867	958.78481	657.23285	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
-18.08	81	18.07_L373.avi	33359	22.23933	1	18.56867	1064.50633	613.49831	Pomacanthidae	Chaetodontoplus	personifer	37365008	1	AD	Passing			
-18.08	82	18.07_L373.avi	33417	22.27800	1	18.60733	127.91955	561.11732	Pomacanthidae	Apolemichthys	trimaculatus	37365016	1	AD	Passing			
-18.08	83	18.07_L373.avi	33417	22.27800	1	18.60733	251.01194	625.07263	Pomacanthidae	Apolemichthys	trimaculatus	37365016	1	AD	Passing			
-18.08	84	18.07_L373.avi	33417	22.27800	1	18.60733	290.83595	609.38547	Pomacanthidae	Apolemichthys	trimaculatus	37365016	1	AD	Passing			
-18.08	85	18.07_L373.avi	33809	22.53933	1	18.86867	531.03797	596.49044	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	86	18.07_L373.avi	33809	22.53933	1	18.86867	526.17722	775.07312	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	87	18.07_L373.avi	33809	22.53933	1	18.86867	750.98734	758.06524	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	88	18.07_L373.avi	33809	22.53933	1	18.86867	1133.77215	696.10799	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Passing			
-18.08	89	18.07_L373.avi	33809	22.53933	1	18.86867	1713.41772	886.83915	Lethrinidae	Gymnocranius	griseus	37351003	1	AD	Passing			
-18.08	90	18.07_L373.avi	34802	23.20133	1	19.53067	86.27848	291.56355	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	91	18.07_L373.avi	34802	23.20133	1	19.53067	32.81013	714.33071	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	92	18.07_L373.avi	34802	23.20133	1	19.53067	1344.00000	589.20135	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	93	18.07_L373.avi	34802	23.20133	1	19.53067	1542.07595	590.41620	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	94	18.07_L373.avi	34802	23.20133	1	19.53067	1553.01266	465.28684	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	95	18.07_L373.avi	34802	23.20133	1	19.53067	1888.40506	516.31046	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	96	18.07_L373.avi	35207	23.47133	1	19.80067	314.73418	798.15523	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	97	18.07_L373.avi	35207	23.47133	1	19.80067	371.84810	698.53768	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	98	18.07_L373.avi	35207	23.47133	1	19.80067	786.22785	43.73453	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	99	18.07_L373.avi	35207	23.47133	1	19.80067	1026.83544	376.60292	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	100	18.07_L373.avi	35207	23.47133	1	19.80067	1388.96203	581.91226	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	101	18.07_L373.avi	35207	23.47133	1	19.80067	1235.84810	308.57143	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	102	18.07_L373.avi	37568	25.04533	1	21.37467	1550.58228	1042.33971	Pinguipedidae	Parapercis	nebulosa	37390005	1	AD	Passing			
-18.08	103	18.07_L373.avi	38843	25.89533	1	22.22467	253.97468	685.17435	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	104	18.07_L373.avi	38843	25.89533	1	22.22467	193.21519	782.36220	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	105	18.07_L373.avi	38843	25.89533	1	22.22467	809.31646	767.78403	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	106	18.07_L373.avi	38843	25.89533	1	22.22467	805.67089	1033.83577	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	107	18.07_L373.avi	38843	25.89533	1	22.22467	1131.34177	665.73678	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	108	18.07_L373.avi	38843	25.89533	1	22.22467	1719.49367	657.23285	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	109	18.07_L373.avi	38843	25.89533	1	22.22467	1785.11392	505.37683	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	110	18.07_L373.avi	38843	25.89533	1	22.22467	1884.75949	775.07312	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	111	18.07_L373.avi	38906	25.93733	1	22.26667	126.37975	700.96738	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	112	18.07_L373.avi	38906	25.93733	1	22.26667	426.53165	770.21372	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	113	18.07_L373.avi	38906	25.93733	1	22.26667	562.63291	647.51406	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	114	18.07_L373.avi	38906	25.93733	1	22.26667	709.67089	529.67379	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	115	18.07_L373.avi	38906	25.93733	1	22.26667	860.35443	816.37795	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	116	18.07_L373.avi	38906	25.93733	1	22.26667	1325.77215	693.67829	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	117	18.07_L373.avi	38906	25.93733	1	22.26667	1339.13924	552.75591	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	118	18.07_L373.avi	38906	25.93733	1	22.26667	1578.53165	632.93588	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	119	18.07_L373.avi	38906	25.93733	1	22.26667	1754.73418	652.37345	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	120	18.07_L373.avi	38906	25.93733	1	22.26667	1809.41772	786.00675	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	121	18.07_L373.avi	39224	26.14933	1	22.47867	725.46835	312.21597	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	122	18.07_L373.avi	39224	26.14933	1	22.47867	426.53165	325.57930	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	123	18.07_L373.avi	39224	26.14933	1	22.47867	283.13924	337.72778	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	124	18.07_L373.avi	39224	26.14933	1	22.47867	269.77215	625.64679	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	125	18.07_L373.avi	39224	26.14933	1	22.47867	224.81013	671.81102	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	126	18.07_L373.avi	39224	26.14933	1	22.47867	752.20253	570.97863	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	127	18.07_L373.avi	39224	26.14933	1	22.47867	698.73418	613.49831	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	128	18.07_L373.avi	39224	26.14933	1	22.47867	963.64557	427.62655	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	129	18.07_L373.avi	39224	26.14933	1	22.47867	1369.51899	801.79978	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	130	18.07_L373.avi	39224	26.14933	1	22.47867	1489.82278	657.23285	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	131	18.07_L373.avi	39224	26.14933	1	22.47867	1768.10127	851.60855	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	132	18.07_L373.avi	39321	26.21400	1	22.54333	862.78481	245.39933	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	133	18.07_L373.avi	39321	26.21400	1	22.54333	582.07595	263.62205	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	134	18.07_L373.avi	39321	26.21400	1	22.54333	370.63291	479.86502	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	135	18.07_L373.avi	39321	26.21400	1	22.54333	647.69620	564.90439	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	136	18.07_L373.avi	39321	26.21400	1	22.54333	514.02532	756.85039	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	137	18.07_L373.avi	39321	26.21400	1	22.54333	922.32911	526.02925	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	138	18.07_L373.avi	39321	26.21400	1	22.54333	952.70886	855.25309	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	139	18.07_L373.avi	39321	26.21400	1	22.54333	1683.03797	680.31496	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	140	18.07_L373.avi	39321	26.21400	1	22.54333	1515.34177	326.79415	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	141	18.07_L373.avi	39321	26.21400	1	22.54333	1876.25316	447.06412	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	142	18.07_L373.avi	39321	26.21400	1	22.54333	1787.54430	922.06974	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	143	18.07_L373.avi	39682	26.45467	1	22.78400	716.96203	91.11361	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	144	18.07_L373.avi	39682	26.45467	1	22.78400	435.03797	146.99663	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	145	18.07_L373.avi	39682	26.45467	1	22.78400	402.22785	522.38470	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	146	18.07_L373.avi	39682	26.45467	1	22.78400	37.67089	666.95163	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	147	18.07_L373.avi	39682	26.45467	1	22.78400	777.72152	771.42857	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	148	18.07_L373.avi	39682	26.45467	1	22.78400	874.93671	711.90101	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	149	18.07_L373.avi	39682	26.45467	1	22.78400	828.75949	506.59168	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	150	18.07_L373.avi	39682	26.45467	1	22.78400	1478.88608	539.39258	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	151	18.07_L373.avi	39682	26.45467	1	22.78400	1162.93671	550.32621	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	152	18.07_L373.avi	39682	26.45467	1	22.78400	1612.55696	676.67042	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	153	18.07_L373.avi	39682	26.45467	1	22.78400	1849.51899	796.94038	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	154	18.07_L373.avi	39682	26.45467	1	22.78400	1811.84810	946.36670	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	155	18.07_L373.avi	39682	26.45467	1	22.78400	1896.91139	863.75703	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	156	18.07_L373.avi	39682	26.45467	1	22.78400	1717.06329	748.34646	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	157	18.07_L373.avi	39906	26.60400	1	22.93333	42.53165	328.00900	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	158	18.07_L373.avi	39906	26.60400	1	22.93333	31.59494	615.92801	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	159	18.07_L373.avi	39906	26.60400	1	22.93333	308.65823	816.37795	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	160	18.07_L373.avi	39906	26.60400	1	22.93333	698.73418	555.18560	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	161	18.07_L373.avi	39906	26.60400	1	22.93333	865.21519	738.62767	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	162	18.07_L373.avi	39906	26.60400	1	22.93333	689.01266	845.53431	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	163	18.07_L373.avi	39906	26.60400	1	22.93333	1184.81013	714.33071	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	164	18.07_L373.avi	39906	26.60400	1	22.93333	1415.69620	601.34983	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	165	18.07_L373.avi	39906	26.60400	1	22.93333	1702.48101	680.31496	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	166	18.07_L373.avi	39906	26.60400	1	22.93333	1893.26582	498.08774	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	167	18.07_L373.avi	39906	26.60400	1	22.93333	1728.00000	794.51069	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	168	18.07_L373.avi	39906	26.60400	1	22.93333	1782.68354	930.57368	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	169	18.07_L373.avi	40826	27.21733	1	23.54667	86.27848	754.42070	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	170	18.07_L373.avi	40826	27.21733	1	23.54667	362.12658	585.55681	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	171	18.07_L373.avi	40826	27.21733	1	23.54667	681.72152	236.89539	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	172	18.07_L373.avi	40826	27.21733	1	23.54667	905.31646	506.59168	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	173	18.07_L373.avi	40826	27.21733	1	23.54667	823.89873	649.94376	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	174	18.07_L373.avi	40826	27.21733	1	23.54667	682.93671	631.72103	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	175	18.07_L373.avi	40826	27.21733	1	23.54667	1204.25316	168.86389	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	176	18.07_L373.avi	40826	27.21733	1	23.54667	1452.15190	104.47694	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	177	18.07_L373.avi	40826	27.21733	1	23.54667	1447.29114	573.40832	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	178	18.07_L373.avi	40826	27.21733	1	23.54667	1858.02532	623.21710	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	179	18.07_L373.avi	40826	27.21733	1	23.54667	1459.44304	969.44882	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	180	18.07_L373.avi	40826	27.21733	1	23.54667	1871.39241	940.29246	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	181	18.07_L373.avi	40826	27.21733	1	23.54667	1025.62025	758.06524	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
-18.08	182	18.07_L373.avi	58263	38.84200	1	35.17133	1269.87342	925.71429	Pinguipedidae	Parapercis	nebulosa	37390005	1	AD	Feeding			
-18.08	183	18.07_L373.avi	64262	42.84133	1	39.17067	885.87342	550.32621	Echeneidae	Echeneis	naucrates	37336001	1	AD	Passing			
-18.08	184	18.07_L373.avi	64267	42.84467	1	39.17400	870.07595	408.18898	Carcharhinidae	Galeocerdo	cuvier	37018022	1	AD	Passing			
-18.08	185	18.07_L373.avi	68756	45.83733	1	42.16667	92.35443	379.03262	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	186	18.07_L373.avi	68756	45.83733	1	42.16667	255.18987	312.21597	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	187	18.07_L373.avi	68756	45.83733	1	42.16667	319.59494	303.71204	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	188	18.07_L373.avi	68756	45.83733	1	42.16667	337.82278	272.12598	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	189	18.07_L373.avi	68756	45.83733	1	42.16667	245.46835	235.68054	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	190	18.07_L373.avi	68756	45.83733	1	42.16667	295.29114	221.10236	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	191	18.07_L373.avi	68756	45.83733	1	42.16667	239.39241	160.35996	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	192	18.07_L373.avi	68756	45.83733	1	42.16667	342.68354	181.01237	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	193	18.07_L373.avi	68756	45.83733	1	42.16667	414.37975	221.10236	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	194	18.07_L373.avi	68756	45.83733	1	42.16667	482.43038	205.30934	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	195	18.07_L373.avi	68756	45.83733	1	42.16667	433.82278	183.44207	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	196	18.07_L373.avi	68756	45.83733	1	42.16667	447.18987	157.93026	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	197	18.07_L373.avi	68756	45.83733	1	42.16667	490.93671	138.49269	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	198	18.07_L373.avi	68756	45.83733	1	42.16667	516.45570	117.84027	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	199	18.07_L373.avi	68756	45.83733	1	42.16667	35.24051	392.39595	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	200	18.07_L373.avi	68756	45.83733	1	42.16667	128.81013	287.91901	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	201	18.07_L373.avi	68756	45.83733	1	42.16667	30.37975	221.10236	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	202	18.07_L373.avi	68756	45.83733	1	42.16667	486.07595	355.95051	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	203	18.07_L373.avi	68756	45.83733	1	42.16667	582.07595	289.13386	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	204	18.07_L373.avi	68756	45.83733	1	42.16667	593.01266	249.04387	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	205	18.07_L373.avi	68756	45.83733	1	42.16667	678.07595	290.34871	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	206	18.07_L373.avi	68756	45.83733	1	42.16667	540.75949	176.15298	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	207	18.07_L373.avi	68756	45.83733	1	42.16667	665.92405	155.50056	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	208	18.07_L373.avi	68756	45.83733	1	42.16667	665.92405	195.59055	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	209	18.07_L373.avi	68756	45.83733	1	42.16667	737.62025	207.73903	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	210	18.07_L373.avi	68756	45.83733	1	42.16667	851.84810	190.73116	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	211	18.07_L373.avi	68756	45.83733	1	42.16667	845.77215	376.60292	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	212	18.07_L373.avi	68756	45.83733	1	42.16667	964.86076	355.95051	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	213	18.07_L373.avi	68756	45.83733	1	42.16667	1082.73418	391.18110	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	214	18.07_L373.avi	68756	45.83733	1	42.16667	815.39241	331.65354	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	215	18.07_L373.avi	68756	45.83733	1	42.16667	755.84810	138.49269	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	216	18.07_L373.avi	68756	45.83733	1	42.16667	737.62025	77.75028	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	217	18.07_L373.avi	68756	45.83733	1	42.16667	781.36709	46.16423	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	218	18.07_L373.avi	68756	45.83733	1	42.16667	827.54430	52.23847	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	219	18.07_L373.avi	68756	45.83733	1	42.16667	1011.03797	264.83690	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	220	18.07_L373.avi	68756	45.83733	1	42.16667	1139.84810	261.19235	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	221	18.07_L373.avi	68756	45.83733	1	42.16667	1066.93671	242.96963	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	222	18.07_L373.avi	68756	45.83733	1	42.16667	1056.00000	206.52418	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	223	18.07_L373.avi	68756	45.83733	1	42.16667	986.73418	117.84027	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	224	18.07_L373.avi	68756	45.83733	1	42.16667	1052.35443	125.12936	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	225	18.07_L373.avi	68756	45.83733	1	42.16667	962.43038	149.42632	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	226	18.07_L373.avi	68756	45.83733	1	42.16667	913.82278	189.51631	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	227	18.07_L373.avi	68756	45.83733	1	42.16667	955.13924	70.46119	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	228	18.07_L373.avi	68756	45.83733	1	42.16667	1045.06329	77.75028	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	229	18.07_L373.avi	68756	45.83733	1	42.16667	1076.65823	23.08211	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	230	18.07_L373.avi	68756	45.83733	1	42.16667	1156.86076	61.95726	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	231	18.07_L373.avi	68756	45.83733	1	42.16667	1109.46835	98.40270	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	232	18.07_L373.avi	68756	45.83733	1	42.16667	1210.32911	95.97300	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	233	18.07_L373.avi	68756	45.83733	1	42.16667	1217.62025	171.29359	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	234	18.07_L373.avi	68756	45.83733	1	42.16667	1194.53165	255.11811	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	235	18.07_L373.avi	68756	45.83733	1	42.16667	1283.24051	267.26659	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	236	18.07_L373.avi	68756	45.83733	1	42.16667	1263.79747	217.45782	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	237	18.07_L373.avi	68756	45.83733	1	42.16667	1301.46835	171.29359	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	238	18.07_L373.avi	68756	45.83733	1	42.16667	1403.54430	189.51631	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	239	18.07_L373.avi	68756	45.83733	1	42.16667	1419.34177	166.43420	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	240	18.07_L373.avi	68756	45.83733	1	42.16667	1491.03797	156.71541	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	241	18.07_L373.avi	68756	45.83733	1	42.16667	1459.44304	134.84814	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	242	18.07_L373.avi	68756	45.83733	1	42.16667	1494.68354	104.47694	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	243	18.07_L373.avi	68756	45.83733	1	42.16667	1359.79747	109.33633	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	244	18.07_L373.avi	68756	45.83733	1	42.16667	1425.41772	32.80090	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	245	18.07_L373.avi	68756	45.83733	1	42.16667	1545.72152	49.80877	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	246	18.07_L373.avi	68756	45.83733	1	42.16667	1594.32911	63.17210	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	247	18.07_L373.avi	68756	45.83733	1	42.16667	1574.88608	177.36783	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	248	18.07_L373.avi	68756	45.83733	1	42.16667	1588.25316	246.61417	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	249	18.07_L373.avi	68756	45.83733	1	42.16667	1375.59494	216.24297	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	250	18.07_L373.avi	68756	45.83733	1	42.16667	1690.32911	199.23510	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	251	18.07_L373.avi	68756	45.83733	1	42.16667	1703.69620	179.79753	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	252	18.07_L373.avi	68756	45.83733	1	42.16667	1748.65823	234.46569	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	253	18.07_L373.avi	68756	45.83733	1	42.16667	1679.39241	143.35208	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	254	18.07_L373.avi	68756	45.83733	1	42.16667	1704.91139	114.19573	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	255	18.07_L373.avi	68756	45.83733	1	42.16667	1764.45570	132.41845	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	256	18.07_L373.avi	68756	45.83733	1	42.16667	1867.74684	31.58605	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	257	18.07_L373.avi	68756	45.83733	1	42.16667	402.22785	99.61755	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	258	18.07_L373.avi	68756	45.83733	1	42.16667	680.50633	229.60630	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	259	18.07_L373.avi	68756	45.83733	1	42.16667	750.98734	247.82902	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	260	18.07_L373.avi	68756	45.83733	1	42.16667	865.21519	275.77053	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	261	18.07_L373.avi	68756	45.83733	1	42.16667	907.74684	109.33633	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	262	18.07_L373.avi	68763	45.84200	1	42.17133	82.63291	211.38358	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	263	18.07_L373.avi	68763	45.84200	1	42.17133	193.21519	259.97750	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	264	18.07_L373.avi	68763	45.84200	1	42.17133	170.12658	273.34083	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	265	18.07_L373.avi	68763	45.84200	1	42.17133	166.48101	298.85264	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	266	18.07_L373.avi	68763	45.84200	1	42.17133	17.01266	291.56355	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	267	18.07_L373.avi	68763	45.84200	1	42.17133	32.81013	375.38808	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	268	18.07_L373.avi	68763	45.84200	1	42.17133	100.86076	136.06299	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	269	18.07_L373.avi	68763	45.84200	1	42.17133	240.60759	165.21935	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	270	18.07_L373.avi	68763	45.84200	1	42.17133	290.43038	224.74691	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	271	18.07_L373.avi	68763	45.84200	1	42.17133	363.34177	207.73903	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	272	18.07_L373.avi	68763	45.84200	1	42.17133	376.70886	168.86389	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	273	18.07_L373.avi	68763	45.84200	1	42.17133	397.36709	111.76603	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	274	18.07_L373.avi	68763	45.84200	1	42.17133	396.15190	95.97300	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	275	18.07_L373.avi	68763	45.84200	1	42.17133	354.83544	126.34421	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	276	18.07_L373.avi	68763	45.84200	1	42.17133	511.59494	154.28571	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	277	18.07_L373.avi	68763	45.84200	1	42.17133	480.00000	233.25084	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	278	18.07_L373.avi	68763	45.84200	1	42.17133	392.50633	280.62992	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	279	18.07_L373.avi	68763	45.84200	1	42.17133	401.01266	292.77840	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	280	18.07_L373.avi	68763	45.84200	1	42.17133	409.51899	343.80202	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	281	18.07_L373.avi	68763	45.84200	1	42.17133	538.32911	278.20022	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	282	18.07_L373.avi	68763	45.84200	1	42.17133	511.59494	292.77840	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	283	18.07_L373.avi	68763	45.84200	1	42.17133	521.31646	321.93476	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	284	18.07_L373.avi	68763	45.84200	1	42.17133	699.94937	380.24747	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	285	18.07_L373.avi	68763	45.84200	1	42.17133	750.98734	346.23172	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	286	18.07_L373.avi	68763	45.84200	1	42.17133	834.83544	410.61867	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	287	18.07_L373.avi	68763	45.84200	1	42.17133	942.98734	403.32958	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	288	18.07_L373.avi	68763	45.84200	1	42.17133	620.96203	205.30934	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	289	18.07_L373.avi	68763	45.84200	1	42.17133	646.48101	228.39145	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	290	18.07_L373.avi	68763	45.84200	1	42.17133	706.02532	198.02025	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	291	18.07_L373.avi	68763	45.84200	1	42.17133	684.15190	132.41845	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	292	18.07_L373.avi	68763	45.84200	1	42.17133	625.82278	100.83240	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	293	18.07_L373.avi	68763	45.84200	1	42.17133	658.63291	74.10574	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	294	18.07_L373.avi	68763	45.84200	1	42.17133	637.97468	47.37908	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	295	18.07_L373.avi	68763	45.84200	1	42.17133	714.53165	32.80090	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	296	18.07_L373.avi	68763	45.84200	1	42.17133	856.70886	57.09786	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	297	18.07_L373.avi	68763	45.84200	1	42.17133	895.59494	81.39483	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	298	18.07_L373.avi	68763	45.84200	1	42.17133	962.43038	63.17210	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	299	18.07_L373.avi	68763	45.84200	1	42.17133	962.43038	24.29696	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	300	18.07_L373.avi	68763	45.84200	1	42.17133	1011.03797	83.82452	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	301	18.07_L373.avi	68763	45.84200	1	42.17133	977.01266	114.19573	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	302	18.07_L373.avi	68763	45.84200	1	42.17133	891.94937	125.12936	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	303	18.07_L373.avi	68763	45.84200	1	42.17133	860.35443	139.70754	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	304	18.07_L373.avi	68763	45.84200	1	42.17133	809.31646	227.17660	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	305	18.07_L373.avi	68763	45.84200	1	42.17133	757.06329	249.04387	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	306	18.07_L373.avi	68763	45.84200	1	42.17133	866.43038	263.62205	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	307	18.07_L373.avi	68763	45.84200	1	42.17133	927.18987	256.33296	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	308	18.07_L373.avi	68763	45.84200	1	42.17133	952.70886	221.10236	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	309	18.07_L373.avi	68763	45.84200	1	42.17133	957.56962	195.59055	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	310	18.07_L373.avi	68763	45.84200	1	42.17133	1040.20253	263.62205	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	311	18.07_L373.avi	68763	45.84200	1	42.17133	1052.35443	215.02812	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	312	18.07_L373.avi	68763	45.84200	1	42.17133	1124.05063	216.24297	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	313	18.07_L373.avi	68763	45.84200	1	42.17133	1136.20253	149.42632	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	314	18.07_L373.avi	68763	45.84200	1	42.17133	1251.64557	160.35996	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	315	18.07_L373.avi	68763	45.84200	1	42.17133	1189.67089	257.54781	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	316	18.07_L373.avi	68763	45.84200	1	42.17133	1432.70886	256.33296	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	317	18.07_L373.avi	68763	45.84200	1	42.17133	1318.48101	179.79753	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	318	18.07_L373.avi	68763	45.84200	1	42.17133	1283.24051	26.72666	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	319	18.07_L373.avi	68763	45.84200	1	42.17133	1278.37975	93.54331	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	320	18.07_L373.avi	68763	45.84200	1	42.17133	1319.69620	116.62542	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	321	18.07_L373.avi	68763	45.84200	1	42.17133	1361.01266	140.92238	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	322	18.07_L373.avi	68763	45.84200	1	42.17133	1412.05063	177.36783	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	323	18.07_L373.avi	68763	45.84200	1	42.17133	1454.58228	51.02362	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	324	18.07_L373.avi	68763	45.84200	1	42.17133	1509.26582	4.85939	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	325	18.07_L373.avi	68763	45.84200	1	42.17133	1505.62025	82.60967	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	326	18.07_L373.avi	68763	45.84200	1	42.17133	1509.26582	178.58268	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	327	18.07_L373.avi	68763	45.84200	1	42.17133	1587.03797	221.10236	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	328	18.07_L373.avi	68763	45.84200	1	42.17133	1611.34177	195.59055	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	329	18.07_L373.avi	68763	45.84200	1	42.17133	1610.12658	164.00450	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	330	18.07_L373.avi	68763	45.84200	1	42.17133	1572.45570	114.19573	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	331	18.07_L373.avi	68763	45.84200	1	42.17133	1674.53165	116.62542	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	332	18.07_L373.avi	68763	45.84200	1	42.17133	1757.16456	20.65242	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	333	18.07_L373.avi	68763	45.84200	1	42.17133	1804.55696	91.11361	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	334	18.07_L373.avi	68763	45.84200	1	42.17133	1752.30380	145.78178	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	335	18.07_L373.avi	68763	45.84200	1	42.17133	1742.58228	161.57480	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	336	18.07_L373.avi	68763	45.84200	1	42.17133	1686.68354	228.39145	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	337	18.07_L373.avi	68763	45.84200	1	42.17133	1876.25316	189.51631	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	338	18.07_L373.avi	68763	45.84200	1	42.17133	1876.25316	144.56693	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	339	18.07_L373.avi	68763	45.84200	1	42.17133	1878.68354	111.76603	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	340	18.07_L373.avi	68763	45.84200	1	42.17133	314.73418	87.46907	Carangidae	Decapterus	spp		1	AD	Passing			
-18.08	341	18.07_L373.avi	72259	48.17267	1	44.50200	207.79747	511.45107	Labridae	Choerodon	zamboangae	37384011	1	AD	Passing			
-18.08	342	18.07_L373.avi	72402	48.26800	1	44.59733	1364.65823	371.74353	Tetraodontidae	Lagocephalus	sceleratus	37467007	1	AD	Passing			
-18.08	343	18.07_L373.avi	72635	48.42333	1	44.75267	409.51899	550.32621	Labridae	Choerodon	zamboangae	37384011	1	AD	Passing			
-18.08	344	18.07_L373.avi	74515	49.67667	1	46.00600	849.41772	614.71316	Labridae	Choerodon	zamboangae	37384011	1	AD	Passing			
-18.08	345	18.07_L373.avi	78133	52.08867	1	48.41800	676.44556	887.78643	Labridae		sp8		1	AD	Passing			
-18.08	346	18.07_L373.avi	82109	54.73933	1	51.06867	815.39241	715.54556	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
-18.08	347	18.07_L373.avi	91969	61.31267	1	57.64200	1245.56962	609.85377	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Feeding			
-18.08	348	18.07_L373.avi	92103	61.40200	1	57.73133	1147.13924	699.75253	Lethrinidae	Gymnocranius	grandoculis	37351005	1	AD	Feeding			
-18.08	349	18.07_L373.avi	92367	61.57800	1	57.90733	1246.78481	692.46344	Balistidae	Sufflamen	fraenatum	37465014	1	AD	Feeding			
-18.08	350	18.07_L373.avi	92470	61.64667	1	57.97600	823.89873	263.62205	Labridae	Choerodon	zamboangae	37384011	1	AD	Passing			
 19.01	0	19.01_L372.avi	7071	4.71400	1	0.72600	1563.94937	925.71429	Microdesmidae	Ptereleotris	sp1		1	AD	Passing			
 19.01	1	19.01_L372.avi	7322	4.88133	1	0.89333	563.84810	55.88301	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing	Check		
 19.01	2	19.01_L372.avi	8216	5.47733	1	1.48933	1028.05063	443.41957	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
@@ -17988,3 +17637,55 @@ OpCode	PointIndex	Filename	Frame	Time	Period	PeriodTime	ImageCol	ImageRow	Family
 31.06	1572	31.06_L372.avi	91182	60.78800	1	56.15667	1348.61368	204.64403	Acanthuridae	Naso	hexacanthus	37437028	1	AD	Passing			
 31.06	1573	31.06_L372.avi	91182	60.78800	1	56.15667	918.00370	372.61774	Acanthuridae	Naso	hexacanthus	37437028	1	AD	Passing			
 31.06	1574	31.06_L372.avi	91626	61.08400	1	56.45267	291.01664	482.62870	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	0	18.08_L372.avi	8827	5.88467	1	2.64400	45.81345	509.46015	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	1	18.08_L372.avi	9615	6.41000	1	3.16933	717.74403	723.23907	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	2	18.08_L372.avi	11339	7.55933	1	4.31867	955.14100	459.48586	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	3	18.08_L372.avi	13354	8.90267	1	5.66200	1082.86334	424.78149	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	4	18.08_L372.avi	13952	9.30133	1	6.06067	1697.87419	451.15681	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	5	18.08_L372.avi	13952	9.30133	1	6.06067	1216.13883	340.10283	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	6	18.08_L372.avi	17644	11.76267	1	8.52200	938.48156	784.31877	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Feeding			
+18.08	7	18.08_L372.avi	17828	11.88533	1	8.64467	1239.73970	569.15167	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	8	18.08_L372.avi	17828	11.88533	1	8.64467	1166.16052	327.60925	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	9	18.08_L372.avi	18622	12.41467	1	9.17400	373.44902	483.08483	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	10	18.08_L372.avi	18622	12.41467	1	9.17400	510.88937	623.29049	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	11	18.08_L372.avi	18622	12.41467	1	9.17400	1764.51193	338.71465	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	12	18.08_L372.avi	20057	13.37133	1	10.13067	538.65510	719.07455	Echeneidae	Echeneis	naucrates	37336001	1	AD	Passing			
+18.08	13	18.08_L372.avi	25268	16.84533	1	13.60467	827.41866	567.76350	Carangidae	Seriola	dumerili	37337025	1	AD	Passing			
+18.08	14	18.08_L372.avi	46897	31.26467	1	28.02400	834.36009	245.70694	Carangidae	Seriola	dumerili	37337025	1	AD	Passing			
+18.08	15	18.08_L372.avi	47119	31.41267	1	28.17200	1280.00000	90.23136	Carcharhinidae	Carcharhinus	tilstoni	37018014	1	AD	Passing			
+18.08	16	18.08_L372.avi	59256	39.50400	1	36.26333	824.64208	602.46787	Echeneidae	Echeneis	naucrates	37336001	1	AD	Passing			
+18.08	17	18.08_L372.avi	64801	43.20067	1	39.96000	1168.93709	687.14653	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	18	18.08_L372.avi	64801	43.20067	1	39.96000	1575.70499	749.61440	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	19	18.08_L372.avi	64801	43.20067	1	39.96000	1713.14534	502.51928	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	20	18.08_L372.avi	81785	54.52333	1	51.28267	1511.84382	465.03856	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	21	18.08_L372.avi	81785	54.52333	1	51.28267	749.67462	523.34190	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	22	18.08_L372.avi	81785	54.52333	1	51.28267	1057.87419	888.43188	Lutjanidae	Pristipomoides	multidens	37346002	1	AD	Passing			
+18.08	23	18.08_L372.avi	87912	58.60800	1	55.36733	805.20607	433.11054	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	24	18.08_L372.avi	87912	58.60800	1	55.36733	1192.53796	480.30848	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	25	18.08_L372.avi	87912	58.60800	1	55.36733	701.08460	688.53470	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	26	18.08_L372.avi	87912	58.60800	1	55.36733	1392.45119	882.87918	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	27	18.08_L372.avi	88201	58.80067	1	55.56000	1484.07809	567.76350	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	28	18.08_L372.avi	88201	58.80067	1	55.56000	1307.76573	839.84576	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	29	18.08_L372.avi	88201	58.80067	1	55.56000	749.67462	838.45758	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	30	18.08_L372.avi	88201	58.80067	1	55.56000	441.47505	769.04884	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	31	18.08_L372.avi	88201	58.80067	1	55.56000	158.26464	778.76607	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	32	18.08_L372.avi	88254	58.83600	1	55.59533	177.70065	355.37275	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	33	18.08_L372.avi	88254	58.83600	1	55.59533	27.76573	628.84319	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	34	18.08_L372.avi	88254	58.83600	1	55.59533	509.50108	526.11825	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	35	18.08_L372.avi	88254	58.83600	1	55.59533	617.78742	844.01028	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	36	18.08_L372.avi	88254	58.83600	1	55.59533	1610.41215	460.87404	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	37	18.08_L372.avi	88254	58.83600	1	55.59533	1878.35141	567.76350	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	38	18.08_L372.avi	89233	59.48867	1	56.24800	730.23861	459.48586	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	39	18.08_L372.avi	89233	59.48867	1	56.24800	521.99566	687.14653	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	40	18.08_L372.avi	89233	59.48867	1	56.24800	1013.44902	896.76093	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	41	18.08_L372.avi	89233	59.48867	1	56.24800	1325.81345	978.66324	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	42	18.08_L372.avi	89233	59.48867	1	56.24800	1361.90889	377.58355	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	43	18.08_L372.avi	89233	59.48867	1	56.24800	1845.03254	552.49357	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	44	18.08_L372.avi	89706	59.80400	1	56.56333	374.83731	267.91774	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	45	18.08_L372.avi	89706	59.80400	1	56.56333	159.65293	427.55784	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	46	18.08_L372.avi	89706	59.80400	1	56.56333	842.68980	671.87661	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	47	18.08_L372.avi	89706	59.80400	1	56.56333	1303.60087	366.47815	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	48	18.08_L372.avi	89706	59.80400	1	56.56333	1832.53796	358.14910	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	49	18.08_L372.avi	89706	59.80400	1	56.56333	1729.80477	701.02828	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	50	18.08_L372.avi	89706	59.80400	1	56.56333	1870.02169	674.65296	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Passing			
+18.08	51	18.08_L372.avi	91375	60.91667	1	57.67600	1243.90456	806.52956	Lutjanidae	Pristipomoides	typus	37346019	1	AD	Feeding			

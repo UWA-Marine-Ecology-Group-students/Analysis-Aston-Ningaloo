@@ -84,8 +84,6 @@
 "2019-08_Ningaloo_stereo-BRUVs",15.12,"Echeneidae","Echeneis","naucrates",124.94642,165,935,1100,"too small",40.05358,11.3587654545455
 "2019-08_Ningaloo_stereo-BRUVs",16.05,"Labridae","Bodianus","solatus",305.78955,52.5,297.5,350,"too big",8.28955000000002,87.3684428571429
 "2019-08_Ningaloo_stereo-BRUVs",17.08,"Lethrinidae","Gymnocranius","griseus",309.98858,52.5,297.5,350,"too big",12.48858,88.5681657142857
-"2019-08_Ningaloo_stereo-BRUVs",18.08,"Labridae","Bodianus","solatus",312.31678,52.5,297.5,350,"too big",14.81678,89.2333657142857
-"2019-08_Ningaloo_stereo-BRUVs",18.08,"Labridae","Bodianus","solatus",373.29587,52.5,297.5,350,"too big",75.79587,106.655962857143
 "2019-08_Ningaloo_stereo-BRUVs",19.01,"Echeneidae","Echeneis","naucrates",160.33606,165,935,1100,"too small",4.66394,14.5760054545455
 "2019-08_Ningaloo_stereo-BRUVs",19.03,"Echeneidae","Echeneis","naucrates",131.82115,165,935,1100,"too small",33.17885,11.9837409090909
 "2019-08_Ningaloo_stereo-BRUVs",19.03,"Lethrinidae","Lethrinus","punctulatus",444.34596,78,442,520,"too big",2.34595999999999,85.4511461538462
@@ -115,3 +113,4 @@
 "2019-08_Ningaloo_stereo-BRUVs",31.04,"Lethrinidae","Lethrinus","ravus",259.82096,45,255,300,"too big",4.82096000000001,86.6069866666667
 "2019-08_Ningaloo_stereo-BRUVs",31.05,"Triakidae","Hemitriakis","falcata",790.47605,120,680,800,"too big",110.47605,98.80950625
 "2019-08_Ningaloo_stereo-BRUVs",31.06,"Serranidae","Cephalopholis","spiloparaea",281.4666,45,255,300,"too big",26.4666,93.8222
+"2019-08_Ningaloo_stereo-BRUVs",18.08,"Echeneidae","Echeneis","naucrates",113.83486,165,935,1100,"too small",51.16514,10.3486236363636

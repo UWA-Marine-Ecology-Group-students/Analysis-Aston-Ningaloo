@@ -484,9 +484,9 @@ spatial.ravus
 setwd(plots.dir)
 ta.sr<-plot_grid(spatial.ta, spatial.sr, labels = c('A', 'B'), label_size = 12,ncol=1)
 ggsave("total.abundance.and.species.richness.potrait.png",ta.sr,dpi=300,width=11,height=17.5,unit="cm")
-# 
-# ta.sr<-plot_grid(spatial.ta, spatial.sr, labels = c('A', 'B'), label_size = 12,ncol=2)
-# ggsave("total.abundance.and.species.richness.landscape1.png",ta.sr,dpi=300,width = 20, height = 5.5,unit="cm") 
+
+ta.sr<-plot_grid(spatial.ta, spatial.sr, labels = c('A', 'B'), label_size = 12,ncol=2)
+ggsave("total.abundance.and.species.richness.landscape1.png",ta.sr,dpi=300,width = 20, height = 5.5,unit="cm")
 
 # Species specific ----
 species.combined<-plot_grid(spatial.decapterus, spatial.multidens, 
