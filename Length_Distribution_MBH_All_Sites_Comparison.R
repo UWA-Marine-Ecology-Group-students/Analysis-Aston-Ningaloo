@@ -46,136 +46,136 @@ theme_ga<-theme(panel.grid.major = element_blank(), panel.grid.minor = element_b
 
 # Decapterus spp
 length.decapterus <- ggplot(data=filter(top.10.lengths, species%in%c('spp')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.decapterus
 
 length.decapterus.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('spp')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.decapterus.MBH
 
 # Pristipomoides multidens
 length.multidens <- ggplot(data=filter(top.10.lengths, species%in%c('multidens')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.multidens
 
 length.multidens.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('multidens')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.multidens.MBH
 
 # Gymnocranius grandoculis
 length.grandoculis <- ggplot(data=filter(top.10.lengths, species%in%c('grandoculis')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.grandoculis
 
 length.grandoculis.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('grandoculis')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.grandoculis.MBH
 
 # Carangoides chrysophrys
 length.chrysophrys <- ggplot(data=filter(top.10.lengths, species%in%c('chrysophrys')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.chrysophrys
 
 length.chrysophrys.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('chrysophrys')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.chrysophrys.MBH
 
 # Lethrinus miniatus
 length.miniatus <- ggplot(data=filter(top.10.lengths, species%in%c('miniatus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.miniatus
 
 length.miniatus.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('miniatus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.miniatus.MBH
 
 # Carangoides gymnostethus
 length.gymnostethus <- ggplot(data=filter(top.10.lengths, species%in%c('gymnostethus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.gymnostethus
 
 length.gymnostethus.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('gymnostethus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.gymnostethus.MBH
 
 # Lethrinus rubrioperculatus
 length.rubrioperculatus <- ggplot(data=filter(top.10.lengths, species%in%c('rubrioperculatus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.rubrioperculatus
 
 length.rubrioperculatus.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('rubrioperculatus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.rubrioperculatus.MBH
 
 # Argyrops spinifer
 length.spinifer <- ggplot(data=filter(top.10.lengths, species%in%c('spinifer')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.spinifer
 
 length.spinifer.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('spinifer')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.spinifer.MBH
 
 # Lagocephalus sceleratus
 length.sceleratus <- ggplot(data=filter(top.10.lengths, species%in%c('sceleratus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.sceleratus
 
 length.sceleratus.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('sceleratus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.sceleratus.MBH
 
@@ -196,61 +196,61 @@ length.sceleratus.MBH
 
 # Lutjanus sebae
 length.sebae <- ggplot(data=filter(top.10.lengths, species%in%c('sebae')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.sebae
 
 length.sebae.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('sebae')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.sebae.MBH
 
 # Lethrinus punctulatus
 length.punctulatus <- ggplot(data=filter(top.10.lengths, species%in%c('punctulatus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.punctulatus
 
 length.punctulatus.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('punctulatus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.punctulatus.MBH
 
 # Diagramma pictum labiosum  
 length.pictum.labiosum <- ggplot(data=filter(top.10.lengths, species%in%c('pictum labiosum')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.pictum.labiosum
 
 length.pictum.labiosum.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('pictum labiosum')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.pictum.labiosum.MBH
 
 # Lethrinus ravus
 length.ravus <- ggplot(data=filter(top.10.lengths, species%in%c('ravus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.ravus
 
 length.ravus.MBH <- ggplot(data=filter(top.10.lengths.MBH, species%in%c('ravus')), aes(as.numeric(length))) +
-  geom_histogram(aes(y =..density..),col="black",fill="grey",alpha = .5)+
+  geom_histogram(aes(y =..ncount..),col="black",fill="grey",alpha = .5)+
   scale_y_continuous(expand = expansion(mult = c(0, .1)))+
-  labs(x = "Length (mm)", y = "Density") +
+  labs(x = "Length (mm)", y = "Scaled Count") +
   theme_ga
 length.ravus.MBH
 
