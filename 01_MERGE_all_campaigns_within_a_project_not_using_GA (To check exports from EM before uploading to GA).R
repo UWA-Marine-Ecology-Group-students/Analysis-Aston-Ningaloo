@@ -69,7 +69,7 @@ dir.create(file.path(working.dir, "Tidy data"))
 # In this example we will use a csv file (you will need to create a csv file to upload to GlobalArchive anyway but can use this script to save the file to upload to globalarchive)
 
 # For csv file ----
-setwd(working.dir)
+setwd(tidy.dir)
 metadata <-read.csv("ningaloo_metadata.csv")%>% # list all files ending in "_Metadata.csv"
   ga.clean.names()%>%
   mutate(sample=as.factor(sample))%>%
