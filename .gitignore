@@ -1,3 +1,7 @@
+
+#Extra things to ignore
+/Plots
+
 # History files
 .Rhistory
 .Rapp.history
