@@ -20,13 +20,13 @@ library(MuMIn)
 
 # Set work directory ----
 
-work.dir <- ("C:/Users/00093391/Dropbox/UWA/data.analyses/Abundances") # path to your directory
+working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON't MOVE THE SCRIPT)
 
 # Set sub directories----
 
-data.dir <- paste(work.dir,"data",sep="/")
-plots.dir <- paste(work.dir,"plots",sep="/")
-model.out <- paste(work.dir,"ModelOut",sep="/")
+data.dir <- paste(working.dir,"data",sep="/")
+plots.dir <- paste(working.dir,"plots",sep="/")
+model.out <- paste(working.dir,"ModelOut",sep="/")
 
 # Read in data----
 data.dir<- ("C:/Users/00093391/Dropbox/UWA/Research Associate/Woodside-Exmouth/fishdata")

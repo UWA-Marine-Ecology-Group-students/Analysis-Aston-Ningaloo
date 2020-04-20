@@ -13,8 +13,8 @@ working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets worki
 
 
 ## Set sub directories----
-d.dir = paste(working.dir,"data/tidy",sep="/") 
-s.dir = paste(working.dir,"data/spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
+d.dir = paste(working.dir,"data/Tidy data",sep="/") 
+s.dir = paste(working.dir,"data/Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
 
 
 ## Load bathymetry and tpi data----
