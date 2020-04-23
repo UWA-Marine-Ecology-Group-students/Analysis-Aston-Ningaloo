@@ -24,10 +24,10 @@ working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets worki
 
 # Set sub directories----
 
-data.dir <- paste(working.dir,"data",sep="/")
-spatial.dir <- paste(working.dir,"spatial",sep="/") # wherever you keep your spatial data
-plots.dir <- paste(working.dir,"plots",sep="/")
-model.out <- paste(working.dir,"ModelOut",sep="/")
+data.dir <- paste(working.dir,"Tidy Data",sep="/")
+spatial.dir <- paste(working.dir,"Spatial",sep="/") # wherever you keep your spatial data
+plots.dir <- paste(working.dir,"Plots",sep="/")
+model.out <- paste(working.dir,"Model Out",sep="/")
 
 
 ## Load predictor data ----
@@ -37,79 +37,86 @@ plot(preds) # to visualize them
 
 names(preds) # check the names of your preds
 # rename this if needed:
-#names(pred)<-c('Bathy','tpi')
+names(preds)<-c('bathymetry','TPI')
 
 
 ## To predict in space make preds df----
-predictm<-as.data.frame(pred,xy=T,na.rm=TRUE)%>%
+predictm<-as.data.frame(preds,xy=T,na.rm=TRUE)%>%
   glimpse()
+names(predictm) <- c("longitude", "latitude", 'bathymetry', 'TPI')
 
-## Predict using the fitted model ----
-prediction.nemip<-predict(Nemip, predictm, type = 'response', se.fit=T, index=1:2, progress='text') 
+predictm$site <- "a"
 
+# predictm$maxn <- as.numeric(predictm$maxn)
+# predictm$site <- as.numeric(predictm$site)
+# 
+# str(predictm)
+
+######## Predict using the fitted model Lutjanus sebae #########
+prediction.sebae<-predict(Sebae.gam, predictm, type = 'response', se.fit=T, index=1:2, progress='text', exclude="s(site)") 
 
 ## Store prediction in a df ----
-prediction.nemid_df<-as.data.frame(prediction.nemip,xy=TRUE,na.rm=TRUE)%>%
+prediction.sebae_df<-as.data.frame(prediction.sebae,xy=TRUE,na.rm=TRUE)%>%
   glimpse()
 # add cooridinates from preds to df
-prediction.nemid_df$Longitude<-predictm$x 
-prediction.nemid_df$Latitude<-predictm$y
-glimpse(prediction.nemid_df) # check
+prediction.sebae_df$Longitude<-predictm$longitude
+prediction.sebae_df$Latitude<-predictm$latitude
+glimpse(prediction.sebae_df) # check
 
 # save this df
-write.csv(prediction.nemid_df, paste(d.dir, "Nemid.predictions.csv", sep='/'))
+write.csv(prediction.sebae_df, paste(d.dir, "Sebae.prediction.csv", sep='/'))
 
 
 ## Create raster for mean fit and one for se fit ----
 
 # Mean fit --
-nemip.fit<-prediction.nemid_df%>%
+sebae.fit<-prediction.sebae_df%>%
   dplyr::select(Longitude,Latitude,fit)%>%
   glimpse()
 
 # SE fit --
-nemip.se<-prediction.nemid_df%>%
+sebae.se<-prediction.sebae_df%>%
   dplyr::select(Longitude,Latitude,se.fit)%>%
   glimpse()
 
 
 ## Convert into a spatialPoints dataframe ----
 # Mean fit--
-coordinates(nemip.fit) <- ~ Longitude + Latitude
+coordinates(sebae.fit) <- ~ Longitude + Latitude
 # SE fit--
-coordinates(nemip.se) <- ~ Longitude + Latitude
+coordinates(sebae.se) <- ~ Longitude + Latitude
 
 
 ## coerce to SpatialPixelsDataFrame ----
 # Mean fit
-gridded(nemip.fit) <- TRUE
+gridded(sebae.fit) <- TRUE
 # SE fit
-gridded(nemip.se) <- TRUE
+gridded(sebae.se) <- TRUE
 
 
 ## Coerce to raster ----
 
 # Set the CRS --
-sr <- "+init=epsg:4326"
+sr <- "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"
 # choose colors --
 library(RColorBrewer)
 my.palette <- brewer.pal(n = 9, name = "OrRd")
 pal <- colorRampPalette(c("yellow","pink", "red", "dark blue"))
 pal <- colorRampPalette(c("yellow","pink", "red", "dark blue"))
 # plot mean fit --
-nemip.fit <- raster(nemip.fit)
-crs(nemip.fit)<-sr
-nemip.fit
-plot(nemip.fit)
+sebae.fit <- raster(sebae.fit)
+crs(sebae.fit)<-sr
+sebae.fit
+plot(sebae.fit, col=my.palette)
 # plot SE fit --
-nemip.se <- raster(nemip.se)
-crs(nemip.se) <-sr
-nemip.se
-plot(nemip.se)
+sebae.se <- raster(sebae.se)
+crs(sebae.se) <-sr
+sebae.se
+plot(sebae.se, col=my.palette)
 
 # Save rasters--
-writeRaster(nemip.fit, paste(model.out, "Nemipfit.tif", sep ='/'))
-writeRaster(nemip.se, paste(model.out, "Nemipse.tif", sep ='/'))
+writeRaster(sebae.fit, paste(model.out, "Sebae_fit.tif", sep ='/'))
+writeRaster(sebae.se, paste(model.out, "Sebae_se.tif", sep ='/'))
 
 
 ## Plot with ggplot ----
@@ -118,8 +125,8 @@ writeRaster(nemip.se, paste(model.out, "Nemipse.tif", sep ='/'))
 
 ## Fit
 
-nemidp<-ggplot()+
-  geom_tile(data=prediction.nemid_df,aes(x=Longitude,y=Latitude,fill=fit),alpha=0.8)+
+sebaep<-ggplot()+
+  geom_tile(data=prediction.sebae_df,aes(x=Longitude,y=Latitude,fill=fit),alpha=0.8)+
   scale_fill_viridis(option = "magma",direction = -1)+
   #geom_polygon(data=australia,aes(x=long,y=lat,group=group),fill="gray12",alpha=0.8)+ # can add polygon of coastline here
   scale_color_gradient()+
@@ -129,6 +136,90 @@ nemidp<-ggplot()+
   theme(panel.background = element_blank(),
         panel.border = element_rect(colour = "black",fill = NA,size = 1))
 
-nemidp
+sebaep
 
-## Repeat for other species ----
+######## Predict using the fitted model Pristipomoides Multidens ########
+prediction.multidens<-predict(Multidens.gam, predictm, type = 'response', se.fit=T, index=1:2, progress='text', exclude="s(site)") 
+
+## Store prediction in a df ----
+prediction.multidens_df<-as.data.frame(prediction.multidens,xy=TRUE,na.rm=TRUE)%>%
+  glimpse()
+# add cooridinates from preds to df
+prediction.multidens_df$Longitude<-predictm$longitude
+prediction.multidens_df$Latitude<-predictm$latitude
+glimpse(prediction.multidens_df) # check
+
+# save this df
+write.csv(prediction.multidens_df, paste(d.dir, "Multidens.prediction.csv", sep='/'))
+
+
+## Create raster for mean fit and one for se fit ----
+
+# Mean fit --
+multidens.fit<-prediction.multidens_df%>%
+  dplyr::select(Longitude,Latitude,fit)%>%
+  glimpse()
+
+# SE fit --
+multidens.se<-prediction.multidens_df%>%
+  dplyr::select(Longitude,Latitude,se.fit)%>%
+  glimpse()
+
+
+## Convert into a spatialPoints dataframe ----
+# Mean fit--
+coordinates(multidens.fit) <- ~ Longitude + Latitude
+# SE fit--
+coordinates(multidens.se) <- ~ Longitude + Latitude
+
+
+## coerce to SpatialPixelsDataFrame ----
+# Mean fit
+gridded(multidens.fit) <- TRUE
+# SE fit
+gridded(multidens.se) <- TRUE
+
+
+## Coerce to raster ----
+
+# Set the CRS --
+sr <- "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"
+# choose colors --
+library(RColorBrewer)
+my.palette <- brewer.pal(n = 9, name = "OrRd")
+pal <- colorRampPalette(c("yellow","pink", "red", "dark blue"))
+pal <- colorRampPalette(c("yellow","pink", "red", "dark blue"))
+# plot mean fit --
+multidens.fit <- raster(multidens.fit)
+crs(multidens.fit)<-sr
+multidens.fit
+plot(multidens.fit, col=my.palette)
+# plot SE fit --
+multidens.se <- raster(multidens.se)
+crs(multidens.se) <-sr
+multidens.se
+plot(multidens.se, col=my.palette)
+
+# Save rasters--
+writeRaster(multidens.fit, paste(model.out, "Multidens_fit.tif", sep ='/'))
+writeRaster(multidens.se, paste(model.out, "Multidens_se.tif", sep ='/'))
+
+
+## Plot with ggplot ----
+
+### Overall plot
+
+## Fit
+
+multidensp<-ggplot()+
+  geom_tile(data=prediction.multidens_df,aes(x=Longitude,y=Latitude,fill=fit),alpha=0.8)+
+  scale_fill_viridis(option = "magma",direction = -1)+
+  #geom_polygon(data=australia,aes(x=long,y=lat,group=group),fill="gray12",alpha=0.8)+ # can add polygon of coastline here
+  scale_color_gradient()+
+  coord_equal()+
+  #xlim(112,155)+ #  set limits of plot if desired
+  #ylim(-45,-7)+ #  set limits of plot
+  theme(panel.background = element_blank(),
+        panel.border = element_rect(colour = "black",fill = NA,size = 1))
+
+multidensp

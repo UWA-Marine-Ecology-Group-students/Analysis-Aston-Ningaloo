@@ -24,19 +24,18 @@ working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets worki
 
 # Set sub directories----
 
-data.dir <- paste(working.dir,"data",sep="/")
-plots.dir <- paste(working.dir,"plots",sep="/")
-model.out <- paste(working.dir,"ModelOut",sep="/")
+data.dir <- paste(working.dir,"Tidy data",sep="/")
+plots.dir <- paste(working.dir,"Plots",sep="/")
+model.out <- paste(working.dir,"Model Out",sep="/")
 
 # Read in data----
-data.dir<- ("C:/Users/00093391/Dropbox/UWA/Research Associate/Woodside-Exmouth/fishdata")
+# data.dir<- ("C:/Users/00093391/Dropbox/UWA/Research Associate/Woodside-Exmouth/fishdata")
 setwd(data.dir)
 dir()
 
-dat<-read.csv("fishpreds.csv")%>% # this is the df with fish and predictor data
-  dplyr::rename(Taxa=Species,
-                response=Carangidae.Carangoides.equula)%>% # rename columns in data for model
-  dplyr::filter(Taxa!='Synodontidae Saurida undosquamis')%>% # remove Synodontidae Saurida undosquamis
+dat<-read.csv("fishdata.csv")%>% # this is the df with fish and predictor data
+  dplyr::rename(site=sample)%>% # rename columns in data for model
+  # dplyr::filter(Taxa!='Synodontidae Saurida undosquamis')%>% remove Synodontidae Saurida undosquamis
   na.omit()%>% # remove NAs
   glimpse() # to see data
 # Convert covariates that are stored as character (factor) or integers (continous) if needed
@@ -46,31 +45,31 @@ dat<-read.csv("fishpreds.csv")%>% # this is the df with fish and predictor data
 plot.new()
 par(mfrow=c(1,2))
 
-levels(dat$Taxa)
+levels(dat$scientific)
 
 ## Subsample data for each species needed for the analysis
 # Repeat for as many species as required --
 
 
-## Species 1: Nemip --
+## Species 1: Lutjanus sebae --
 
-levels(dat$Taxa)
+levels(dat$scientific)
 
-Nemip<-dat%>%
-  filter(Taxa=="Nemipteridae Nemipterus bathybius")%>%
+Sebae<-dat%>%
+  filter(scientific=="Lutjanidae Lutjanus sebae")%>%
   glimpse()
-hist(Nemip$response)
-plot(Nemip$response)
+hist(Sebae$TPI)
+plot(Sebae$bathymetry)
 
-## Species 2: Carangid.2 --
+## Species 2: Pristipomoides multidens --
 
-levels(dat$Taxa)
+levels(dat$species)
 
-carangid.2<-dat%>%
-  filter(Taxa=="Carangidae Decapterus tabl")%>%
+Multidens<-dat%>%
+  filter(scientific=="Lutjanidae Pristipomoides multidens")%>%
   glimpse()
-hist(carangid.2$response)
-plot(carangid.2$response)
+hist(Multidens$maxn)
+plot(Multidens$maxn)
 
 
 
@@ -80,7 +79,7 @@ class(dat) # should be spatial object
 
 
 ## Set the reference system to the widely used WGS84
-proj4string(dat)<-CRS("+init=epsg:4326")
+proj4string(dat)<-CRS("+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0")
 dat@proj4string
 
 
@@ -93,19 +92,33 @@ dat@proj4string
 #library(mgcv)
 #library(MuMIn)
 
-## Fit model for Nemip ----
+## Fit model for Lutjanus sebae ---- 
 
 names(dat)
 
-Nemip <- gam(response ~ s(tpi, k = 6, bs = "cr") + s(bathy, k = 6, bs = "cr") + # covariate effect of tpi and bathymetry
-            + s(cluster, k = 3, bs ='re'), # random effect of cluster or site
-          family=tw(),data=Nemip) # family tweedy
-plot(Nemip,residuals=T,all.terms = TRUE,pages=1)
-summary(Nemip) # check results
-AICc(Nemip) # check AIC of model
+Sebae.gam <- gam(maxn ~ s(TPI, k = 6, bs = "cr") + s(bathymetry, k = 6, bs = "cr") + # covariate effect of tpi and bathymetry
+           + s(site, k = 3, bs ='re'), # random effect of cluster or site
+           family=tw(),data=Sebae) # family tweedy
+plot(Sebae.gam,residuals=T,all.terms = TRUE,pages=1)
+summary(Sebae.gam) # check results
+AICc(Sebae.gam) # check AIC of model
 
 ## Check residuals
 par(mfrow=c(2,2))
-gam.check(Nemip)
+gam.check(Sebae.gam)
 
-## Repeat for other species as needed ----
+## Fit model for Pristipomoides multidens ----
+
+names(dat)
+
+Multidens.gam <- gam(maxn ~ s(TPI, k = 6, bs = "cr") + s(bathymetry, k = 6, bs = "cr") +  # covariate effect of tpi and bathymetry
+                 + s(site, k = 3, bs ='re'), # random effect of cluster or site
+                 family=tw(),data=Multidens) # family tweedy
+plot(Multidens.gam,residuals=T,all.terms = TRUE,pages=1)
+summary(Multidens.gam) # check results
+AICc(Multidens.gam) # check AIC of model
+
+## Check residuals
+par(mfrow=c(2,2))
+gam.check(Multidens.gam)
+
