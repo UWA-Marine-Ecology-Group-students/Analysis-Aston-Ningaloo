@@ -47,10 +47,6 @@ names(predictm) <- c("longitude", "latitude", 'bathymetry', 'TPI')
 
 predictm$site <- "a"
 
-# predictm$maxn <- as.numeric(predictm$maxn)
-# predictm$site <- as.numeric(predictm$site)
-# 
-# str(predictm)
 
 ######## Predict using the fitted model Lutjanus sebae #########
 prediction.sebae<-predict(Sebae.gam, predictm, type = 'response', se.fit=T, index=1:2, progress='text', exclude="s(site)") 
