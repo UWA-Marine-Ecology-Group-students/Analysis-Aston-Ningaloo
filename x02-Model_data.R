@@ -17,9 +17,7 @@ library(mgcv)
 library(MuMIn)
 
 
-
 # Set work directory ----
-
 working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON't MOVE THE SCRIPT)
 
 # Set sub directories----
@@ -33,8 +31,13 @@ model.out <- paste(working.dir,"Model Out",sep="/")
 setwd(data.dir)
 dir()
 
+metadata<-read.csv("MEG_Labsheets_2020 - 2019-08_Ningaloo-Deep_stereo-BR.csv")%>%
+  dplyr::rename(sample=Sample,site=Site)%>%
+  dplyr::select(sample,site)
+
 dat<-read.csv("fishdata.csv")%>% # this is the df with fish and predictor data
-  dplyr::rename(site=sample)%>% # rename columns in data for model
+  left_join(metadata, by = "sample")%>%
+  # dplyr::rename(site=sample)%>% # rename columns in data for model - BG You need site not sample 23/04/20
   # dplyr::filter(Taxa!='Synodontidae Saurida undosquamis')%>% remove Synodontidae Saurida undosquamis
   na.omit()%>% # remove NAs
   glimpse() # to see data
