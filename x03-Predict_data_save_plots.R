@@ -219,3 +219,28 @@ multidensp<-ggplot()+
         panel.border = element_rect(colour = "black",fill = NA,size = 1))
 
 multidensp
+
+
+
+## Calculate population estimates in your domain (fish/squared meter) ----
+## Check the resolution of your data and how many cells in your raster file
+yourraster # your prediction raster - check the resolution I think is 25x25m = 625m^2 /cell
+# get the number of cells also: I think 383292 ni yours
+
+# get the number of cells in your raster that are not NA
+rNA <- sum(!is.na(youraster)) # 199757
+notNA <- 383292 - 199757
+# calculate no of 1m^2 in the actual area modeled 
+domainmeters <- notNA*625 # to standarize by 1m^2
+
+# get the total fish abundance in the domain --
+suma <- cellStats(m, sum) # 62988154 this is you estmate of total abundance for the total area of domain
+
+# get fish per meter squared -- you can calculate these estimates to other area (different from 1 m^2) 
+fpm <- suma/domainmeters # 0.5491108 
+
+# repeat for SE 
+
+
+
+
