@@ -106,5 +106,4 @@ write.csv(fishdata, paste(d.dir, "fishdata.csv", sep ='/'))
 # Save stack of predictors if desired
 writeRaster(preds, paste(s.dir, "predstack.tif", sep ='/'))
 
-check 
 
