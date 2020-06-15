@@ -87,5 +87,54 @@ write.csv(fullcovariates, paste(d.dir, "covariates.csv", sep ='/'))
 # Save stack of predictors if desired
 writeRaster(preds, paste(s.dir, "covariatestack.tif", sep ='/'))
 
+###### Finding NA values #######
+
+NA.bathy <- subset(fullcovariates,is.na(fullcovariates$bathymetry))
+NA.tpi <- subset(fullcovariates,is.na(fullcovariates$TPI))
+NA.slope <- subset(fullcovariates,is.na(fullcovariates$Slope))
+NA.aspect <- subset(fullcovariates,is.na(fullcovariates$Aspect))
+NA.tri <- subset(fullcovariates,is.na(fullcovariates$TRI))
+NA.roughness <- subset(fullcovariates,is.na(fullcovariates$Roughness))
+NA.flowdir <- subset(fullcovariates,is.na(fullcovariates$FlowDir))
+
+unique(NA.bathy$sample) #10.12
+unique(NA.tpi$sample) # 8.05 10.09 10.12 16.03
+unique(NA.slope$sample) #10.12 16.03
+unique(NA.aspect$sample) #10.12 16.03
+unique(NA.tri$sample) #10.12 16.03
+unique(NA.roughness$sample) #10.12 16.03
+unique(NA.flowdir$sample) #10.12
+
+## Plots
+
+#Bathymetry
+plot(bathy)
+points(bruv, pch=20, cex=0.75, col=ifelse(bruv$sample=='10.12', "red", "black"))
+
+#TPI
+plot(tpi)
+points(bruv, pch=20, cex=0.75, col=ifelse(bruv$sample %in% c("8.05", "10.09", "10.12", "16.03"), "red", "black"))
+
+#Slope
+plot(Slope)
+points(bruv, pch=20, cex-0.75, col=ifelse(bruv$sample %in% c("10.12", "16.03"), "red", "black"))
+
+#Aspect
+plot(Aspect)
+points(bruv, pch=20, cex-0.75, col=ifelse(bruv$sample %in% c("10.12", "16.03"), "red", "black"))
+
+#TRI
+plot(TRI)
+points(bruv, pch=20, cex-0.75, col=ifelse(bruv$sample %in% c("10.12", "16.03"), "red", "black"))
+
+#Roughness
+plot(Roughness)
+points(bruv, pch=20, cex-0.75, col=ifelse(bruv$sample %in% c("10.12", "16.03"), "red", "black"))
+
+#FlowDir
+plot(FlowDir)
+points(bruv, pch=20, cex=0.75, col=ifelse(bruv$sample=='10.12', "red", "black"))
+
+
 
 
