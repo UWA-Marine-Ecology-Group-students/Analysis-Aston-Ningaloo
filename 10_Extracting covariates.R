@@ -36,7 +36,7 @@ tpi <- flip(tpi, direction="y")
 plot(tpi)
 
 ## Load BRUV data
-bruv <-  read.csv(paste(d.dir, "ningaloo.complete.maxn.csv", sep ='/'))
+bruv <-  read.csv(paste(d.dir, "ningaloo_metadata.csv", sep ='/'))
 str(bruv) # check df
 names(bruv) # check the names of the columns with lat and lon
 # Extract bits we need
