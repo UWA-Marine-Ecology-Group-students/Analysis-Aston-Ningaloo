@@ -41,7 +41,7 @@ str(bruv) # check df
 names(bruv) # check the names of the columns with lat and lon
 # Extract bits we need
 bruv <- bruv %>%
-  select("sample", "longitude", "latitude")
+  select("sample", "longitude", "latitude", "site")
 bruv
 
 
@@ -169,7 +169,7 @@ covariates<-covariates%>%
   select(!c("X.x", "X.y"))%>%
   dplyr::rename(distance.to.ramp=Distance.to.ramp)
 
-covariates<-covariates[,c(1,9,2,3,4,5,6,7,8,10,11,12,13,14,15,16)]
+covariates<-covariates[,c(1,9,10,11,12,2,3,4,5,6,7,8,13,14,15,16,17)]
 
 write.csv(covariates, "covariates.csv")
 
