@@ -9,11 +9,11 @@ library(rgeos)
 library(spatialEco)
 
 ## Set work directory----
-working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON't MOVE THE SCRIPT)
+working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON'T MOVE THE SCRIPT)
 
 ## Set sub directories----
-d.dir = paste(working.dir,"Tidy data",sep="/") 
-s.dir = paste(working.dir,"Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
+d.dir <- paste(working.dir,"Tidy data",sep="/") 
+s.dir <- paste(working.dir,"Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
 p.dir <- paste(working.dir,"Plots",sep="/")
 
 ## Load bathymetry and tpi data----
@@ -24,7 +24,7 @@ plot(bathy) # check it
 proj4string(bathy) # check the coordinate system, resolution, etc..
 
 
-tpi <- raster(paste(s.dir, "tpi2.tif", sep='/'))
+tpi <- raster(paste(s.dir, "tpi.tif", sep='/'))
 tpi <- flip(tpi, direction="y")
 plot(tpi)
 proj4string(tpi) # check the coordinate system, resolution, etc..
@@ -132,7 +132,7 @@ ramps <- data.frame(
 head(ramps,4)
 
 samples.ramps <- metadata %>% 
-  select("sample", "latitude", "longitude")#this has OpCode,Latitude,Longitude in it
+  select("sample", "latitude", "longitude") #this has OpCode,Latitude,Longitude in it
 
 distance.to.ramp<-samples.ramps%>%
   select(sample,latitude,longitude)%>%
@@ -148,11 +148,16 @@ distance.to.ramp<-samples.ramps%>%
   #   mutate(To.Fortescue=distance(lat1=ramps[10,2],lat2=.$Latitude,lon1=ramps[10,3],lon2=.$Longitude))%>%
   #   mutate(To.Warroora=distance(lat1=ramps[11,2],lat2=.$Latitude,lon1=ramps[11,3],lon2=.$Longitude))%>%
   #   mutate(To.Gnaraloo=distance(lat1=ramps[12,2],lat2=.$Latitude,lon1=ramps[12,3],lon2=.$Longitude))%>%
-  mutate(Distance.to.ramp=do.call(pmin, .[,4:5]))%>%
+  mutate(Distance.to.ramp=do.call(pmin, .[,4:7]))%>%
   select(sample,Distance.to.ramp)%>%
   distinct() #need to be distinct otherwise joins dont work
 head(distance.to.ramp)
 names((distance.to.ramp))
+
+distance.to.ramp
+
+write.csv(distance.to.ramp, "distance.to.ramp.csv")
+
 
 
 

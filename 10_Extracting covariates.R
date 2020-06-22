@@ -105,7 +105,7 @@ unique(NA.tri$sample) #10.12 16.03
 unique(NA.roughness$sample) #10.12 16.03
 unique(NA.flowdir$sample) #10.12
 
-## Plots
+## Plots of NA sites 
 
 #Bathymetry
 plot(bathy)
@@ -135,6 +135,55 @@ points(bruv, pch=20, cex-0.75, col=ifelse(bruv$sample %in% c("10.12", "16.03"), 
 plot(FlowDir)
 points(bruv, pch=20, cex=0.75, col=ifelse(bruv$sample=='10.12', "red", "black"))
 
+############# Formating habitat data to use as covariate #############
+
+setwd(d.dir)
+
+habitat <- read.csv("ningaloo.complete.habitat.csv")
+
+## Want corals and sponges to stay as coral/sponge when coverage is greater than 50% otherwise we want it to
+## be classified as just reef but if unconsolidated sediment is >50% we want it to be classified as unconsolidated
+
+names(habitat)
+habitat.classified <- habitat %>%
+  rowwise()%>%
+  mutate(reef=sum(c(broad.bryozoa,broad.crinoids,broad.hydrocoral,broad.hydroids,broad.octocoral.black,broad.sponges)))%>%
+  mutate(sand=broad.unconsolidated)
+
+habitat.classified <- habitat.classified%>%
+  select("sample", "mean.relief", "sd.relief", "reef", "sand")
+
+write.csv(habitat.classified, "habitat.classified.csv")
+
+# Add to existing covariates
+covariates<-read.csv("covariates.csv")
+
+covariates<-full_join(covariates,habitat.classified,by="sample")
+
+############# Adding distance to boat ramp to covariates ##############
+ramps<-read.csv("distance.to.ramp.csv")
+
+covariates<-full_join(covariates,ramps,by="sample")
+  
+covariates<-covariates%>%
+  select(!c("X.x", "X.y"))%>%
+  dplyr::rename(distance.to.ramp=Distance.to.ramp)
+
+covariates<-covariates[,c(1,9,2,3,4,5,6,7,8,10,11,12,13,14,15,16)]
+
+write.csv(covariates, "covariates.csv")
 
 
 
+
+
+
+
+
+  
+
+
+
+         
+         
+        
