@@ -173,6 +173,19 @@ covariates<-covariates[,c(1,9,10,11,12,2,3,4,5,6,7,8,13,14,15,16,17)]
 
 write.csv(covariates, "covariates.csv")
 
+############## Adding status of site to covariates ##############
+setwd(d.dir)
+covariates <- read.csv('covariates.csv')
+
+covariates <- covariates%>%
+  mutate(status= 
+           if_else(sample%in%c('5.02','5.03','5.07','5.08','5.11','5.13','6.01','6.02','6.03','6.04','6.05',
+                              '6.12','7.01','7.02','7.03','7.04','7.05','7.08','8.01','8.02','8.05','8.06',
+                              '8.07','8.12','9.01','9.02','9.05','9.06','9.07','9.08','10.01','10.02','10.03',
+                              '10.04','10.07','10.08'),"NT","F"))
+
+write.csv(covariates, "covariates.csv")
+
 
 
 

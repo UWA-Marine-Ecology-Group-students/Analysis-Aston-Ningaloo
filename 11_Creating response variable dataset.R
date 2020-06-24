@@ -126,16 +126,24 @@ Sum.sublegal <- aggregate(sublegal.target$number, by=list(sample=sublegal.target
   rename(target.fish=x)
 
 final.data.legal <- full_join(covariates,Sum.legal, by='sample')%>%
-  select(-c('X','ID'))
+  select(-c('X','ID'))%>%
+  mutate(model='Legal')
 final.data.legal$target.fish[is.na(final.data.legal$target.fish)] <- 0
 
 final.data.sublegal <- full_join(covariates,Sum.sublegal, by='sample')%>%
-  select(-c('X','ID'))
+  select(-c('X','ID'))%>%
+  mutate(model='Sublegal')
 final.data.sublegal$target.fish[is.na(final.data.sublegal$target.fish)] <- 0
 
+final.data<- rbind(final.data.legal, final.data.sublegal)%>%
+  select(-c('X.1'))
+final.data$target.fish[is.na(final.data$target.fish)] <- 0
 
-write.csv(final.data.legal, "final.data.legal.csv")
-write.csv(final.data.sublegal, "final.data.sublegal.csv")  
+
+write.csv(final.data, "final.data.csv")
+
+
+
 
 
 
