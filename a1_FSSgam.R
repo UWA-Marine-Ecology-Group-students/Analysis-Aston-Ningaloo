@@ -12,7 +12,7 @@ library(RColorBrewer)
 library(doParallel) #this can removed?
 library(doSNOW)
 library(gamm4)
-library(RCurl) #needed to download data from GitHub
+#library(RCurl) #needed to download data from GitHub
 library(FSSgam)
 
 rm(list=ls())
@@ -25,30 +25,34 @@ working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets worki
 d.dir <- paste(working.dir,"Tidy data",sep="/") 
 s.dir <- paste(working.dir,"Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
 p.dir <- paste(working.dir,"Plots",sep="/")
-m.dir <- paste(working.dir,"Model Out", sep="/")
+m.dir <- paste(working.dir,"Model Out", sep="/") #suggest make a model.out.gam folder to keep things seperate
 
 # Bring in and format the data----
-name <- 'ningaloo'
+name <- 'ningaloo' # for the study
 
 # Load the dataset - from github
 setwd(d.dir)
 dat <-read.csv('final.data.csv')%>%
-  rename(response=target.fish)
+  rename(response=target.fish)%>%
+  glimpse()
 
 names(dat)
 
 #Set bathymetry to be a positive number for loop
 dat<- dat%>%
-  mutate(pos.bathymetry=(bathymetry*-1))
+  mutate(pos.bathymetry=(bathymetry*-1))%>%
+  glimpse()
 
 # Set predictor variables---
 pred.vars=c("TPI","Slope","Aspect","TRI","Roughness","FlowDir","mean.relief",
-            "sd.relief","reef","distance.to.ramp","bathymetry")
+            "sd.relief","reef","distance.to.ramp","pos.bathymetry")
 
 # Check for correlation of predictor variables- remove anything highly correlated (>0.95)---
 round(cor(dat[,pred.vars], use = "complete.obs"),2)
-# TRI is super correlated to both slope and roughness
-pred.vars=c("TPI","Slope","Aspect","Roughness","FlowDir","mean.relief",
+
+
+# TRI is super correlated to both slope and roughness, "Roughness",
+pred.vars=c("TPI","Slope","Aspect","FlowDir","mean.relief",
             "sd.relief","reef","distance.to.ramp","pos.bathymetry")
 
 # Plot of likely transformations
@@ -64,6 +68,20 @@ for (i in pred.vars) {
   plot(log(x+1))
 }
 
+
+# Plot of likely transformations
+par(mfrow=c(3,2))
+for (i in pred.vars) {
+  x<-dat[ ,i]
+  x = as.numeric(unlist(x))
+  hist((x))#Looks best
+  plot((x),main = paste(i))
+  hist((x)^2)
+  plot((x)^2)
+  hist((x)^3)
+  plot((x)^3)
+}
+
 # Review of individual predictors - we have to make sure they have an even distribution---
 # Bathymetry, distance to ramp, sd.relief, mean.relief, flow.dir, aspect, TPI leave untransformed - should use 
 # sqrt for TPI but it generates a lot of NAs as some values negative and some are positive 
@@ -74,37 +92,62 @@ for (i in pred.vars) {
 dat <- dat%>%
   mutate(sqrt.reef=sqrt(reef))%>%
   mutate(sqrt.slope=sqrt(Slope))%>%
-  mutate(sqrt.TPI=sqrt(TPI))%>%
-  mutate(log.roughness=log(Roughness+1))
+  # mutate(sqrt.TPI=sqrt(TPI))%>%
+  mutate(log.roughness=log(Roughness+1))%>%
+  mutate(cube.Aspect=(Aspect)^3)%>%
+  glimpse()
+
 
 #Reset predictor variables 
-pred.vars=c("bathymetry","TPI","sqrt.slope","Aspect","log.roughness","FlowDir","mean.relief",
+pred.vars=c("bathymetry","TPI","sqrt.slope","cube.Aspect","log.roughness","FlowDir","mean.relief",
             "sd.relief","sqrt.reef","distance.to.ramp")
 
 
 # Check to make sure Response vector has not got more than 80% zeros----
+glimpse(dat)
+str(dat)
+
 unique.vars=unique(as.character(dat$model))
 unique.vars.use=character()
 for(i in 1:length(unique.vars)){
   temp.dat=dat[which(dat$model==unique.vars[i]),]
-  if(length(which(temp.dat$response==0))/nrow(temp.dat)<0.8){
+  if(length(which(temp.dat$response==0))/nrow(temp.dat)<0.5){
     unique.vars.use=c(unique.vars.use,unique.vars[i])}
 }
 unique.vars.use     
 
 zero.legal<-dat%>%
   filter(model=='Legal')%>%
-  filter(response=='0') #29 which is 21%
+  filter(response=='0') #29 which is 21% - there are a lot of legal size fish compared to shallow water surveys
 
 zero.sub<-dat%>%
   filter(model=='Sublegal')%>%
   filter(response=='0') #85 which is 64%
 
-# Remove NA values (can interpolate but I don't know how to do that right now...)
-# 8.05 10.09 10.12 16.03 All have NAs 
+# Remove NA values  - for one of the predictor variables
+# (can interpolate but I don't know how to do that right now...)
+# 8.05 10.09 10.12 16.03 All have NAs
 
 dat<-dat%>%
   filter(!sample%in%c("8.05","10.09","10.12","16.03"))
+
+
+
+# Before we run a model of the data  - check the resiuduals with a 'likley' model - and investigate error distribution and potentially spatial auotcorrelation.
+
+# Likely model 
+m1=gam(response~s(bathymetry,k=3,bs='cr')+ s(distance.to.ramp,k=3,bs='cr')+s(site,bs="re"),
+           family=tw(),  data=dat%>%filter(model=="Legal"))
+summary(m1)
+plot(m1)
+dev.off()
+gam.check(m1)
+
+# We should re-vist spatial auotcorrelation - one approach is to use a 
+# https://www.researchgate.net/post/How_can_I_apply_GLM_and_GAM_to_spatially_autocorrelated_data
+# 1. Specfic test for spatial autocorrelation - Moran's I
+# 2. or can explicitlly include - by including spatial covariance matrix?
+
 
 
 # Run the full subset model selection----
@@ -114,6 +157,22 @@ use.dat=dat
 factor.vars=c("status")# Status as a Factor with two levels
 out.all=list()
 var.imp=list()
+
+
+# Check out the model set----
+
+Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re"),
+           family=tw(),  data=use.dat)
+
+model.set=generate.model.set(use.dat=use.dat,
+                             test.fit=Model1,
+                             pred.vars.cont=pred.vars,
+                             pred.vars.fact=factor.vars,
+                             # linear.vars="distance.to.ramp",
+                             k=3,
+                             null.terms="s(site,bs='re')")
+
+
 
 # Loop through the FSS function for legal and sublegal
 # Loop through the FSS function for each Taxa----
@@ -127,9 +186,11 @@ for(i in 1:length(resp.vars)){
                                test.fit=Model1,
                                pred.vars.cont=pred.vars,
                                pred.vars.fact=factor.vars,
-                               linear.vars="distance.to.ramp",
+                               # linear.vars="distance.to.ramp",
                                k=3,
                                null.terms="s(site,bs='re')")
+  
+  
   out.list=fit.model.set(model.set,
                          max.models=600,
                          parallel=T)
@@ -141,8 +202,7 @@ for(i in 1:length(resp.vars)){
   mod.table$cumsum.wi=cumsum(mod.table$wi.AICc)
   out.i=mod.table[which(mod.table$delta.AICc<=3),]
   out.all=c(out.all,list(out.i))
-  # var.imp=c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw)) #Either raw importance score
-  var.imp=c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw)) #Or importance score weighted by r2
+  var.imp=c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw)) 
   
   # plot the best models
   for(m in 1:nrow(out.i)){
@@ -219,6 +279,7 @@ dat.var.label<-dat.var.imp%>%
   glimpse()
 
 # Plot gg.importance.scores ----
+  # NEED TO ADD IN STATUS
 gg.importance.scores <- ggplot(dat.var.label, aes(x=predictor,y=resp.var,fill=importance))+
   geom_tile(show.legend=T) +
   scale_fill_gradientn(legend_title,colours=c("white", re), na.value = "grey98",

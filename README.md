@@ -6,6 +6,8 @@ Charlotte's data analysis
 [exploratory plots](https://docs.google.com/presentation/d/1q41-zH9fMNZF-7Gj4Yb5Le6UiagzWPYgE_LjxhCM3_U/edit#slide=id.g83644b08f4_0_21)
 
 
+[transformation choices](https://docs.google.com/presentation/d/1DYwrKfa4tqCtQ5ouvVR0vZ_aLGzeTtBoDIW1oner0r4/edit?usp=sharing)
+
 
 
 [model results sheet](https://docs.google.com/spreadsheets/d/1MYTtxkhvJgoJ1qrGaOrqQ7N-5ZZ4iVRpeyBVzByS30Y/edit?usp=sharing)

@@ -43,7 +43,7 @@ for(i in 1:nrow(grid)) {
                                 gbm.y="target.fish",## response
                                 lr=grid[i,"lr"], ## ref to grid 
                                 tc=grid[i,"tc"], ## ref to grid 
-                                family="poisson", ## distribution family 
+                                family="poisson", ## distribution family  - see what else you can use?
                                 bag.fraction=grid[i,"bf"])
   grid[i, "res.dev"]<-dp.stepW_dem$self.statistics$mean.resid} ### store res.dev in grid 
 
