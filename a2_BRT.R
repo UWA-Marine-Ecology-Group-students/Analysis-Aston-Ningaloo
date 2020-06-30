@@ -19,7 +19,7 @@ sublegal.dat <- subset(dat, model=='Sublegal')
 
 #Set co-variates. There are no distributional assumptions on these. Make those you want to be factors into factors
 factor.vars=c("status","model")
-cont.vars=c("bathymetry","TPI", "Slope", "Aspect", "Roughness", "FlowDir", "mean.relief", "sd.relief",
+cont.vars=c("bathymetry","TPI", "Slope", "Aspect", "FlowDir", "mean.relief", "sd.relief",
             "reef", "distance.to.ramp")
 
 ################## Legal Target Species Model ##################
@@ -56,7 +56,7 @@ model <- dismo::gbm.step(data=legal.dat,
                          gbm.y="target.fish",## response
                          lr=best$lr, ## ref to grid 
                          tc=best$tc, ## ref to grid 
-                         family="gaussian",
+                         family="poisson",
                          bag.fraction=best$tc)
 
 
@@ -146,10 +146,10 @@ model <- dismo::gbm.step(data=legal.dat,
                          gbm.y="target.fish",## response
                          lr=best$lr, ## ref to grid 
                          tc=best$tc, ## ref to grid 
-                         family="gaussian",
+                         family="poisson",
                          bag.fraction=best$tc)
 
-
+?gbm.step
 #STEP 3 plots
 summary(model) #Shows importance of different variables
 dismo::gbm.plot(model) #Shows variable effects

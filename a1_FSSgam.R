@@ -14,6 +14,9 @@ library(doSNOW)
 library(gamm4)
 #library(RCurl) #needed to download data from GitHub
 library(FSSgam)
+library(spdep)
+library(spatialEco)
+library(nlme)
 
 rm(list=ls())
 
@@ -25,7 +28,7 @@ working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets worki
 d.dir <- paste(working.dir,"Tidy data",sep="/") 
 s.dir <- paste(working.dir,"Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
 p.dir <- paste(working.dir,"Plots",sep="/")
-m.dir <- paste(working.dir,"Model Out", sep="/") #suggest make a model.out.gam folder to keep things seperate
+m.dir <- paste(working.dir,"Model Out GAM", sep="/") #suggest make a model.out.gam folder to keep things seperate
 
 # Bring in and format the data----
 name <- 'ningaloo' # for the study
@@ -38,6 +41,15 @@ dat <-read.csv('final.data.csv')%>%
 
 names(dat)
 
+# Correct Lat/Long - had been changed to UTM in a previous script
+metadata <- read.csv('ningaloo_metadata.csv')
+
+latlongs <- metadata%>%
+  select('longitude', 'latitude')
+
+dat <- cbind(dat, latlongs)
+dat <- dat[,-c(4,5)]
+  
 #Set bathymetry to be a positive number for loop
 dat<- dat%>%
   mutate(pos.bathymetry=(bathymetry*-1))%>%
@@ -97,7 +109,6 @@ dat <- dat%>%
   mutate(cube.Aspect=(Aspect)^3)%>%
   glimpse()
 
-
 #Reset predictor variables 
 pred.vars=c("bathymetry","TPI","sqrt.slope","cube.Aspect","log.roughness","FlowDir","mean.relief",
             "sd.relief","sqrt.reef","distance.to.ramp")
@@ -132,8 +143,24 @@ zero.sub<-dat%>%
 dat<-dat%>%
   filter(!sample%in%c("8.05","10.09","10.12","16.03"))
 
+#### Checking for spatial autocorrelation in the data 
+install.packages("ape")
+library(ape)
 
+# Generate a distance matrix between our samples
+sample.dists <- as.matrix(dist(cbind(dat$longitude, dat$latitude)))
 
+# Then take the inverse of this matrix and set the diagonal to be 0
+sample.dists.inv <- 1/sample.dists
+diag(sample.dists.inv) <- 0
+
+# Remove any infinite values 
+sample.dists.inv[is.infinite(sample.dists.inv)] <- 0
+
+# Now calculate Morans I 
+Moran.I(dat$response, sample.dists.inv, scaled=T)
+
+?gam
 # Before we run a model of the data  - check the resiuduals with a 'likley' model - and investigate error distribution and potentially spatial auotcorrelation.
 
 # Likely model 
@@ -181,7 +208,7 @@ for(i in 1:length(resp.vars)){
   use.dat=dat[which(dat$model==resp.vars[i]),]
   
   Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re"),
-             family=tw(),  data=use.dat)
+             family=tw(),  data=use.dat, correlation=corSpher(form=~latitude+longtidue))
   
   model.set=generate.model.set(use.dat=use.dat,
                                test.fit=Model1,
@@ -226,6 +253,7 @@ all.mod.fits=do.call("rbind",out.all)
 all.var.imp=do.call("rbind",var.imp)
 write.csv(all.mod.fits[,-2],file=paste(name,"all.mod.fits.csv",sep="_"))
 write.csv(all.var.imp,file=paste(name,"all.var.imp.csv",sep="_"))
+
 
 # Generic importance plots-
 heatmap(all.var.imp,notecex=0.4,  dendrogram ="none",
@@ -333,6 +361,26 @@ dat.legal<-dat%>%filter(model=="Legal")
 gamm.legal=gam(response~s(bathymetry,k=3,bs='cr')+s(sqrt.reef,k=3,bs='cr')+ s(distance.to.ramp,k=3,bs='cr')+
            s(site,bs="re"), family=tw(),data=dat.legal)
 
+###### CHECK for spatial autocorrelation in the model
+spatial.dat.legal <- dat.legal
+
+#Create a spatial data frame
+coordinates(spatial.dat.legal) <- ~ longitude + latitude
+proj4string(spatial.dat.legal) # check coordinate system and/or projection
+# If no projection give assign one,
+proj4string(spatial.dat.legal) <- "+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs"
+
+neighbours <- knearneigh(spatial.dat.legal, k=1, longlat = TRUE)
+
+knn <- knn2nb(neighbours, row.names = NULL, sym = FALSE)
+nb <- nb2listw(knn, glist=NULL, style="W", zero.policy=NULL)
+
+moran.test(gamm.legal$residuals, nb, randomisation=T, zero.policy=NULL,
+           alternative="greater", rank = FALSE)
+
+moran.plot(gamm.legal$residuals, nb, zero.policy=NULL, spChk=NULL, labels=NULL,
+           xlab=NULL, ylab=NULL, quiet=NULL, plot=TRUE)
+
 # predict bathymetry from model
 mod<-gamm.legal
 testdata <- expand.grid(sqrt.reef=seq(min(dat$sqrt.reef),max(dat$sqrt.reef),length.out = 20),
@@ -394,6 +442,23 @@ predicts.legal.ramp<-read.csv("predict.legal.ramp.csv")%>%
 dat.sublegal<-dat%>%filter(model=="Sublegal")
 gamm.sublegal=gam(response~s(bathymetry,k=3,bs='cr')+s(sd.relief,k=3,bs='cr')+ s(distance.to.ramp,k=3,bs='cr')+
                  s(site,bs="re"), family=tw(),data=dat.sublegal)
+
+###### CHECK for spatial autocorrelation in the model
+spatial.dat.legal <- dat.legal
+
+#Create a spatial data frame
+coordinates(spatial.dat.legal) <- ~ longitude + latitude
+proj4string(spatial.dat.legal) # check coordinate system and/or projection
+# If no projection give assign one,
+proj4string(spatial.dat.legal) <- "+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs"
+
+neighbours <- knearneigh(spatial.dat.legal, k=1, longlat = TRUE)
+
+knn <- knn2nb(neighbours, row.names = NULL, sym = FALSE)
+nb <- nb2listw(knn, glist=NULL, style="W", zero.policy=NULL)
+
+moran.test(gamm.sublegal$residuals, nb, randomisation=T, zero.policy=NULL,
+           alternative="greater", rank = FALSE)
 
 #predict bathymetry
 mod<-gamm.sublegal
