@@ -51,7 +51,7 @@ pred.vars=c("TPI","Slope","Aspect","TRI","Roughness","FlowDir","mean.relief",
 round(cor(dat[,pred.vars], use = "complete.obs"),2)
 
 
-# TRI is super correlated to both slope and roughness, "Roughness",
+# TRI is super correlated to both slope and roughness, Roughness also super correlated with slope,
 pred.vars=c("TPI","Slope","Aspect","FlowDir","mean.relief",
             "sd.relief","reef","distance.to.ramp","pos.bathymetry")
 
@@ -111,10 +111,11 @@ unique.vars=unique(as.character(dat$model))
 unique.vars.use=character()
 for(i in 1:length(unique.vars)){
   temp.dat=dat[which(dat$model==unique.vars[i]),]
-  if(length(which(temp.dat$response==0))/nrow(temp.dat)<0.5){
+  if(length(which(temp.dat$response==0))/nrow(temp.dat)<0.8){
     unique.vars.use=c(unique.vars.use,unique.vars[i])}
 }
 unique.vars.use     
+
 
 zero.legal<-dat%>%
   filter(model=='Legal')%>%
@@ -275,7 +276,7 @@ legend_title<-"Importance"
 dat.var.label<-dat.var.imp%>%
   mutate(label=NA)%>%
   mutate(label=ifelse(predictor=="distance.to.ramp"&resp.var=="Legal","X",ifelse(predictor=="bathymetry"&resp.var=="Legal","X",ifelse(predictor=="sqrt.reef"&resp.var=="Legal","X",label))))%>%
-  mutate(label=ifelse(predictor=="sd.relief"&resp.var=="Sublegal","X",ifelse(predictor=="bathymetry"&resp.var=="Sublegal","X",label)))
+  mutate(label=ifelse(predictor=="distance.to.ramp"&resp.var=="Sublegal","X",ifelse(predictor=="bathymetry"&resp.var=="Sublegal","X",ifelse(predictor=="sd.relief"&resp.var=="Sublegal","X",label))))%>%
   glimpse()
 
 # Plot gg.importance.scores ----
@@ -285,10 +286,10 @@ gg.importance.scores <- ggplot(dat.var.label, aes(x=predictor,y=resp.var,fill=im
   scale_fill_gradientn(legend_title,colours=c("white", re), na.value = "grey98",
                        limits = c(0, max(dat.var.label$importance)))+
   scale_x_discrete(limits=c("bathymetry","TPI","sqrt.slope","Aspect","log.roughness","FlowDir","mean.relief",
-                            "sd.relief","sqrt.reef","distance.to.ramp"),
+                            "sd.relief","sqrt.reef","distance.to.ramp", "status"),
                    labels=c(
                      "bathymetry","TPI","sqrt.slope","Aspect","log.roughness","FlowDir","mean.relief",
-                     "sd.relief","sqrt.reef","distance.to.ramp"
+                     "sd.relief","sqrt.reef","distance.to.ramp", "status"
                    ))+
   scale_y_discrete(limits = c("Legal",
                               "Sublegal"),
@@ -389,15 +390,16 @@ write.csv(predicts.legal.ramp,"predict.legal.ramp.csv") #there is some BUG in dp
 predicts.legal.ramp<-read.csv("predict.legal.ramp.csv")%>%
   glimpse()
 
-# MODEL Sublegal bathymetry, sd.reef
+# MODEL Sublegal bathymetry, sd.relief, distance to ramp
 dat.sublegal<-dat%>%filter(model=="Sublegal")
-gamm.sublegal=gam(response~s(bathymetry,k=3,bs='cr')+ s(sd.relief,k=3,bs='cr')+
+gamm.sublegal=gam(response~s(bathymetry,k=3,bs='cr')+s(sd.relief,k=3,bs='cr')+ s(distance.to.ramp,k=3,bs='cr')+
                  s(site,bs="re"), family=tw(),data=dat.sublegal)
 
 #predict bathymetry
 mod<-gamm.sublegal
 testdata <- expand.grid(sd.relief=seq(min(dat$sd.relief),max(dat$sd.relief),length.out = 20),
                         bathymetry=seq(min(dat$bathymetry),max(dat$bathymetry), length.out=20),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=20),
                         site=(mod$model$site))%>%
   distinct()%>%
   glimpse()
@@ -417,6 +419,7 @@ predicts.sublegal.bathy<-read.csv("predict.sublegal.bathy.csv")%>%
 mod<-gamm.sublegal
 testdata <- expand.grid(sd.relief=seq(min(dat$sd.relief),max(dat$sd.relief),length.out = 20),
                         bathymetry=seq(min(dat$bathymetry),max(dat$bathymetry), length.out=20),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=20),
                         site=(mod$model$site))%>%
   distinct()%>%
   glimpse()
@@ -429,6 +432,26 @@ predict.sublegal.sd.relief = testdata%>%data.frame(fits)%>%
   ungroup()
 write.csv(predict.sublegal.sd.relief,"predict.sublegal.sd.relief.csv") #there is some BUG in dplyr - that this fixes
 predict.sublegal.sd.relief<-read.csv("predict.sublegal.sd.relief.csv")%>%
+  glimpse()
+
+
+#Predict distance to ramp 
+mod<-gamm.sublegal
+testdata <- expand.grid(sd.relief=seq(min(dat$sd.relief),max(dat$sd.relief),length.out = 20),
+                        bathymetry=seq(min(dat$bathymetry),max(dat$bathymetry), length.out=20),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=20),
+                        site=(mod$model$site))%>%
+  distinct()%>%
+  glimpse()
+
+fits <- predict.gam(mod, newdata=testdata, type='response', se.fit=T)
+
+predicts.sublegal.ramp = testdata%>%data.frame(fits)%>%
+  group_by(distance.to.ramp)%>% #only change here
+  summarise(response=mean(fit),se.fit=mean(se.fit))%>%
+  ungroup()
+write.csv(predicts.legal.ramp,"predict.sublegal.ramp.csv") #there is some BUG in dplyr - that this fixes
+predicts.legal.ramp<-read.csv("predict.sublegal.ramp.csv")%>%
   glimpse()
 
 ## PLOTS for Legal sized fish ----
@@ -493,6 +516,23 @@ ggsave(combine.plot,file="Ningaloo_legalgamm.plot.png", width = 30, height = 30,
 
 ## PLOTS for Sublegal sized fish ----
 
+# Distance to ramps
+ggmod.sublegal.ramps<- ggplot() +
+  ylab(" ")+
+  xlab('Distance to Ramps')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("red", "black"))+
+  #   geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.sublegal,aes(x=distance.to.ramp,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predicts.sublegal.ramp,aes(x=distance.to.ramp,y=response),alpha=0.5)+
+  geom_line(data=predicts.sublegal.ramp,aes(x=distance.to.ramp,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.sublegal.ramp,aes(x=distance.to.ramp,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.sublegal.ramps
+
+
 #Bathymetry
 ggmod.sublegal.bathy<- ggplot() +
   ylab(" ")+
@@ -532,7 +572,7 @@ blank <- grid.rect(gp=gpar(col="white"))
 grid.arrange(ggmod.sublegal.bathy,ggmod.sublegal.relief)
 
 # Use arrangeGrob ONLY - as we can pass this to ggsave! Note use of raw ggplot's
-combine.plot<-arrangeGrob(ggmod.sublegal.bathy,ggmod.sublegal.relief)
+combine.plot<-arrangeGrob(ggmod.sublegal.bathy,ggmod.sublegal.relief, ggmod.sublegal.ramps)
 ggsave(combine.plot,file="Ningaloo_sublegalgamm.plot.png", width = 30, height = 30,units = "cm")
 
 
