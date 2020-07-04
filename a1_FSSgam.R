@@ -49,7 +49,7 @@ latlongs <- metadata%>%
 
 dat <- cbind(dat, latlongs)
 dat <- dat[,-c(4,5)]
-  
+legal.dat <- subset(dat, model=='Legal')
 #Set bathymetry to be a positive number for loop
 dat<- dat%>%
   mutate(pos.bathymetry=(bathymetry*-1))%>%
@@ -70,7 +70,7 @@ pred.vars=c("TPI","Slope","Aspect","FlowDir","mean.relief",
 # Plot of likely transformations
 par(mfrow=c(3,2))
 for (i in pred.vars) {
-  x<-dat[ ,i]
+  x<-legal.dat[ ,i]
   x = as.numeric(unlist(x))
   hist((x))#Looks best
   plot((x),main = paste(i))
@@ -203,7 +203,6 @@ model.set=generate.model.set(use.dat=use.dat,
 
 
 # Loop through the FSS function for legal and sublegal
-# Loop through the FSS function for each Taxa----
 for(i in 1:length(resp.vars)){
   use.dat=dat[which(dat$model==resp.vars[i]),]
   
