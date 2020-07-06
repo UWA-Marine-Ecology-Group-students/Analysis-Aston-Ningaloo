@@ -1,9 +1,12 @@
 library(raster)
+install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
 library(INLA)
 library(dplyr)
 library(sp) 
 library(fields)
 library(ggplot2)
+library(devtools) #From GitHub
+install_github('timcdlucas/INLAutils')
 library(INLAutils)
 
 
@@ -30,9 +33,9 @@ data.legal <- subset(data, model=='Legal')
 #remove NA sites 
 data<- data%>%
   filter(!sample%in%c("8.05","10.09","10.12","16.03"))%>%
-  select(!sand)%>%
-  select(!TRI)%>%
-  select(!Roughness)
+  dplyr::select(!sand)%>%
+  dplyr::select(!TRI)%>%
+  dplyr::select(!Roughness)
 
 # Set your covariates/spatial data
 covariates <- c("bathymetry","TPI","Slope","Aspect","FlowDir","mean.relief",
@@ -80,12 +83,11 @@ my.stack <- inla.stack(data=list(y=data$target.fish), A=list(A.matrix, 1),
                                       list(bathymetry=data$bathymetry, TPI=data$TPI, Slope=data$Slope, 
                                            Aspect=data$Aspect, FlowDir=data$FlowDir,
                                            mean.relief=data$mean.relief, sd.relief=data$sd.relief, 
-                                           reef=data$reef, distance.to.ramp=data$distance.to.ramp, 
-                                           status=data$status)))#covariates
+                                           reef=data$reef, distance.to.ramp=data$distance.to.ramp)))#covariates
 
 ###### Run Full Model #########
 f.s <- y ~ -1 + intercept + bathymetry + TPI + Slope + Aspect + FlowDir + mean.relief + sd.relief + 
-  reef + distance.to.ramp + status + f(data$site, model='iid') + f(iSpat, model=spat.priors)
+  reef + distance.to.ramp + f(data$site, model='iid') + f(iSpat, model=spat.priors)
 
 fm <- inla(f.s,
             family = "zeroinflatedpoisson1", #might use zeroinflated poisson as you've got a lot of zeros, link is the same
@@ -111,7 +113,7 @@ summary <- summary%>%
   rename(upper=`0.975quant`)%>%
   rename(estimate=mean)%>%
   mutate(factor=c("intercept", "bathy", "TPI", "slope", "aspect", "flowdir", "mean.relief", "sd.relief",
-           "reef", "ramp", "statusF", "statusNT"))
+           "reef", "ramp"))
 
 effects <- ggplot(summary,
             aes(x = estimate,
@@ -161,12 +163,11 @@ plot_grid(gmean, gsd)
 # under fitting 
 ggplot_inla_residuals(fm, data$target.fish, binwidth = 0.1)
 
-####### Model selection ########
-model <- INLAstep(fam1="zeroinflatedpoisson1", data, in_stack=my.stack, 
-                  invariant = "0-1", direction="backwards", 
-                  include=6:15, y='y',
-                  inter=3)
+####### Stepwise Model selection ########
+bestmodel <- INLAstep(fam1="zeroinflatedpoisson1", data, spde = spat.priors,  in_stack=my.stack, 
+                  invariant = "-1+f(iSpat, model=spat.priors)", direction="backwards", 
+                  include=6:14, y='y', powerl = 1, inter=3)
 
-
+autoplot(bestmodel$best_model, which = c(1, 5), CI = TRUE)
 
 
