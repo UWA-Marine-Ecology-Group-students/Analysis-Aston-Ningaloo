@@ -182,7 +182,7 @@ gam.check(m1)
 setwd(m.dir)
 resp.vars=unique.vars.use
 use.dat=dat
-factor.vars=c("status")# Status as a Factor with two levels
+factor.vars=c("status") # Status as a Factor with two levels
 out.all=list()
 var.imp=list()
 
@@ -207,7 +207,7 @@ for(i in 1:length(resp.vars)){
   use.dat=dat[which(dat$model==resp.vars[i]),]
   
   Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re"),
-             family=tw(),  data=use.dat, correlation=corSpher(form=~latitude+longtidue))
+             family=tw(),  data=use.dat)
   
   model.set=generate.model.set(use.dat=use.dat,
                                test.fit=Model1,
@@ -294,7 +294,7 @@ Theme1 <-
     strip.background = element_blank())
 
 # colour ramps-
-re <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
+re <- colorRampPalette(c("lightskyblue1","royalblue3"))(200)
 
 # Labels-
 legend_title<-"Importance"
@@ -312,11 +312,11 @@ gg.importance.scores <- ggplot(dat.var.label, aes(x=predictor,y=resp.var,fill=im
   geom_tile(show.legend=T) +
   scale_fill_gradientn(legend_title,colours=c("white", re), na.value = "grey98",
                        limits = c(0, max(dat.var.label$importance)))+
-  scale_x_discrete(limits=c("bathymetry","TPI","sqrt.slope","Aspect","log.roughness","FlowDir","mean.relief",
+  scale_x_discrete(limits=c("bathymetry","TPI","sqrt.slope","cube.aspect","log.roughness","FlowDir","mean.relief",
                             "sd.relief","sqrt.reef","distance.to.ramp", "status"),
                    labels=c(
-                     "bathymetry","TPI","sqrt.slope","Aspect","log.roughness","FlowDir","mean.relief",
-                     "sd.relief","sqrt.reef","distance.to.ramp", "status"
+                     "Bathymetry","TPI","Slope (sqrt)","Aspect (cubed)","Roughness (log)","FlowDir","Mean Relief",
+                     "SD Relief","% Reef (sqrt)","Distance to Ramp", "Status"
                    ))+
   scale_y_discrete(limits = c("Legal",
                               "Sublegal"),
@@ -355,7 +355,7 @@ Theme1 <-
     axis.line.y=element_line(colour="black", size=0.5,linetype='solid'),
     strip.background = element_blank())
 
-# MODEL Legal size bathymetry, distance and sqrt.reef
+######### Predict and plot legal fish #########
 dat.legal<-dat%>%filter(model=="Legal")
 gamm.legal=gam(response~s(bathymetry,k=3,bs='cr')+s(sqrt.reef,k=3,bs='cr')+ s(distance.to.ramp,k=3,bs='cr')+
            s(site,bs="re"), family=tw(),data=dat.legal)
@@ -399,6 +399,22 @@ write.csv(predicts.legal.bathy,"predict.legal.bathy.csv") #there is some BUG in 
 predicts.legal.bathy<-read.csv("predict.legal.bathy.csv")%>%
   glimpse()
 
+# Plot Bathymetry from model
+ggmod.legal.bathy<- ggplot() +
+  ylab("Predicted Abundance of Legal Sized Fish")+
+  xlab('Bathymetry (m)')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.legal,aes(x=bathymetry,y=response,colour=status),  alpha=0.75, size=2,show.legend=F)+
+  geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response),alpha=0.75)+
+  geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.legal.bathy
+
 #predict sqrt.reef
 mod<-gamm.legal
 testdata <- expand.grid(sqrt.reef=seq(min(dat$sqrt.reef),max(dat$sqrt.reef),length.out = 20),
@@ -417,6 +433,25 @@ predicts.legal.sqrt.reef = testdata%>%data.frame(fits)%>%
 write.csv(predicts.legal.sqrt.reef,"predict.legal.sqrt.reef.csv") #there is some BUG in dplyr - that this fixes
 predicts.legal.sqrt.reef<-read.csv("predict.legal.sqrt.reef.csv")%>%
   glimpse()
+
+# plot sqrt.reef
+ggmod.legal.reef<- ggplot() +
+  ylab("Predicted Abundance of Legal Sized Fish")+
+  xlab('% Reef (sqrt)')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.legal,aes(x=sqrt.reef,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predicts.legal.sqrt.reef,aes(x=sqrt.reef,y=response),alpha=0.75)+
+  geom_line(data=predicts.legal.sqrt.reef,aes(x=sqrt.reef,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.legal.sqrt.reef,aes(x=sqrt.reef,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.legal.reef
+
+# combined.plot using grid() and gridExtra()------
+blank <- grid.rect(gp=gpar(col="white"))
 
 #predict distance to ramp
 mod<-gamm.legal
@@ -437,7 +472,32 @@ write.csv(predicts.legal.ramp,"predict.legal.ramp.csv") #there is some BUG in dp
 predicts.legal.ramp<-read.csv("predict.legal.ramp.csv")%>%
   glimpse()
 
-# MODEL Sublegal bathymetry, sd.relief, distance to ramp
+
+# Plot Distance to ramps
+ggmod.legal.ramps<- ggplot() +
+  ylab("Predicted Abundance of Legal Sized Fish")+
+  xlab('Distance to Ramps')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.legal,aes(x=distance.to.ramp,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response),alpha=0.75)+
+  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(d)",vjust = 1, hjust = -.1,size=5)
+ggmod.legal.ramps
+
+# To see what they will look like use grid.arrange() - make sure Plot window is large enough! - or will error!
+grid.arrange(ggmod.legal.ramps,ggmod.legal.bathy,ggmod.legal.reef,blank)
+
+# Use arrangeGrob ONLY - as we can pass this to ggsave! Note use of raw ggplot's
+combine.plot<-arrangeGrob(ggmod.legal.ramps,ggmod.legal.bathy,ggmod.legal.reef,blank)
+ggsave(combine.plot,file="Ningaloo_legalgamm.plot.png", width = 30, height = 30,units = "cm")
+
+
+######## Predict and plot Sublegal bathymetry, sd.relief, distance to ramp ######
 dat.sublegal<-dat%>%filter(model=="Sublegal")
 gamm.sublegal=gam(response~s(bathymetry,k=3,bs='cr')+s(sd.relief,k=3,bs='cr')+ s(distance.to.ramp,k=3,bs='cr')+
                  s(site,bs="re"), family=tw(),data=dat.sublegal)
@@ -478,6 +538,22 @@ write.csv(predicts.sublegal.bathy,"predict.sublegal.bathy.csv") #there is some B
 predicts.sublegal.bathy<-read.csv("predict.sublegal.bathy.csv")%>%
   glimpse()
 
+# Plot Bathymetry
+ggmod.sublegal.bathy<- ggplot() +
+  ylab("Predicted Abundance of Sublegal Sized Fish")+
+  xlab('Bathymetry (m)')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  #   geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.sublegal,aes(x=bathymetry,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predicts.sublegal.bathy,aes(x=bathymetry,y=response),alpha=0.75)+
+  geom_line(data=predicts.sublegal.bathy,aes(x=bathymetry,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.sublegal.bathy,aes(x=bathymetry,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.sublegal.bathy
+
 
 # Predict sd.relief
 mod<-gamm.sublegal
@@ -499,6 +575,23 @@ predict.sublegal.sd.relief<-read.csv("predict.sublegal.sd.relief.csv")%>%
   glimpse()
 
 
+#sd.relief
+ggmod.sublegal.relief<- ggplot() +
+  ylab("Predicted Abundance of Sublegal Sized Fish")+
+  xlab('SD Relief')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  #   geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.sublegal,aes(x=sd.relief,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predict.sublegal.sd.relief,aes(x=sd.relief,y=response),alpha=0.5)+
+  geom_line(data=predict.sublegal.sd.relief,aes(x=sd.relief,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predict.sublegal.sd.relief,aes(x=sd.relief,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.sublegal.relief
+
+
 #Predict distance to ramp 
 mod<-gamm.sublegal
 testdata <- expand.grid(sd.relief=seq(min(dat$sd.relief),max(dat$sd.relief),length.out = 20),
@@ -518,74 +611,12 @@ write.csv(predicts.legal.ramp,"predict.sublegal.ramp.csv") #there is some BUG in
 predicts.legal.ramp<-read.csv("predict.sublegal.ramp.csv")%>%
   glimpse()
 
-## PLOTS for Legal sized fish ----
-
-# Distance to ramps
-ggmod.legal.ramps<- ggplot() +
-  ylab(" ")+
-  xlab('Distance to Ramps')+
-  #   ggtitle(substitute(italic(name)))+
-  scale_color_manual(labels = c("Fished", "No-take"),values=c("red", "black"))+
-  #   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=dat.legal,aes(x=distance.to.ramp,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
-  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response),alpha=0.5)+
-  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response - se.fit),linetype="dashed",alpha=0.5)+
-  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response + se.fit),linetype="dashed",alpha=0.5)+
-  theme_classic()+
-  Theme1+
-  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
-ggmod.legal.ramps
-
-# Bathymetry
-ggmod.legal.bathy<- ggplot() +
-  ylab(" ")+
-  xlab('Bathymetry (m)')+
-  #   ggtitle(substitute(italic(name)))+
-  scale_color_manual(labels = c("Fished", "No-take"),values=c("red", "black"))+
-  #   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=dat.legal,aes(x=bathymetry,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
-  geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response),alpha=0.5)+
-  geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit),linetype="dashed",alpha=0.5)+
-  geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit),linetype="dashed",alpha=0.5)+
-  theme_classic()+
-  Theme1+
-  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
-ggmod.legal.bathy
-
-# sqrt.reef
-ggmod.legal.reef<- ggplot() +
-  ylab(" ")+
-  xlab('% Reef (sqrt)')+
-  #   ggtitle(substitute(italic(name)))+
-  scale_color_manual(labels = c("Fished", "No-take"),values=c("red", "black"))+
-  #   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=dat.legal,aes(x=sqrt.reef,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
-  geom_line(data=predicts.legal.sqrt.reef,aes(x=sqrt.reef,y=response),alpha=0.5)+
-  geom_line(data=predicts.legal.sqrt.reef,aes(x=sqrt.reef,y=response - se.fit),linetype="dashed",alpha=0.5)+
-  geom_line(data=predicts.legal.sqrt.reef,aes(x=sqrt.reef,y=response + se.fit),linetype="dashed",alpha=0.5)+
-  theme_classic()+
-  Theme1+
-  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
-ggmod.legal.reef
-
-# combined.plot using grid() and gridExtra()------
-blank <- grid.rect(gp=gpar(col="white"))
-
-# To see what they will look like use grid.arrange() - make sure Plot window is large enough! - or will error!
-grid.arrange(ggmod.legal.ramps,ggmod.legal.bathy,ggmod.legal.reef,blank)
-
-# Use arrangeGrob ONLY - as we can pass this to ggsave! Note use of raw ggplot's
-combine.plot<-arrangeGrob(ggmod.legal.ramps,ggmod.legal.bathy,ggmod.legal.reef,blank)
-ggsave(combine.plot,file="Ningaloo_legalgamm.plot.png", width = 30, height = 30,units = "cm")
-
-## PLOTS for Sublegal sized fish ----
-
 # Distance to ramps
 ggmod.sublegal.ramps<- ggplot() +
-  ylab(" ")+
+  ylab("Predicted Abundance of Sublegal Sized Fish")+
   xlab('Distance to Ramps')+
   #   ggtitle(substitute(italic(name)))+
-  scale_color_manual(labels = c("Fished", "No-take"),values=c("red", "black"))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
   #   geom_jitter(width = 0.25,height = 0)+
   geom_point(data=dat.sublegal,aes(x=distance.to.ramp,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
   geom_line(data=predicts.sublegal.ramp,aes(x=distance.to.ramp,y=response),alpha=0.5)+
@@ -596,38 +627,6 @@ ggmod.sublegal.ramps<- ggplot() +
   annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
 ggmod.sublegal.ramps
 
-
-#Bathymetry
-ggmod.sublegal.bathy<- ggplot() +
-  ylab(" ")+
-  xlab('Bathymetry (m)')+
-  #   ggtitle(substitute(italic(name)))+
-  scale_color_manual(labels = c("Fished", "No-take"),values=c("red", "black"))+
-  #   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=dat.sublegal,aes(x=bathymetry,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
-  geom_line(data=predicts.sublegal.bathy,aes(x=bathymetry,y=response),alpha=0.5)+
-  geom_line(data=predicts.sublegal.bathy,aes(x=bathymetry,y=response - se.fit),linetype="dashed",alpha=0.5)+
-  geom_line(data=predicts.sublegal.bathy,aes(x=bathymetry,y=response + se.fit),linetype="dashed",alpha=0.5)+
-  theme_classic()+
-  Theme1+
-  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
-ggmod.sublegal.bathy
-
-#sd.relief
-ggmod.sublegal.relief<- ggplot() +
-  ylab(" ")+
-  xlab('SD Relief')+
-  #   ggtitle(substitute(italic(name)))+
-  scale_color_manual(labels = c("Fished", "No-take"),values=c("red", "black"))+
-  #   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=dat.sublegal,aes(x=sd.relief,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
-  geom_line(data=predict.sublegal.sd.relief,aes(x=sd.relief,y=response),alpha=0.5)+
-  geom_line(data=predict.sublegal.sd.relief,aes(x=sd.relief,y=response - se.fit),linetype="dashed",alpha=0.5)+
-  geom_line(data=predict.sublegal.sd.relief,aes(x=sd.relief,y=response + se.fit),linetype="dashed",alpha=0.5)+
-  theme_classic()+
-  Theme1+
-  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
-ggmod.sublegal.relief
 
 # combined.plot using grid() and gridExtra()------
 blank <- grid.rect(gp=gpar(col="white"))
