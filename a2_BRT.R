@@ -1,6 +1,13 @@
 library(dismo)
 library(RCurl)
 library(gbm)
+remotes::install_github("JBjouffray/ggBRT")
+library(ggBRT)
+install.packages('caret')
+library(caret)
+install.packages("tidyselect")
+
+rm(list=ls())
 
 working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON'T MOVE THE SCRIPT)
 
@@ -21,6 +28,22 @@ sublegal.dat <- subset(dat, model=='Sublegal')
 factor.vars=c("status","model")
 cont.vars=c("bathymetry","TPI", "Slope", "Aspect", "FlowDir", "mean.relief", "sd.relief",
             "reef", "distance.to.ramp")
+
+################## Check to see if removing correlated variables makes the model better ##############
+
+predictors <- dat[,c(6:9,10:13,15:16)]
+  
+
+descrCor <- cor(predictors)
+summary(descrCor[upper.tri(descrCor)])
+
+highlyCorDescr <- findCorrelation(descrCor, cutoff = .95)
+filteredDescr <- predictors[,-highlyCorDescr]
+descrCor2 <- cor(filteredDescr)
+summary(descrCor2[upper.tri(descrCor2)])
+
+# It removed distance to ramp so probably not great - will remove the predictors that the FSSgam 
+# said was correlated instead 
 
 ################## Legal Target Species Model ##################
 
@@ -67,10 +90,6 @@ dismo::gbm.plot(model) #Shows variable effects
 
 
 ###################### Sublegal Target Species Model #########################
-#STEP 1: you need to find the optimal learning rate, bag fraction and tree complexity for your data
-
-#To find optimal settings we are going to loop through a range of candidates and select the option with the 
-#lowest cross validated residual deviance - i.e. the model that fits the data the best. 
 
 # making a grid for loop
 res.dev<-c() ## make a res.dev variable to store in grid
@@ -112,10 +131,6 @@ summary(model) #Shows importance of different variables
 dismo::gbm.plot(model) #Shows variable effects
 
 ############# All data together #############
-#STEP 1: you need to find the optimal learning rate, bag fraction and tree complexity for your data
-
-#To find optimal settings we are going to loop through a range of candidates and select the option with the 
-#lowest cross validated residual deviance - i.e. the model that fits the data the best. 
 
 # making a grid for loop
 res.dev<-c() ## make a res.dev variable to store in grid
@@ -141,7 +156,7 @@ for(i in 1:nrow(grid)) {
 
 best<-grid[grid$res.dev == min(grid$res.dev), ] #shows parameters for best fitting model
 
-model <- dismo::gbm.step(data=legal.dat,
+model <- dismo::gbm.step(data=dat,
                          gbm.x=c(factor.vars, cont.vars), ## explanatory
                          gbm.y="target.fish",## response
                          lr=best$lr, ## ref to grid 
@@ -149,12 +164,30 @@ model <- dismo::gbm.step(data=legal.dat,
                          family="poisson",
                          bag.fraction=best$tc)
 
-?gbm.step
+
 #STEP 3 plots
-summary(model) #Shows importance of different variables
+summary(model)
+summary <- summary(model) #Shows importance of different variables
 dismo::gbm.plot(model) #Shows variable effects
 
+#Bootstrapping to get CIs
+brt1.prerun<- plot.gbm.4list(model)
+brt1.boot <- gbm.bootstrap.functions(model, list.predictors=brt1.prerun, n.reps=1000)
 
+bathy <- ggPD_boot(model, predictor="bathymetry", list.4.preds=brt1.prerun, 
+                   booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
 
-#Note that you need to bootstrap in order to get confidence intervals. Some code has been written on gitHub and
-#I am still testing this code out: https://github.com/JBjouffray/ggBRT
+legal.sublegal <- ggPD_boot(model, predictor="model", list.4.preds=brt1.prerun, 
+                   booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+
+sd.relief <- ggPD_boot(model, predictor="sd.relief", list.4.preds=brt1.prerun, 
+                      booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+
+slope <- ggPD_boot(model, predictor="Slope", list.4.preds=brt1.prerun, 
+                       booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+
+aspect <- ggPD_boot(model, predictor="Aspect", list.4.preds=brt1.prerun, 
+                    booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+
+ramp <- ggPD_boot(model, predictor="distance.to.ramp", list.4.preds=brt1.prerun, 
+                  booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
