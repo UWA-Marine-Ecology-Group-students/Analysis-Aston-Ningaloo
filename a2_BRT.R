@@ -1,6 +1,7 @@
 library(dismo)
 library(RCurl)
 library(gbm)
+remotes::install_github("JBjouffray/ggBRT", dependencies = FALSE)
 
 working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON'T MOVE THE SCRIPT)
 

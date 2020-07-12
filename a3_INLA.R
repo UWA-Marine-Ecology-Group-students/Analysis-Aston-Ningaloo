@@ -8,6 +8,7 @@ library(ggplot2)
 library(devtools) #From GitHub
 install_github('timcdlucas/INLAutils')
 library(INLAutils)
+library(rgdal)
 
 
 rm(list=ls())
@@ -48,23 +49,48 @@ covariates <- na.exclude(covariates)
 # This creates a mesh of discrete sampling locations that allows the model to estimate the spatial
 # autocorrelation in the data 
 
-data <- data%>%
-  rename(easting=latitude)%>%
-  rename(northing=longitude)
+# changing the mesh to reflect the coastline of WA
+# data <- data%>%
+#   rename(easting=latitude)%>%
+#   rename(northing=longitude)
+# 
+# Locations <- data%>%
+#   dplyr::select("easting", "northing")
+# 
+# coordinates(Locations) <- ~ northing + easting
+# 
+# setwd(s.dir)
+# 
+# interest <- readOGR(dsn = ".", layer = "Area of Interest")
+# coastline <- readOGR(dsn=".", layer = "Coastline")
+# 
+# plot(coastline)
+# plot(interest)
+# 
+# interest <- spTransform(interest, CRS("+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+# coastline <- spTransform(coastline, CRS("+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"))
 
-Locations <- data%>%
-  dplyr::select("easting", "northing")
+# pll <- Polygon(interest@polygons[[1]]@Polygons[[1]]@coords, hole = F)
+# hole <- Polygon(coastline@polygons[[1]]@Polygons[[1]]@coords, hole = T)
+# new_sp <- SpatialPolygons(list(Polygons(append(hole, pll),'1')))
 
-my.mesh <- inla.mesh.2d(Locations, max.edge=c(6000,11000), offset = c(7000, 7000))
+# plot(new_sp)
+
+
+# Creating the mesh
+# my.mesh.land <- inla.mesh.2d(Locations, boundary=new_sp, max.edge = c(3500))
+
+my.mesh <- inla.mesh.2d(Locations, max.edge=c(6000))
 
 plot(my.mesh)
+points(Locations, col = 2, pch = 16, cex = 0.2)
 
 ######### Setting the priors ########
 
 spat.priors <- inla.spde2.pcmatern(
   mesh=my.mesh, alpha=2, ### alpha can usually be left at 2 unless using a 3d mesh
   constr=TRUE,### so that random effects are constrained to sum to zero
-  prior.range=c(5000, 0.05), ### P(practic.range<150)=0.05
+  prior.range=c(3000, 0.05), ### P(practic.range<3000)=0.05
   #This is saying that the probability the range is less than 10000 is 5%
   prior.sigma=c(5, 0.1)) ### P( sigma>5)=0.01  sigma is sd.
   #This is saying that probability the variance is greater than 1 is less than 1%
@@ -83,11 +109,12 @@ my.stack <- inla.stack(data=list(y=data$target.fish), A=list(A.matrix, 1),
                                       list(bathymetry=data$bathymetry, TPI=data$TPI, Slope=data$Slope, 
                                            Aspect=data$Aspect, FlowDir=data$FlowDir,
                                            mean.relief=data$mean.relief, sd.relief=data$sd.relief, 
-                                           reef=data$reef, distance.to.ramp=data$distance.to.ramp)))#covariates
+                                           reef=data$reef, distance.to.ramp=data$distance.to.ramp, 
+                                           status=data$status))) #covariates
 
 ###### Run Full Model #########
 f.s <- y ~ -1 + intercept + bathymetry + TPI + Slope + Aspect + FlowDir + mean.relief + sd.relief + 
-  reef + distance.to.ramp + f(data$site, model='iid') + f(iSpat, model=spat.priors)
+  reef + distance.to.ramp + status + f(data$site, model='iid') + f(iSpat, model=spat.priors)
 
 fm <- inla(f.s,
             family = "zeroinflatedpoisson1", #might use zeroinflated poisson as you've got a lot of zeros, link is the same
@@ -113,7 +140,7 @@ summary <- summary%>%
   rename(upper=`0.975quant`)%>%
   rename(estimate=mean)%>%
   mutate(factor=c("intercept", "bathy", "TPI", "slope", "aspect", "flowdir", "mean.relief", "sd.relief",
-           "reef", "ramp"))
+           "reef", "ramp", "fished", "NTZ"))
 
 effects <- ggplot(summary,
             aes(x = estimate,
