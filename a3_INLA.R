@@ -198,3 +198,97 @@ bestmodel <- INLAstep(fam1="zeroinflatedpoisson1", data, spde = spat.priors,  in
 autoplot(bestmodel$best_model, which = c(1, 5), CI = TRUE)
 
 
+######### Predicting fish abundance using subset of data to test priors ########
+# Randomly selected 25% of the sites to be used as predictive sites rather than used in the model
+training <- data%>%
+  filter(!sample%in%c("19.03","10.11","13.03","14.03", "4.01", "1.06", "12.06", "10.13", "19.02",
+                      "4.12", "6.12", "30.02", "15.02", "30.01", "16.05", "3.06", "1.04", "16.02",
+                      "9.01", "23.06", "13.08", "2.02", "14.06", "6.03", "14.11", "6.02", "23.02",
+                      "14.12", "30.06", "5.08", "18.03", "18.07")) 
+predictive <- data%>%
+  filter(sample%in%c("19.03","10.11","13.03","14.03", "4.01", "1.06", "12.06", "10.13", "19.02",
+                      "4.12", "6.12", "30.02", "15.02", "30.01", "16.05", "3.06", "1.04", "16.02",
+                      "9.01", "23.06", "13.08", "2.02", "14.06", "6.03", "14.11", "6.02", "23.02",
+                      "14.12", "30.06", "5.08", "18.03", "18.07")) 
+
+# Set your covariates/spatial data
+covariates <- c("bathymetry","TPI","Slope","Aspect","FlowDir","mean.relief",
+                "sd.relief","reef","distance.to.ramp")
+factors <- c("status")
+covariates <- na.exclude(covariates)
+
+
+####### Make a mesh using the training data set ########
+Locations.train <- training%>%
+  dplyr::select("easting", "northing")
+
+pred.mesh <- inla.mesh.2d(Locations.train, max.edge=c(6000))
+
+plot(pred.mesh)
+points(Locations.train, col = 2, pch = 16, cex = 0.2)
+
+######### Setting the priors for prediction ########
+spat.priors.predict <- inla.spde2.pcmatern(
+  mesh=pred.mesh, alpha=2, ### alpha can usually be left at 2 unless using a 3d mesh
+  constr=TRUE,### so that random effects are constrained to sum to zero
+  prior.range=c(3000, 0.05), ### P(practic.range<3000)=0.05
+  #This is saying that the probability the range is less than 10000 is 5%
+  prior.sigma=c(5, 0.1)) ### P( sigma>5)=0.01  sigma is sd.
+#This is saying that probability the variance is greater than 1 is less than 1%
+
+######### Making the A matrix for prediction ########
+# Need one that has the data points and one that doesn't so we can predict over the area
+Pred.matrix <- inla.spde.make.A(pred.mesh, loc = as.matrix(training[,c("easting","northing")]))
+Pred.matrix.2 <- inla.spde.make.A(mesh = pred.mesh)
+
+######## Creating the stacks #######
+# Again need two stacks, one that has all the points in the training data and one that has NA for response
+
+mesh.index <- inla.spde.make.index(name = "iSpat", n.spde = spat.priors.predict$n.spde)
+
+stack.train <- inla.stack(data=list(y=training$target.fish), A=list(Pred.matrix, 1),
+                       tag = "train",
+                       effects=list(c(mesh.index, list( intercept=1)),#for the spatial effects and intercept
+                                    list(bathymetry=training$bathymetry, TPI=training$TPI, Slope=training$Slope, 
+                                         Aspect=training$Aspect, FlowDir=training$FlowDir,
+                                         mean.relief=training$mean.relief, sd.relief=training$sd.relief, 
+                                         reef=training$reef, distance.to.ramp=training$distance.to.ramp, 
+                                         status=training$status))) 
+
+stack.pred <- inla.stack(data=list(y=NA), A=list(Pred.matrix.2),
+                          tag = "preds",
+                          effects=list(c(mesh.index, list(intercept=1))))
+
+StackJoin <- inla.stack(stack.train, stack.pred)
+
+##### Run model ######
+
+f.s <- y ~ -1 + intercept + bathymetry + TPI + Slope + Aspect + FlowDir + mean.relief + sd.relief + 
+  reef + distance.to.ramp + status + f(iSpat, model=spat.priors)
+
+fm <- inla(f.s,
+           family = "zeroinflatedpoisson1", #might use zeroinflated poisson as you've got a lot of zeros, link is the same
+           data = inla.stack.data(StackJoin),
+           verbose=FALSE,
+           control.predictor=list(A=inla.stack.A(StackJoin), compute=TRUE, link=1),
+           control.fixed = list(mean=0, prec=0.2),
+           control.results = list(return.marginals.random = TRUE, return.marginals.predictor = TRUE), 
+           control.compute=list(config = TRUE, dic=TRUE))
+
+
+###### Selecting the posterior mean and SD of the response from the model #######
+index.pred <- inla.stack.index(StackJoin, "Pred")$data
+
+post.mean.pred <- fm$summary.linear.predictor[index.pred, "mean"]
+post.sd.pred <- fm$summary.linear.predictor[index.pred, "sd"]
+
+proj.grid <- inla.mesh.projector(pred.mesh, 
+                                 xlim = range(pred.grid[,1]), 
+                                 ylim = range(pred.grid[,2]), 
+                                 dims = c(ncol,nrow))
+
+
+
+
+
+
