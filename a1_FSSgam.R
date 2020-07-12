@@ -17,6 +17,8 @@ library(FSSgam)
 library(spdep)
 library(spatialEco)
 library(nlme)
+devtools::install_github("beckyfisher/FSSgam_package") #run once
+library(FSSgam)
 
 rm(list=ls())
 
@@ -110,7 +112,7 @@ dat <- dat%>%
   glimpse()
 
 #Reset predictor variables 
-pred.vars=c("bathymetry","TPI","sqrt.slope","cube.Aspect","log.roughness","FlowDir","mean.relief",
+pred.vars=c("bathymetry","sqrt.slope","cube.Aspect","log.roughness","FlowDir","mean.relief",
             "sd.relief","sqrt.reef","distance.to.ramp")
 
 
@@ -189,7 +191,7 @@ var.imp=list()
 
 # Check out the model set----
 
-Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re"),
+Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re") + s(TPI,bs="re"),
            family=tw(),  data=use.dat)
 
 model.set=generate.model.set(use.dat=use.dat,
@@ -198,7 +200,7 @@ model.set=generate.model.set(use.dat=use.dat,
                              pred.vars.fact=factor.vars,
                              # linear.vars="distance.to.ramp",
                              k=3,
-                             null.terms="s(site,bs='re')")
+                             null.terms="s(site,bs='re')"+"s(TPI,bs='re')")
 
 
 
@@ -206,7 +208,7 @@ model.set=generate.model.set(use.dat=use.dat,
 for(i in 1:length(resp.vars)){
   use.dat=dat[which(dat$model==resp.vars[i]),]
   
-  Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re"),
+  Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re")+ s(TPI,bs="re"),
              family=tw(),  data=use.dat)
   
   model.set=generate.model.set(use.dat=use.dat,
@@ -215,7 +217,7 @@ for(i in 1:length(resp.vars)){
                                pred.vars.fact=factor.vars,
                                # linear.vars="distance.to.ramp",
                                k=3,
-                               null.terms="s(site,bs='re')")
+                               null.terms="s(site,bs='re')+ s(TPI,bs='re')")
   
   
   out.list=fit.model.set(model.set,
