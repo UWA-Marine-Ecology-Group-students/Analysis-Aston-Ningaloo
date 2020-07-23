@@ -25,7 +25,7 @@ library(googlesheets4)
 complete.species <- read.csv("ningaloo.checked.maxn.csv")
 complete.species <- complete.species%>%
   mutate(scientific=paste(family,genus,species,sep=" "))%>%
-  select("sample", "scientific", "family", "genus", "species")%>%
+  dplyr::select("sample", "scientific", "family", "genus", "species")%>%
   filter(!grepl("NA NA NA", scientific))
 
 # Just extract targeted species
@@ -43,12 +43,12 @@ target<-googlesheets4::read_sheet(url)%>%
   dplyr::rename(genus=Genus)%>%
   dplyr::rename(species=Species)%>%
   mutate(scientific=paste(family,genus,species,sep=" "))%>%
-  select(scientific, family, genus, species, FB.Length_MAX,Fishing.mortality, Fishing.type, MinLegal.WA)%>%
+  dplyr::select(scientific, family, genus, species, FB.Length_MAX,Fishing.mortality, Fishing.type, MinLegal.WA)%>%
   glimpse()
 
 
 target.species<-left_join(complete.species,target,by=c("scientific"))%>%
-  select(!c("family.y","genus.y","species.y"))%>%
+  dplyr::select(!c("family.y","genus.y","species.y"))%>%
   dplyr::rename(family=family.x)%>%
   dplyr::rename(genus=genus.x)%>%
   dplyr::rename(species=species.x)%>%
@@ -69,11 +69,11 @@ target.species<-target.species[!duplicated(target.species$scientific), ]
 # Format species.lengths table
 species.lengths<-species.lengths%>%
   mutate(scientific=paste(family,genus,species,sep=" "))%>%
-  select(sample,scientific,family,genus,species,number,length,site)
+  dplyr::select(sample,scientific,family,genus,species,number,length,site)
 
 #Add two dataframes together to give only targeted fish species at each sample location
 target.lengths <- inner_join(species.lengths,target.species, by='scientific')%>%
-  select(sample.x,scientific,family.x,genus.x,species.x,number,length,site,FB.Length_MAX,MinLegal.WA,Fishing.mortality,
+  dplyr::select(sample.x,scientific,family.x,genus.x,species.x,number,length,site,FB.Length_MAX,MinLegal.WA,Fishing.mortality,
          Fishing.type)%>%
   mutate(min.length=0.15*FB.Length_MAX)%>%
   rename(sample=sample.x)%>%
@@ -126,17 +126,17 @@ Sum.sublegal <- aggregate(sublegal.target$number, by=list(sample=sublegal.target
   rename(target.fish=x)
 
 final.data.legal <- full_join(covariates,Sum.legal, by='sample')%>%
-  select(-c('X','ID'))%>%
+  dplyr::select(-c('X','ID'))%>%
   mutate(model='Legal')
 final.data.legal$target.fish[is.na(final.data.legal$target.fish)] <- 0
 
 final.data.sublegal <- full_join(covariates,Sum.sublegal, by='sample')%>%
-  select(-c('X','ID'))%>%
+  dplyr::select(-c('X','ID'))%>%
   mutate(model='Sublegal')
 final.data.sublegal$target.fish[is.na(final.data.sublegal$target.fish)] <- 0
 
 final.data<- rbind(final.data.legal, final.data.sublegal)%>%
-  select(-c('X.1'))
+  dplyr::select(-c('X.1'))
 final.data$target.fish[is.na(final.data$target.fish)] <- 0
 
 
