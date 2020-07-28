@@ -1,5 +1,9 @@
 library(raster)
 install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
+install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE)
+library(INLA)
+inla.setOption(mkl=FALSE)
+library(dplyr)
 library(INLA)
 library(dplyr)
 library(sp) 
@@ -9,7 +13,6 @@ library(devtools) #From GitHub
 install_github('timcdlucas/INLAutils')
 library(INLAutils)
 library(rgdal)
-
 
 rm(list=ls())
 
@@ -34,7 +37,8 @@ data<- data%>%
   filter(!sample%in%c("8.05","10.09","10.12","16.03"))%>%
   dplyr::select(!sand)%>%
   dplyr::select(!TRI)%>%
-  dplyr::select(!Roughness)
+  dplyr::select(!Roughness)%>%
+  dplyr::select(!X)
 
 # Set your covariates/spatial data
 covariates <- c("bathymetry","TPI","Slope","Aspect","FlowDir","mean.relief",
@@ -116,8 +120,7 @@ my.stack <- inla.stack(data=list(y=data.legal$target.fish), A=list(A.matrix, 1),
 
 ###### Run Full Model #########
 f.s <- y ~ -1 + intercept + bathymetry + TPI + Slope + Aspect + FlowDir + mean.relief + sd.relief + 
-  reef + distance.to.ramp + status + f(iSpat, model=spat.priors)
-# + f(data.legal$site, model="iid")
+  reef + distance.to.ramp + status + f(iSpat, model=spat.priors) + f(data.legal$site, model="iid")
 
 fm <- inla(f.s,
            family = "zeroinflatedpoisson1",
@@ -132,6 +135,7 @@ fm <- inla(f.s,
 summary(fm)
 
 plot(fm)
+
 
 ####### Plotting the residuals and checking the model ######
 # If the model is well calibrated then the bins should be the same height. The convex model suggests that
