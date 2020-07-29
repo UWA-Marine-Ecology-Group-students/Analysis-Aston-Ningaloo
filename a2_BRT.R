@@ -2,6 +2,7 @@ library(dismo)
 library(RCurl)
 library(gbm)
 remotes::install_github("JBjouffray/ggBRT", dependencies = FALSE)
+library(ggBRT)
 
 working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON'T MOVE THE SCRIPT)
 
@@ -9,7 +10,7 @@ working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets worki
 d.dir <- paste(working.dir,"Tidy data",sep="/") 
 s.dir <- paste(working.dir,"Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
 p.dir <- paste(working.dir,"Plots",sep="/")
-m.dir <- paste(working.dir,"Model Out", sep="/")
+m.dir <- paste(working.dir,"Model Out BRT", sep="/")
 
 setwd(d.dir)
 
@@ -20,8 +21,8 @@ sublegal.dat <- subset(dat, model=='Sublegal')
 
 #Set co-variates. There are no distributional assumptions on these. Make those you want to be factors into factors
 factor.vars=c("status","model")
-cont.vars=c("bathymetry","TPI", "Slope", "Aspect", "FlowDir", "mean.relief", "sd.relief",
-            "reef", "distance.to.ramp")
+cont.vars=c("bathymetry","TPI", "Slope", "Aspect", "FlowDir",
+            "distance.to.ramp")
 
 ################## Legal Target Species Model ##################
 
@@ -112,6 +113,8 @@ model <- dismo::gbm.step(data=sublegal.dat,
 summary(model) #Shows importance of different variables
 dismo::gbm.plot(model) #Shows variable effects
 
+
+
 ############# All data together #############
 #STEP 1: you need to find the optimal learning rate, bag fraction and tree complexity for your data
 
@@ -159,19 +162,27 @@ brt1.prerun<- plot.gbm.4list(model)
 brt1.boot <- gbm.bootstrap.functions(model, list.predictors=brt1.prerun, n.reps=1000)
 
 bathy <- ggPD_boot(model, predictor="bathymetry", list.4.preds=brt1.prerun, 
-                   booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+                   booted.preds=brt1.boot$function.preds, type.ci = "ribbon",
+                   col.line = "royalblue2", rug = T)
 
 legal.sublegal <- ggPD_boot(model, predictor="model", list.4.preds=brt1.prerun, 
-                            booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+                            booted.preds=brt1.boot$function.preds, type.ci = "lines",
+                            col.line = "royalblue2", rug = T)
 
-sd.relief <- ggPD_boot(model, predictor="sd.relief", list.4.preds=brt1.prerun, 
-                       booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+#sd.relief <- ggPD_boot(model, predictor="sd.relief", list.4.preds=brt1.prerun, 
+#                       booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
 
 slope <- ggPD_boot(model, predictor="Slope", list.4.preds=brt1.prerun, 
-                   booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+                   booted.preds=brt1.boot$function.preds, type.ci = "ribbon",
+                   col.line = "royalblue2", rug = T)
 
 aspect <- ggPD_boot(model, predictor="Aspect", list.4.preds=brt1.prerun, 
-                    booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+                    booted.preds=brt1.boot$function.preds, type.ci = "ribbon",
+                    col.line = "royalblue2", rug = T)
 
-ramp <- ggPD_boot(model, predictor="distance.to.ramp", list.4.preds=brt1.prerun, 
-                  booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+status <- ggPD_boot(model, predictor="status", list.4.preds=brt1.prerun,
+                    booted.preds=brt.boot$function.preds, type.ci = "ribbon",
+                    col.line = "royalblue2", rug = T)
+
+#ramp <- ggPD_boot(model, predictor="distance.to.ramp", list.4.preds=brt1.prerun, 
+#                  booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
