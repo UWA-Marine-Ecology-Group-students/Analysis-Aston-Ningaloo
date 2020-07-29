@@ -1,5 +1,5 @@
-"","modname","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","bathymetry","sqrt.slope","cube.Aspect","log.roughness","FlowDir","mean.relief","sd.relief","sqrt.reef","distance.to.ramp","status","cumsum.wi"
-"Legal","bathymetry+distance.to.ramp+sqrt.reef",542.552020829624,566.641491860619,0.28894,NA,7.86,1,0,0,0.899,0.854,1,0,0,0,0,0,0,1,1,0,0.899
-"Sublegal.bathymetry+distance.to.ramp+sd.relief","bathymetry+distance.to.ramp+sd.relief",325.380306162689,346.94447238685,0.16287,NA,6.9,1,0,2.93,0.325,0.061,1,0,0,0,0,0,1,0,1,0,0.325
-"Sublegal.bathymetry+cube.Aspect+distance.to.ramp","bathymetry+cube.Aspect+distance.to.ramp",327.647119424637,351.670518732072,0.16549,NA,7.72,1,2.267,7.656,0.104,0.006,1,0,1,0,0,0,0,0,1,0,0.429
-"Sublegal.distance.to.ramp+sd.relief","distance.to.ramp+sd.relief",328.269459323378,347.242456864953,0.14115,NA,5.88,1,2.889,3.228,0.077,0.053,0,0,0,0,0,0,1,0,1,0,0.506
+"","modname","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","bathymetry","sqrt.slope","cube.Aspect","log.roughness","FlowDir","distance.to.ramp","status","cumsum.wi"
+"Legal","log.roughness.by.status+status",539.350633068129,560.533440695403,0.36978,NA,7.56,2,0,0,0.701,0.668,0,0,0,1,0,0,1,0.701
+"Sublegal.bathymetry+cube.Aspect+distance.to.ramp","bathymetry+cube.Aspect+distance.to.ramp",327.647119424637,351.670518732071,0.16549,NA,7.72,1,0,7.656,0.322,0.009,1,0,1,0,0,1,0,0.322
+"Sublegal.bathymetry+distance.to.ramp","bathymetry+distance.to.ramp",328.678623095193,347.654324621324,0.15019,NA,5.88,1,1.032,3.64,0.192,0.068,1,0,0,0,0,1,0,0.514
+"Sublegal.distance.to.ramp","distance.to.ramp",329.754074587416,346.102600656378,0.13377,NA,4.86,1,2.107,2.089,0.112,0.148,0,0,0,0,0,1,0,0.626

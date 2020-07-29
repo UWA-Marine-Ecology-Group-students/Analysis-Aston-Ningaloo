@@ -1,10 +1,10 @@
 library(raster)
-install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
+#install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
 install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE)
 library(INLA)
 inla.setOption(mkl=FALSE)
-library(dplyr)
-library(INLA)
+inla.setOption(pardiso.license = "/Users/Charlotte/Documents/University/Masters/Research/pardiso.lic.rtf")
+inla.pardiso.check()
 library(dplyr)
 library(sp) 
 library(fields)
@@ -15,6 +15,7 @@ library(INLAutils)
 library(rgdal)
 
 rm(list=ls())
+
 
 ##Set working directory----
 ## Set work directory----
@@ -31,6 +32,9 @@ m.dir <- paste(working.dir,"Model Out INLA", sep="/")
 ## Load data
 setwd(d.dir)
 data<- read.csv('final.data.csv')
+
+str(data)
+data$status <- as.factor(data$status)
 
 #remove NA sites 
 data<- data%>%
@@ -94,7 +98,7 @@ points(Locations, col = 2, pch = 16, cex = 0.2)
 ######### Setting the priors ########
 
 spat.priors <- inla.spde2.pcmatern(
-  mesh=my.mesh.land, alpha=2, ### alpha can usually be left at 2 unless using a 3d mesh
+  mesh=my.mesh, alpha=2, ### alpha can usually be left at 2 unless using a 3d mesh
   constr=TRUE,### so that random effects are constrained to sum to zero
   prior.range=c(300, 0.05), ### 300 for legal, not sure for sub-legal
   #This is saying that the probability the range is less than 300 is 5%
@@ -103,7 +107,7 @@ spat.priors <- inla.spde2.pcmatern(
 
 ######### Making the A matrix ########
 # This translates the spatial locations on the mesh to vectors in the model
-A.matrix <- inla.spde.make.A(my.mesh.land, loc = as.matrix(data.legal[,c("easting","northing")]))
+A.matrix <- inla.spde.make.A(my.mesh, loc = as.matrix(data.legal[,c("easting","northing")]))
 
 ######## Creating a stack #######
 # This is a combination of the A. matrix and the mesh 
@@ -120,11 +124,15 @@ my.stack <- inla.stack(data=list(y=data.legal$target.fish), A=list(A.matrix, 1),
 
 ###### Run Full Model #########
 f.s <- y ~ -1 + intercept + bathymetry + TPI + Slope + Aspect + FlowDir + mean.relief + sd.relief + 
-  reef + distance.to.ramp + status + f(iSpat, model=spat.priors) + f(data.legal$site, model="iid")
+  reef + distance.to.ramp + status + f(iSpat, model=spat.priors) 
+#+ f(data.legal$site, model="iid")
+
+system("d=/Library/Frameworks/R.framework/Versions/4.0/Resources/library/INLA/bin/mac/64bit/; cp -v $d/lib* $d/first")
 
 fm <- inla(f.s,
            family = "zeroinflatedpoisson1",
            data = inla.stack.data(my.stack),
+           #control.inla=list(reordering="matis"),
            verbose=FALSE,
            control.predictor=list(A=inla.stack.A(my.stack), compute=TRUE, link=1),
            control.fixed = list(mean=0, prec=0.2),

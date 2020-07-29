@@ -13,8 +13,8 @@ library(spatialEco)
 working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON't MOVE THE SCRIPT)
 
 ## Set sub directories----
-d.dir = paste(working.dir,"Tidy data",sep="/") 
-s.dir = paste(working.dir,"Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
+d.dir <- paste(working.dir,"Tidy data",sep="/") 
+s.dir <- paste(working.dir,"Spatial",sep="/") # spatial is where I keep spatial data files, rasters and shapefiles
 p.dir <- paste(working.dir,"Plots",sep="/")
 
 lat.long <- "+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs"
@@ -59,12 +59,17 @@ points(bruv)
 ## Create all covariates wanted - already have bathymetry and TPI
 
 Slope <- raster::terrain(bathy, opt="slope")
+writeRaster(Slope, paste(s.dir, "slope.tif", sep ='/'))
 Aspect <- raster::terrain(bathy, opt="aspect")
+writeRaster(Aspect, paste(s.dir, "aspect.tif", sep ='/'))
 TRI <- raster::terrain(bathy, opt="tri")
+# writeRaster(preds, paste(s.dir, "TRI.tif", sep ='/'))
 Roughness <- raster::terrain(bathy, opt="roughness")
+writeRaster(Roughness, paste(s.dir, "roughness.tif", sep ='/'))
 FlowDir <- raster::terrain(bathy,opt="flowdir")
+writeRaster(FlowDir, paste(s.dir, "flowdir.tif", sep ='/'))
 
-## Extract perdictor data at bruv locations ----
+## Extract predictor data at bruv locations ----
 
 # Stack predictors --
 preds <- raster::stack(bathy,tpi,Slope,Aspect,TRI,Roughness,FlowDir) # if this fails: preds may have different extent or resolution
