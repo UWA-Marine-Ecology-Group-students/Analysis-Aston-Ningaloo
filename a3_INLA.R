@@ -251,11 +251,30 @@ flowdir <- raster(paste(s.dir, "flowdir.tif", sep='/'))
 plot(flowdir)
 proj4string(flowdir)
 
-ramps <- raster(paste(s.dir, "distance.to.ramp.asc", sep='/'))
+ramps <- raster(paste(s.dir, "d_ramp_m.tiff", sep='/'))
 plot(ramps)
 proj4string(ramps)
-proj4string(ramps) <- "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"
-writeRaster(ramps, paste(s.dir, "ramps.tif", sep ='/'))
+
+
+# Create shape file for the no take zones 
+
+# Define an empty raster to hold the coordinates of the prediction must be same extent as 
+# covariate rasters
+r <- raster(xmn = min(754687.5), xmx = max(851312.5),
+            ymn = min(7460312), ymx = max(7619938),
+            resolution = 25)
+
+# Create data frame with everything in it
+preds <- as.data.frame(xyFromCell(r, cell = 1:ncell(r)))
+preds$bathy <- values(bathy)
+preds$tpi <- values(tpi)
+preds$aspect <- values(aspect)
+preds$slope <- values(slope)
+preds$flowdir <- values(flowdir)
+preds$ramps <- values(ramps)
+
+
+
 
 ###################### Sublegal Model #########################
 ########## Setting up a mesh #########
