@@ -256,8 +256,12 @@ plot(ramps)
 proj4string(ramps)
 
 # Read in shape file for NTZs and then convert to raster 
+pp <- readOGR(dsn = ".", layer = "NT and F Zones")
+zones <- SpatialPolygons(pp@polygons)
 
-region <- rasterize(pp,r)
+Status <- rasterize(zones, r)
+
+plot(status)
 
 # Define an empty raster to hold the coordinates of the prediction must be same extent as 
 # covariate rasters
@@ -273,9 +277,7 @@ preds$aspect <- values(aspect)
 preds$slope <- values(slope)
 preds$flowdir <- values(flowdir)
 preds$ramps <- values(ramps)
-preds$status
-
-
+preds$status <- values(Status$status)
 
 ###################### Sublegal Model #########################
 ########## Setting up a mesh #########
