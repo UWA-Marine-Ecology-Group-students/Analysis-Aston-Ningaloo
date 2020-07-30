@@ -251,12 +251,13 @@ flowdir <- raster(paste(s.dir, "flowdir.tif", sep='/'))
 plot(flowdir)
 proj4string(flowdir)
 
-ramps <- raster(paste(s.dir, "d_ramp_m.tiff", sep='/'))
+ramps <- raster(paste(s.dir, "d_ramp_m.tif", sep='/'))
 plot(ramps)
 proj4string(ramps)
 
+# Read in shape file for NTZs and then convert to raster 
 
-# Create shape file for the no take zones 
+region <- rasterize(pp,r)
 
 # Define an empty raster to hold the coordinates of the prediction must be same extent as 
 # covariate rasters
@@ -272,7 +273,7 @@ preds$aspect <- values(aspect)
 preds$slope <- values(slope)
 preds$flowdir <- values(flowdir)
 preds$ramps <- values(ramps)
-
+preds$status
 
 
 
