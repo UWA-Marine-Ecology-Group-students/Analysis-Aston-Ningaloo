@@ -233,14 +233,29 @@ proj4string(bathy) # check the coordinate system, resolution, etc..
 tpi <- raster(paste(s.dir, "tpi.tif", sep='/'))
 tpi <- flip(tpi,direction='y')
 plot(tpi) # check it
-proj4string(tpi) # check the coordinate system, resolution, etc..
+proj4string(tpi) 
 
-aspect <- raster(paste(s.dir, "aspect.tif", spe='/'))
+aspect <- raster(paste(s.dir, "aspect.tif", sep='/'))
 plot(aspect)
+proj4string(aspect)
 
+slope <- raster(paste(s.dir, "slope.tif", sep='/'))
+plot(slope)
+proj4string(slope)
 
+roughness <- raster(paste(s.dir, "roughness.tif", sep='/'))
+plot(roughness)
+proj4string(roughness)
 
+flowdir <- raster(paste(s.dir, "flowdir.tif", sep='/'))
+plot(flowdir)
+proj4string(flowdir)
 
+ramps <- raster(paste(s.dir, "distance.to.ramp.asc", sep='/'))
+plot(ramps)
+proj4string(ramps)
+proj4string(ramps) <- "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"
+writeRaster(ramps, paste(s.dir, "ramps.tif", sep ='/'))
 
 ###################### Sublegal Model #########################
 ########## Setting up a mesh #########
