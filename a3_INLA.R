@@ -220,6 +220,24 @@ bestmodel <- INLAstep(fam1="zeroinflatedpoisson1", data.legal, spde = spat.prior
 
 autoplot(bestmodel$best_model, which = c(1, 5), CI = TRUE)
 
+####### Making a predictive map - Legal #########
+
+##### Loading raster files ######
+setwd(s.dir)
+
+bathy <- raster(paste(s.dir, "bathy.tif", sep='/'))
+bathy <- flip(bathy, direction="y")
+plot(bathy) # check it
+proj4string(bathy) # check the coordinate system, resolution, etc..
+
+tpi <- raster(paste(s.dir, "tpi.tif", sep='/'))
+tpi <- flip(tpi,direction='y')
+plot(tpi) # check it
+proj4string(tpi) # check the coordinate system, resolution, etc..
+
+aspect <- raster(paste(s.dir, "aspect.tif", spe='/'))
+plot(aspect)
+
 
 
 
@@ -364,10 +382,6 @@ sd_s <- inla.mesh.project(proj, fm$summary.random$iSpat$sd)
 df <- expand.grid(x = proj$x, y = proj$y)
 df$mean_s <- as.vector(mean_s)
 df$sd_s <- as.vector(sd_s)
-
-df_mean <- df[,c(1:3)]
-write.csv(df_mean, paste(s.dir, "sublegal.random.spatial.mean.csv", sep ='/'))
-df_sd <- df[,c(1,2,4)]
 
 library(viridis)
 library(cowplot)
