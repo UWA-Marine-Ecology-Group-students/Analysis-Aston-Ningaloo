@@ -18,7 +18,7 @@ library(spdep)
 library(spatialEco)
 library(nlme)
 devtools::install_github("beckyfisher/FSSgam_package") #run once
-library(FSSgam)
+
 
 rm(list=ls())
 
@@ -37,9 +37,7 @@ name <- 'ningaloo' # for the study
 
 # Load the dataset - from github
 setwd(d.dir)
-dat <-read.csv('final.data.csv')%>%
-  rename(response=target.fish)%>%
-  glimpse()
+dat <-read.csv('final.data.csv')
 
 names(dat)
 
@@ -49,13 +47,25 @@ metadata <- read.csv('ningaloo_metadata.csv')
 latlongs <- metadata%>%
   select('longitude', 'latitude')
 
+
 dat <- cbind(dat, latlongs)
 dat <- dat[,-c(4,5)]
-legal.dat <- subset(dat, model=='Legal')
+
+# Add distance to -60m bathome and then convert into use for spline
+distance.60m <- read.csv("distance to 60.csv")
+
+dat <- cbind(dat,distance.60m)
+
+#dat <- dat%>%
+#  mutate(bathome.x.depth=(distance.to.60*bathymetry))%>%
+#  glimpse()
+
+
 #Set bathymetry to be a positive number for loop
-dat<- dat%>%
+legal.dat<- legal.dat%>%
   mutate(pos.bathymetry=(bathymetry*-1))%>%
   glimpse()
+
 
 # Set predictor variables---
 pred.vars=c("TPI","Slope","Aspect","TRI","Roughness","FlowDir","mean.relief",
@@ -191,8 +201,8 @@ var.imp=list()
 
 # Check out the model set----
 
-Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re") + s(TPI,bs="re"),
-           family=tw(),  data=use.dat)
+Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re") + s(TPI,bs="re") + 
+             ti(bathome.x.depth, k=3, bs='cr'), family=tw(),  data=use.dat)
 
 model.set=generate.model.set(use.dat=use.dat,
                              test.fit=Model1,
@@ -208,8 +218,8 @@ model.set=generate.model.set(use.dat=use.dat,
 for(i in 1:length(resp.vars)){
   use.dat=dat[which(dat$model==resp.vars[i]),]
   
-  Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re")+ s(TPI,bs="re"),
-             family=tw(),  data=use.dat)
+  Model1=gam(response~s(bathymetry,k=3,bs='cr')+ s(site,bs="re") + s(TPI,bs="re") + 
+               te(bathome.x.depth, k=3, bs='cr'), family=tw(),  data=use.dat)
   
   model.set=generate.model.set(use.dat=use.dat,
                                test.fit=Model1,

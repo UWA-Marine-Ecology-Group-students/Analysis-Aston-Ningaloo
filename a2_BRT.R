@@ -22,7 +22,7 @@ sublegal.dat <- subset(dat, model=='Sublegal')
 #Set co-variates. There are no distributional assumptions on these. Make those you want to be factors into factors
 factor.vars=c("status","model")
 cont.vars=c("bathymetry","TPI", "Slope", "Aspect", "FlowDir",
-            "distance.to.ramp")
+            "distance.to.ramp", "mean.relief", "sd.relief", "reef")
 
 ################## Legal Target Species Model ##################
 
@@ -169,8 +169,8 @@ legal.sublegal <- ggPD_boot(model, predictor="model", list.4.preds=brt1.prerun,
                             booted.preds=brt1.boot$function.preds, type.ci = "lines",
                             col.line = "royalblue2", rug = T)
 
-#sd.relief <- ggPD_boot(model, predictor="sd.relief", list.4.preds=brt1.prerun, 
-#                       booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+sd.relief <- ggPD_boot(model, predictor="sd.relief", list.4.preds=brt1.prerun, 
+                       booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
 
 slope <- ggPD_boot(model, predictor="Slope", list.4.preds=brt1.prerun, 
                    booted.preds=brt1.boot$function.preds, type.ci = "ribbon",
