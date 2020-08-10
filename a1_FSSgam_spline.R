@@ -41,6 +41,10 @@ dat <-read.csv('final.data.csv')
 
 names(dat)
 
+dat <- dat%>%
+  select(!X.1)%>%
+  select(!X)
+
 # Correct Lat/Long - had been changed to UTM in a previous script
 metadata <- read.csv('ningaloo_metadata.csv')
 
@@ -49,7 +53,7 @@ latlongs <- metadata%>%
 
 
 dat <- cbind(dat, latlongs)
-dat <- dat[,-c(4,5)]
+dat <- dat[,-c(3,4)]
 
 # Add distance to -60m bathome and then convert into use for spline
 distance.60m <- read.csv("distance to 60.csv")
@@ -72,7 +76,7 @@ dat<-dat%>%
 
 
 #Set bathymetry to be a positive number for loop
-legal.dat<- legal.dat%>%
+dat <- dat%>%
   mutate(pos.bathymetry=(bathymetry*-1))%>%
   glimpse()
 
@@ -92,7 +96,7 @@ pred.vars=c("TPI","Slope","Aspect","FlowDir","mean.relief",
 # Plot of likely transformations
 par(mfrow=c(3,2))
 for (i in pred.vars) {
-  x<-legal.dat[ ,i]
+  x<-dat[ ,i]
   x = as.numeric(unlist(x))
   hist((x))#Looks best
   plot((x),main = paste(i))
@@ -135,7 +139,100 @@ dat <- dat%>%
 pred.vars=c("bathymetry","sqrt.slope","cube.Aspect","log.roughness","FlowDir","distance.to.ramp")
 
 ######### Legal Model #########
-#Run mot likely models and look at AIC/BIC as well as Moran's I 
+dat.legal<-dat%>%filter(model=="Legal")
 
+# Bathy, TPI and Zones have to be in the null model
+# Start with null model then add things one by one and look at the effect on AIC 
+# First thing to look at is the Moran's I and see if spline helps 
+
+gamm.legal.null<-gam(target.fish ~ s(bathymetry, bs="re") + s(TPI, bs="re") + s(zone, bs="re") +
+                  te(distance.to.60,bathymetry, k=3, bs="cr"), family=tw(), data=dat.legal)
+
+summary(gamm.legal.null)
+gamm.legal.null$aic
+# Deviance explained 23.3%
+# AIC 558.821
+
+## Check Moran's I with spline
+#Create a spatial data frame
+coordinates(dat.legal) <- ~ longitude + latitude
+proj4string(dat.legal) # check coordinate system and/or projection
+# If no projection give assign one,
+proj4string(dat.legal) <- "+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs"
+
+neighbours <- knearneigh(dat.legal, k=1, longlat = TRUE)
+
+knn <- knn2nb(neighbours, row.names = NULL, sym = FALSE)
+nb <- nb2listw(knn, glist=NULL, style="W", zero.policy=NULL)
+
+moran.test(gamm.legal.null$residuals, nb, randomisation=T, zero.policy=NULL,
+           alternative="greater", rank = FALSE)
+
+moran.plot(gamm.legal$residuals, nb, zero.policy=NULL, spChk=NULL, labels=NULL,
+           xlab=NULL, ylab=NULL, quiet=NULL, plot=TRUE)
+
+# p-value = 0.001074
+
+gamm.legal.no.spline <- gamm.legal.null<-gam(target.fish ~ s(bathymetry, bs="re") + s(TPI, bs="re") + s(zone, bs="re"),
+                                               family=tw(), data=dat.legal)
+
+## Check Moran's I without spline
+#Create a spatial data frame
+coordinates(dat.legal) <- ~ longitude + latitude
+proj4string(dat.legal) # check coordinate system and/or projection
+# If no projection give assign one,
+proj4string(dat.legal) <- "+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs"
+
+neighbours <- knearneigh(dat.legal, k=1, longlat = TRUE)
+
+knn <- knn2nb(neighbours, row.names = NULL, sym = FALSE)
+nb <- nb2listw(knn, glist=NULL, style="W", zero.policy=NULL)
+
+moran.test(gamm.legal.no.spline$residuals, nb, randomisation=T, zero.policy=NULL,
+           alternative="greater", rank = FALSE)
+
+moran.plot(gamm.legal$residuals, nb, zero.policy=NULL, spChk=NULL, labels=NULL,
+           xlab=NULL, ylab=NULL, quiet=NULL, plot=TRUE)
+
+# p-value is 5.493e-05 so the spline definitely helps with spatial autocorrelation although it
+# doesn't remove it entirely 
+
+## Adding variables
+gamm.legal<-gam(target.fish ~ 
+                  s(distance.to.ramp, k=3, bs="cr") + 
+                  status +
+                 # s(log.roughness, k=3, bs="cr") +
+                 # s(sqrt.slope, k=3, bs="cr") + 
+                  s(cube.Aspect, k=3, bs="cr") +
+                  s(bathymetry, bs="re") + s(TPI, bs="re") + s(zone, bs="re") +
+                  te(distance.to.60,bathymetry, k=3, bs="cr"), family=tw(), data=dat.legal)
+
+summary(gamm.legal)
+gamm.legal$aic
+
+# Results are on a spreadsheet in excel 
+
+######### Sublegal Model #########
+dat.sublegal<-dat%>%filter(model=="Sublegal")
+
+# Bathy, TPI and Zones have to be in the null model
+# Start with null model then add things one by one and look at the effect on AIC 
+# First thing to look at is the Moran's I and see if spline helps 
+
+######### Sublegal ##########
+dat.sublegal<-dat%>%filter(model=="Sublegal")
+
+## Adding variables
+gamm.sublegal<-gam(target.fish ~ 
+                     s(distance.to.ramp, k=3, bs="cr") + 
+                    # status +
+                    # s(log.roughness, k=3, bs="cr") +
+                     s(sqrt.slope, k=3, bs="cr") + 
+                    # s(cube.Aspect, k=3, bs="cr") +
+                    s(bathymetry, bs="re") + s(TPI, bs="re") + s(zone, bs="re") +
+                    te(distance.to.60,bathymetry, k=3, bs="cr"), family=tw(), data=dat.sublegal)
+
+summary(gamm.sublegal)
+gamm.sublegal$aic
 
 

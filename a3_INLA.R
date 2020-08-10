@@ -14,6 +14,8 @@ install_github('timcdlucas/INLAutils')
 library(INLAutils)
 library(rgdal)
 library(RColorBrewer)
+install_github('oswaldosantos/INLAOutputs')
+library(INLAOutputs)
 
 rm(list=ls())
 
@@ -43,7 +45,8 @@ data<- data%>%
   dplyr::select(!sand)%>%
   dplyr::select(!TRI)%>%
   dplyr::select(!Roughness)%>%
-  dplyr::select(!X)
+  dplyr::select(!X)%>%
+  dplyr::select(!X.1)
 
 # Set your covariates/spatial data
 covariates <- c("bathymetry","TPI","Slope","Aspect","FlowDir","mean.relief",
@@ -63,8 +66,8 @@ data.sublegal <- subset(data, model=='Sublegal')
 
 # Rename coordinates
 data.legal <- data.legal%>%
-  rename(easting=latitude)%>%
-  rename(northing=longitude)
+  dplyr::rename(easting=latitude)%>%
+  dplyr::rename(northing=longitude)
 
 Locations <- data.legal%>%
   dplyr::select("easting", "northing")
@@ -135,14 +138,15 @@ fm <- inla(f.s,
            data = inla.stack.data(my.stack.legal),
            verbose=FALSE,
            control.predictor=list(A=inla.stack.A(my.stack.legal), compute=TRUE, link=1),
-           control.fixed = list(mean=0, prec=0.2),
+           control.fixed = list(mean=0, prec=0.001),
            control.results = list(return.marginals.random = TRUE, return.marginals.predictor = TRUE), 
-           control.compute=list(config = TRUE, dic=TRUE)
+           control.compute=list(config = TRUE, dic=TRUE, waic=TRUE)
 )
 
 summary(fm)
 
 plot(fm)
+
 
 
 ####### Plotting the residuals and checking the model ######
@@ -152,7 +156,7 @@ plot(fm)
 ggplot_inla_residuals(fm, data.legal$target.fish, binwidth = 0.1)
 
 # This plots the values predeicted by the model against the actual values 
-index.pred <- inla.stack.index(my.stack, "preds")$data
+index.pred <- inla.stack.index(my.stack.legal, "preds")$data
 
 post.mean.pred <- fm$summary.fitted.values[index.pred, "mean"]
 post.sd.pred <- fm$summary.fitted.values[index.pred, "sd"]
@@ -166,10 +170,10 @@ plot(post.mean.pred,data.legal$target.fish)
 summary <- as.data.frame(summary(fm)$fixed)
 
 summary <- summary%>%
-  rename(lower=`0.025quant`)%>%
-  rename(upper=`0.975quant`)%>%
-  rename(estimate=mean)%>%
-  mutate(factor=c("intercept", "bathy", "TPI", "slope", "aspect", "flowdir",
+  dplyr::rename(lower=`0.025quant`)%>%
+  dplyr::rename(upper=`0.975quant`)%>%
+  dplyr::rename(estimate=mean)%>%
+  dplyr::mutate(factor=c("intercept", "bathy", "TPI", "slope", "aspect", "flowdir",
                   "ramp", "fished", "NTZ"))
 
 effects <- ggplot(summary,
