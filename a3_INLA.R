@@ -19,7 +19,7 @@ library(INLAOutputs)
 
 rm(list=ls())
 
-
+names(inla.models()$latent$iid$name)
 ##Set working directory----
 ## Set work directory----
 working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON'T MOVE THE SCRIPT)
@@ -146,8 +146,6 @@ fm <- inla(f.s,
 summary(fm)
 
 plot(fm)
-
-
 
 ####### Plotting the residuals and checking the model ######
 # If the model is well calibrated then the bins should be the same height. The convex model suggests that

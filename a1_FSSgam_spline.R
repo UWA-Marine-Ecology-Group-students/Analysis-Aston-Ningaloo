@@ -235,4 +235,265 @@ gamm.sublegal<-gam(target.fish ~
 summary(gamm.sublegal)
 gamm.sublegal$aic
 
+############### Part 3 Plotting the most parsimonious models #################
+
+library(gridExtra)
+library(grid)
+# Theme-
+Theme1 <-
+  theme( # use theme_get() to see available options
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    # legend.background = element_rect(fill="white"),
+    legend.background = element_blank(),
+    legend.key = element_blank(), # switch off the rectangle around symbols in the legend
+    legend.text = element_text(size=15),
+    legend.title = element_blank(),
+    legend.position = c(0.2, 0.8),
+    text=element_text(size=15),
+    strip.text.y = element_text(size = 15,angle = 0),
+    axis.title.x=element_text(vjust=0.3, size=15),
+    axis.title.y=element_text(vjust=0.6, angle=90, size=15),
+    axis.text.x=element_text(size=15),
+    axis.text.y=element_text(size=15),
+    axis.line.x=element_line(colour="black", size=0.5,linetype='solid'),
+    axis.line.y=element_line(colour="black", size=0.5,linetype='solid'),
+    strip.background = element_blank())
+
+######### Predict and plot legal fish #########
+dat.legal<-dat%>%
+  dplyr::filter(model=="Legal")%>%
+  dplyr::rename(response=target.fish)
+
+gamm.legal<-gam(response ~ 
+                  s(distance.to.ramp, k=3, bs="cr") + 
+                  status +
+                  # s(log.roughness, k=3, bs="cr") +
+                  # s(sqrt.slope, k=3, bs="cr") + 
+                  s(cube.Aspect, k=3, bs="cr") +
+                  te(distance.to.60,bathymetry, k=3, bs="cr") +
+                  s(bathymetry, bs="re") + s(TPI, bs="re") + s(zone, bs="re"),
+                  family=tw(), data=dat.legal)
+
+
+# predict cube.Aspect from model
+mod<-gamm.legal
+testdata <- expand.grid(cube.Aspect=seq(min(dat$cube.Aspect),max(dat$cube.Aspect),length.out = 5),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=5),
+                        bathymetry=seq(min(dat$bathymetry), max(dat$bathymetry), length.out=5),
+                        distance.to.60=seq(min(dat$distance.to.60), max(dat$distance.to.60), length.out=5),
+                        TPI=seq(min(dat$TPI), max(dat$TPI), length.out=5),
+                        zone=(mod$model$zone),
+                        status=(mod$model$status))%>%
+                        
+  distinct()%>%
+  glimpse()
+
+fits <- predict.gam(mod, newdata=testdata, type='response', se.fit=T)
+
+predicts.legal.cube.Aspect <- testdata%>%data.frame(fits)%>%
+  group_by(cube.Aspect)%>% #only change here
+  dplyr::summarise(response=mean(fit),se.fit=mean(se.fit))%>%
+  ungroup()
+write.csv(predicts.legal.bathy,"predict.legal.bathy.csv") #there is some BUG in dplyr - that this fixes
+predicts.legal.bathy<-read.csv("predict.legal.bathy.csv")%>%
+  glimpse()
+
+# Plot cube aspect from model
+ggmod.legal.cube.Aspect<- ggplot() +
+  ylab("Predicted Abundance of Legal Sized Fish")+
+  xlab('Aspect (cubed)')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.legal,aes(x=cube.Aspect,y=response,colour=status),  alpha=0.75, size=2,show.legend=F)+
+  geom_line(data=predicts.legal.cube.Aspect,aes(x=cube.Aspect,y=response),alpha=0.75)+
+  geom_line(data=predicts.legal.cube.Aspect,aes(x=cube.Aspect,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.legal.cube.Aspect,aes(x=cube.Aspect,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.legal.cube.Aspect
+
+#predict distance to ramp
+mod<-gamm.legal
+testdata <- expand.grid(cube.Aspect=seq(min(dat$cube.Aspect),max(dat$cube.Aspect),length.out = 5),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=5),
+                        bathymetry=seq(min(dat$bathymetry), max(dat$bathymetry), length.out=5),
+                        distance.to.60=seq(min(dat$distance.to.60), max(dat$distance.to.60), length.out=5),
+                        TPI=seq(min(dat$TPI), max(dat$TPI), length.out=5),
+                        zone=(mod$model$zone),
+                        status=(mod$model$status))%>%
+  
+  distinct()%>%
+  glimpse()
+
+fits <- predict.gam(mod, newdata=testdata, type='response', se.fit=T)
+
+predicts.legal.ramp <- testdata%>%data.frame(fits)%>%
+  group_by(distance.to.ramp)%>% #only change here
+  dplyr::summarise(response=mean(fit),se.fit=mean(se.fit))%>%
+  ungroup()
+write.csv(predicts.legal.bathy,"predict.legal.bathy.csv") #there is some BUG in dplyr - that this fixes
+predicts.legal.bathy<-read.csv("predict.legal.bathy.csv")%>%
+  glimpse()
+
+
+# Plot Distance to ramps
+ggmod.legal.ramps<- ggplot() +
+  ylab("Predicted Abundance of Legal Sized Fish")+
+  xlab('Distance to Ramp')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.legal,aes(x=distance.to.ramp,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response),alpha=0.75)+
+  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(d)",vjust = 1, hjust = -.1,size=5)
+ggmod.legal.ramps
+
+#predict status
+mod<-gamm.legal
+testdata <- expand.grid(cube.Aspect=seq(min(dat$cube.Aspect),max(dat$cube.Aspect),length.out = 5),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=5),
+                        bathymetry=seq(min(dat$bathymetry), max(dat$bathymetry), length.out=5),
+                        distance.to.60=seq(min(dat$distance.to.60), max(dat$distance.to.60), length.out=5),
+                        TPI=seq(min(dat$TPI), max(dat$TPI), length.out=5),
+                        zone=(mod$model$zone),
+                        status=(mod$model$status))%>%
+  
+  distinct()%>%
+  glimpse()
+
+fits <- predict.gam(mod, newdata=testdata, type='response', se.fit=T)
+
+predicts.legal.status <- testdata%>%data.frame(fits)%>%
+  group_by(status)%>% #only change here
+  dplyr::summarise(response=mean(fit),se.fit=mean(se.fit))%>%
+  ungroup()
+write.csv(predicts.legal.bathy,"predict.legal.bathy.csv") #there is some BUG in dplyr - that this fixes
+predicts.legal.bathy<-read.csv("predict.legal.bathy.csv")%>%
+  glimpse()
+
+# Plot status
+ggmod.legal.status<- ggplot(aes(x=status,y=response,fill=status,colour=status), data=predicts.legal.status) +
+  ylab("Predicted Abundance of Legal Sized Fish")+
+  xlab('Status')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_fill_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  scale_colour_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  scale_x_discrete(limits = rev(levels(predicts.legal.status$status)))+
+  geom_bar(stat = "identity")+
+  geom_errorbar(aes(ymin = response-se.fit,ymax = response+se.fit),width = 0.5) +
+  theme_classic()+
+  Theme1
+ggmod.legal.status
+
+
+######## Predict and plot Sublegal ramp and slope ######
+dat.sublegal<-dat%>%
+  filter(model=="Sublegal")%>%
+  dplyr::rename(response=target.fish)
+
+gamm.sublegal<-gam(response ~ 
+                     s(distance.to.ramp, k=3, bs="cr") + 
+                     # status +
+                     # s(log.roughness, k=3, bs="cr") +
+                     s(sqrt.slope, k=3, bs="cr") + 
+                     # s(cube.Aspect, k=3, bs="cr") +
+                     s(bathymetry, bs="re") + s(TPI, bs="re") + s(zone, bs="re") +
+                     te(distance.to.60,bathymetry, k=3, bs="cr"), family=tw(), data=dat.sublegal)
+
+
+#predict slope
+mod<-gamm.sublegal
+testdata <- expand.grid(sqrt.slope=seq(min(dat$sqrt.slope),max(dat$sqrt.slope),length.out = 5),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=5),
+                        bathymetry=seq(min(dat$bathymetry), max(dat$bathymetry), length.out=5),
+                        distance.to.60=seq(min(dat$distance.to.60), max(dat$distance.to.60), length.out=5),
+                        TPI=seq(min(dat$TPI), max(dat$TPI), length.out=5),
+                        zone=(mod$model$zone))%>%
+  
+  distinct()%>%
+  glimpse()
+
+fits <- predict.gam(mod, newdata=testdata, type='response', se.fit=T)
+
+predicts.sublegal.slope <- testdata%>%data.frame(fits)%>%
+  group_by(sqrt.slope)%>% #only change here
+  dplyr::summarise(response=mean(fit),se.fit=mean(se.fit))%>%
+  ungroup()
+
+
+# Plot Bathymetry
+ggmod.sublegal.slope<- ggplot() +
+  ylab("Predicted Abundance of Sublegal Sized Fish")+
+  xlab('Slope (sqrt)')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  #   geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.sublegal,aes(x=sqrt.slope,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predicts.sublegal.slope,aes(x=sqrt.slope,y=response),alpha=0.75)+
+  geom_line(data=predicts.sublegal.slope,aes(x=sqrt.slope,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.sublegal.slope,aes(x=sqrt.slope,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.sublegal.slope
+
+
+#Predict distance to ramp 
+mod<-gamm.sublegal
+testdata <- expand.grid(sqrt.slope=seq(min(dat$sqrt.slope),max(dat$sqrt.slope),length.out = 5),
+                        distance.to.ramp=seq(min(dat$distance.to.ramp),max(dat$distance.to.ramp),length.out=5),
+                        bathymetry=seq(min(dat$bathymetry), max(dat$bathymetry), length.out=5),
+                        distance.to.60=seq(min(dat$distance.to.60), max(dat$distance.to.60), length.out=5),
+                        TPI=seq(min(dat$TPI), max(dat$TPI), length.out=5),
+                        zone=(mod$model$zone))%>%
+  
+  distinct()%>%
+  glimpse()
+
+fits <- predict.gam(mod, newdata=testdata, type='response', se.fit=T)
+
+predicts.sublegal.ramp = testdata%>%data.frame(fits)%>%
+  group_by(distance.to.ramp)%>% #only change here
+  dplyr::summarise(response=mean(fit),se.fit=mean(se.fit))%>%
+  ungroup()
+write.csv(predicts.legal.ramp,"predict.sublegal.ramp.csv") #there is some BUG in dplyr - that this fixes
+predicts.legal.ramp<-read.csv("predict.sublegal.ramp.csv")%>%
+  glimpse()
+
+# Distance to ramps
+ggmod.sublegal.ramps<- ggplot() +
+  ylab("Predicted Abundance of Sublegal Sized Fish")+
+  xlab('Distance to Ramps')+
+  #   ggtitle(substitute(italic(name)))+
+  scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
+  #   geom_jitter(width = 0.25,height = 0)+
+  geom_point(data=dat.sublegal,aes(x=distance.to.ramp,y=response,colour=status),  alpha=0.75, size=2,show.legend=FALSE)+
+  geom_line(data=predicts.sublegal.ramp,aes(x=distance.to.ramp,y=response),alpha=0.5)+
+  geom_line(data=predicts.sublegal.ramp,aes(x=distance.to.ramp,y=response - se.fit),linetype="dashed",alpha=0.5)+
+  geom_line(data=predicts.sublegal.ramp,aes(x=distance.to.ramp,y=response + se.fit),linetype="dashed",alpha=0.5)+
+  theme_classic()+
+  Theme1+
+  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+ggmod.sublegal.ramps
+
+
+# combined.plot using grid() and gridExtra()------
+blank <- grid.rect(gp=gpar(col="white"))
+
+# To see what they will look like use grid.arrange() - make sure Plot window is large enough! - or will error!
+grid.arrange(ggmod.sublegal.bathy,ggmod.sublegal.relief)
+
+# Use arrangeGrob ONLY - as we can pass this to ggsave! Note use of raw ggplot's
+combine.plot<-arrangeGrob(ggmod.sublegal.bathy,ggmod.sublegal.relief, ggmod.sublegal.ramps)
+ggsave(combine.plot,file="Ningaloo_sublegalgamm.plot.png", width = 30, height = 30,units = "cm")
+
+
+
 
