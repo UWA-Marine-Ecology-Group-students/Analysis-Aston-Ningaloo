@@ -86,16 +86,17 @@ summary(model.splinek5.2)
 
 #### Top models using corGaus ####
 model.corgaus.1 <- gamm(response~
-                        s(cube.aspect, k=3, bs='cr') + status + s(bathymetry, bs="cr"),
+                          s(sqrt.slope, k=3, bs='cr') + status + s(bathymetry, bs="cr"),
                         family=poisson(), correlation = corGaus(form = ~ latitude + longitude),  data=legal.dat)
 
 AIC(model.corgaus.1)
 summary(model.corgaus.1$gam)
 
 model.corgaus.2 <- gamm(response~
-                        s(sqrt.slope, k=3, bs='cr') + status + s(bathymetry, bs="cr"),
+                        s(log.roughness, k=3, bs='cr') + status + s(bathymetry, bs="cr"),
                         family=poisson(), correlation = corGaus(form = ~ latitude + longitude),  data=legal.dat)
 
 AIC(model.corgaus.2)
 summary(model.corgaus.2$gam)
+
 
