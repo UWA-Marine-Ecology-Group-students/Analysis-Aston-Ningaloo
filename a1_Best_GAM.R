@@ -22,6 +22,7 @@ library(vcd)
 
 rm(list=ls())
 
+
 ## Set working directory----
 working.dir <- dirname(rstudioapi::getActiveDocumentContext()$path) # sets working directory to where this script is saved (DON'T MOVE THE SCRIPT)
 
@@ -587,4 +588,6 @@ ggmod.gam.distance<- ggplot() +
   Theme1+
   annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
 ggmod.gam.distance
+
+#### Simulating my model for verification lme4 ####
 

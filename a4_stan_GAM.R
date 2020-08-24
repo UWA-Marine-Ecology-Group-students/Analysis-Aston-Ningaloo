@@ -128,116 +128,276 @@ all.var.imp=do.call("rbind",var.imp)
 write.csv(all.mod.fits[,-2],file=paste(name,"lme4.random.all.mod.fits.csv",sep="_"))
 write.csv(all.var.imp,file=paste(name,"lme4.all.var.imp.csv",sep="_"))
 
+#### Model 1 ####
 ### Predict from the model ###
-fits.all=list()
-mod.dat.all=list()
-out.fits.all=list()
-mcmc.out=list()
 
 effect.dat <- expand.grid(cube.Aspect=seq(min(legal.dat$cube.Aspect),max(legal.dat$cube.Aspect),length.out = 20),
                         distance.to.ramp=seq(min(legal.dat$distance.to.ramp),max(legal.dat$distance.to.ramp),length.out = 20),
-                        bathymetry=seq(min(legal.dat$bathymetry),max(legal.dat$bathymetry), length.out=20),
-                        site=lme4.site$gam$model$site)%>%
-  
-  distinct()%>%
-  glimpse()
+                        bathymetry=seq(min(legal.dat$bathymetry),max(legal.dat$bathymetry), length.out=20))
+                        #site=lme4.site$gam$model$site)%>%
 
 use.dat <- dat%>%
   dplyr::select(response, distance.to.ramp, cube.Aspect, sqrt.slope, log.roughness, status, FlowDir,
                 bathymetry, site)
 factor.vars <- c("status")
-
-for(s in 1:length(modnames)){
   
   
-  Model1 <- uGamm(response~s(bathymetry,k=5,bs='cr')+ s(distance.to.ramp, k=5, bs='cr')
+Model.1 <- uGamm(response~s(bathymetry,k=5,bs='cr')+ s(distance.to.ramp, k=5, bs='cr')
                   + s(cube.Aspect,k=5,bs='cr'),random=~(1|site), 
                      family=poisson(), data=use.dat, lme4=TRUE)
   
+
   
-  mod.list <- list(full=Model1)
-  
-  mod.data.out <- data.frame(do.call("rbind",
-                                     lapply(mod.list,FUN=function(x){unlist(extract.mod.dat(x, r2.type="r2"))}))) %>%
-    mutate(delta.AICc=round(AICc-min(AICc,na.rm=T),1),
-           delta.BIC=round(BIC-min(BIC,na.rm=T),1),
-           wi.AICc=round(wi(AICc),2),
-           wi.BIC=round(wi(BIC),2)) %>%
-    dplyr::select_if(~sum(!is.na(.)) > 0) %>%
-    mutate(R2=round(r2.vals,3),
-           edf=round(edf,1),
-           #Site=site.labels.short[[s]],
-           u.R2=round(max(r2.vals)-r2.vals,3)) %>%
-    dplyr::select(c("u.R2","delta.AICc","wi.AICc"))
-  
-  # now fit with shrinkage - to generate predicted values
-  Model.2 <- uGamm(response~s(bathymetry,k=5,bs='cr')+ s(distance.to.ramp, k=5, bs='cr') 
+# now fit with shrinkage - to generate predicted values
+Model.2 <- uGamm(response~s(bathymetry,k=5,bs='cr')+ s(distance.to.ramp, k=5, bs='cr') 
                    + s(cube.Aspect,k=5,bs='cr'), random=~(1|site), 
                      family=poisson(), data=use.dat, lme4=TRUE)
   
-  stangam.s  <- stan_gamm4(response~s(bathymetry, k = 5, bs = "cr")+ s(distance.to.ramp, k=5, bs='cr') 
+stangam.s  <- stan_gamm4(response~s(bathymetry, k = 5, bs = "cr")+ s(distance.to.ramp, k=5, bs='cr') 
                            + s(cube.Aspect,k=5,bs='cr'), random=~(1|site), adapt_delta = 0.99,
                            data=use.dat, chains=3, cores=3, iter=21000, warmup=20000,
-                           family=gaussian())
-  
-  fits.all <- c(fits.all, list(mod.list))
-  mod.dat.all <- c(mod.dat.all, list(mod.data.out))
-  out.fits.all <- c(out.fits.all, list(Model.2))
-  mcmc.out <- c(mcmc.out,list(stangam.s))
-  
-}
-names(fits.all) <- modnames
-names(mod.dat.all) <- modnames
-names(out.fits.all) <- modnames
-names(mcmc.out) <- modnames
+                           family=poisson())
 
 
 # calcualte frequentist effects
-tt=lapply(out.fits.all$legal$gam,FUN="predict.gam",newdata=effect.dat)
-effect.dat <- cbind(effect.dat,do.call("cbind", tt))
+predicted <- predict.gam(Model.1$gam, newdata=effect.data, type='response')
+effect.dat$predicted <- cbind(effect.dat, predicted)
 
+# bathy effect 
+bathy.P <- effect.dat%>%
+  group_by(bathymetry)%>%
+  summarise_at(var(predicted), list(mean))
+
+bathy.E <- diff(range(bathy.P$predicted))
+
+# aspect effect 
+aspect.P <- effect.dat%>%
+  group_by(cube.Aspect)%>%
+  summarise_at(var(predicted), list(mean))
+
+aspect.E <- diff(range(aspect.P$predicted))
+
+# ramp effect 
+ramp.P <- effect.dat%>%
+  group_by(distance.to.ramp)%>%
+  summarise_at(var(predicted), list(mean))
+
+ramp.E <- diff(range(ramp.P$predicted))
 
 ## use the bayesian models to calculate a posterior distribution of the effect size.-------
 effect.dat.sim <- effect.dat
-bayes.effects <- list()
-bayes.cv <- list()
-for(s in 1:length(modnames)){
-  stangam.s <- mcmc.out[[s]]
-  gg <- t((posterior_predict(stangam.s, effect.dat.sim)))
-  colnames(gg) <- paste("sim",1:ncol(gg),sep="_")
-  gg.dat <- cbind(effect.dat.sim,gg)
+gg <- t(posterior_predict(stangam.s, effect.dat.sim))
+#colnames(gg) <- paste("sim",1:ncol(gg),sep="_")
+gg.dat <- cbind(effect.dat.sim,gg)
+
+gg.dat.long <- gg.dat%>%
+  gather(sim, predicted.sim, 4:3000)
+
+gg.dat.long$sim <- as.factor(gg.dat.long$sim)
+
+# bathy effect 
+bathy.sim <- data.frame(matrix(ncol=1, nrow=1))
+x <- c("bathy.mean")
+colnames(bathy.sim) <- x
+
+for(i in 1:3000){
+  bathy.sim.1 <- gg.dat.long
+  bathy.sim.2 <- filter(bathy.sim.1, sim==i)
+  bathy.sim.3 <- group_by(bathy.sim.3, bathymetry)
+  bathy.sim.4 <- summarise_at(bathy.sim.3, vars(predicted.sim), list(mean))
+  print(bathy.sim.5 <- diff(range(bathy.sim.4$predicted.sim)))
+  bathy.sim <- rbind(bathy.sim, bathy.sim.5)
   
-  # bathy effects
-  bathy.E.log <- summaryBy(as.formula(paste(paste(paste("sim",1:ncol(gg),sep="_"),collapse="+"),
-                                            "~bathymetry",sep="")), FUN=mean, data=gg.dat, keep.names = T)
-  #waves.E <- as.numeric(exp(waves.E.log[2,1:ncol(gg)])-exp(waves.E.log[1,1:ncol(gg)]))
-  bathy.E <- round(apply(
-    apply(exp(bathy.E.log[,paste("sim",1:ncol(gg),sep="_")]), MARGIN=2,FUN="range"),
-    MARGIN=2,FUN="diff"),2)
-  
-  # aspect effects
-  aspect.E.log <- summaryBy(as.formula(paste(paste(paste("sim",1:ncol(gg),sep="_"),collapse="+"),
-                                           "~cube.Aspect",sep="")), FUN=mean, data=gg.dat, keep.names = T)
-  #wind.E <- as.numeric(exp(wind.E.log[2,1:ncol(gg)])-exp(wind.E.log[1,1:ncol(gg)]))
-  aspect.E <- round(apply(
-    apply(exp(aspect.E.log[,paste("sim",1:ncol(gg),sep="_")]), MARGIN=2,FUN="range"),
-    MARGIN=2,FUN="diff"),2)
-  
-  # ramp effects
-  ramp.E.log <- summaryBy(as.formula(paste(paste(paste("sim",1:ncol(gg),sep="_"),collapse="+"),
-                                             "~distance.to.ramp",sep="")), FUN=mean, data=gg.dat, keep.names = T)
-  #wind.E <- as.numeric(exp(wind.E.log[2,1:ncol(gg)])-exp(wind.E.log[1,1:ncol(gg)]))
-  ramp.E <- round(apply(
-    apply(exp(ramp.E.log[,paste("sim",1:ncol(gg),sep="_")]), MARGIN=2,FUN="range"),
-    MARGIN=2,FUN="diff"),2)
-  
-  ## calculate effect as cv
-  mean.NTU <- summaryBy(as.formula(paste(paste(paste("sim",1:ncol(gg),sep="_"),collapse="+"),"~Site.Code")),FUN=mean,
-                        data=gg.dat)
-  
-  bayes.effects.s <- list(bathy.E=bathy.E,aspect.E=aspect.E,ramp.E=ramp.E)
-  bayes.cv.s <- lapply(bayes.effects.s,FUN=function(x){unlist(x/exp(mean.NTU))})
-  
-  bayes.effects <- c(bayes.effects,list(bayes.effects.s))
-  bayes.cv <- c(bayes.cv,list(bayes.cv.s))
 }
+
+bathy.sim
+
+write.csv(bathy.sim, "bayesian.bathy.predictions")
+
+# aspect effect 
+aspect.sim <- data.frame(matrix(ncol=1, nrow=1))
+x <- c("aspect.mean")
+colnames(aspect.sim) <- x
+
+for(i in 1:3000){
+  aspect.sim.1 <- gg.dat.long
+  aspect.sim.2 <- filter(aspect.sim.1, sim==i)
+  aspect.sim.3 <- group_by(aspect.sim.3, cube.Aspect)
+  aspect.sim.4 <- summarise_at(aspect.sim.3, vars(predicted.sim), list(mean))
+  print(aspect.sim.5 <- diff(range(aspect.sim.4$predicted.sim)))
+  aspect.sim <- rbind(aspect.sim, aspect.sim.5)
+  
+}
+
+aspect.sim
+
+write.csv(aspect.sim, "bayesian.aspect.predictions")
+
+# ramp effect 
+ramp.sim <- data.frame(matrix(ncol=1, nrow=1))
+x <- c("ramp.mean")
+colnames(ramp.sim) <- x
+
+for(i in 1:3000){
+  ramp.sim.1 <- gg.dat.long
+  ramp.sim.2 <- filter(ramp.sim.1, sim==i)
+  ramp.sim.3 <- group_by(ramp.sim.3, distance.to.ramp)
+  aspect.sim.4 <- summarise_at(aspect.sim.3, vars(predicted.sim), list(mean))
+  print(rampsim.5 <- diff(range(ramp.sim.4$predicted.sim)))
+  ramp.sim <- rbind(ramp.sim, ramp.sim.5)
+  
+}
+
+ramp.sim
+
+write.csv(ramp.sim, "bayesian.ramp.predictions")
+
+setwd(m.dir)
+
+#### Model 2 ####
+### Predict from the model ###
+
+use.dat <- legal.dat%>%
+  dplyr::select(response, distance.to.ramp, cube.Aspect, sqrt.slope, log.roughness, status, FlowDir,
+                bathymetry, site)
+factor.vars <- c("status")
+
+
+Model.2 <- uGamm(response~s(bathymetry,k=5,bs='cr')+ factor(status)
+                 + s(cube.Aspect,k=5,bs='cr'),random=~(1|site), 
+                 family=poisson(), data=use.dat, lme4=TRUE)
+
+
+
+# now fit with shrinkage - to generate predicted values
+Model.2 <- uGamm(response~s(bathymetry,k=5,bs='cr')+ s(distance.to.ramp, k=5, bs='cr') 
+                 + s(cube.Aspect,k=5,bs='cr'), random=~(1|site), 
+                 family=poisson(), data=use.dat, lme4=TRUE)
+
+stangam.s.2  <- stan_gamm4(response~s(bathymetry, k = 5, bs = "cr")+ status
+                         + s(cube.Aspect,k=5,bs='cr'), random=~(1|site), adapt_delta = 0.99,
+                         data=use.dat, chains=3, cores=3, iter=21000, warmup=20000,
+                         family=poisson())
+
+
+
+effect.dat.2 <- expand.grid(cube.Aspect=seq(min(legal.dat$cube.Aspect),max(legal.dat$cube.Aspect),length.out = 15),
+                          bathymetry=seq(min(legal.dat$bathymetry),max(legal.dat$bathymetry), length.out=15),
+                          status=Model.2$gam$model$status)
+
+# calcualte frequentist effects
+predicted <- predict.gam(Model.2$gam, newdata=effect.dat, type='response')
+effect.dat.2 <- cbind(effect.dat.2, predicted)
+
+# bathy effect 
+bathy.P.2 <- effect.dat.2%>%
+  group_by(bathymetry)%>%
+  summarise_at(vars(predicted), list(mean))
+
+bathy.E.2 <- diff(range(bathy.P.2$predicted))
+bathy.E.2
+
+# aspect effect 
+aspect.P.2 <- effect.dat.2%>%
+  group_by(cube.Aspect)%>%
+  summarise_at(vars(predicted), list(mean))
+
+aspect.E.2 <- diff(range(aspect.P.2$predicted))
+aspect.E.2
+
+# ramp effect 
+status.P.2 <- effect.dat.2%>%
+  group_by(status)%>%
+  summarise_at(vars(predicted), list(mean))
+
+status.E.2 <- diff(range(status.P.2$predicted))
+status.E.2
+
+## use the bayesian models to calculate a posterior distribution of the effect size.-------
+effect.dat.sim.2 <- effect.dat.2
+gg <- t(posterior_predict(stangam.s.2, effect.dat.sim.2, re.form=NA))
+#colnames(gg) <- paste("sim",1:ncol(gg),sep="_")
+gg.dat <- cbind(effect.dat.sim.2,gg)
+
+head(gg.dat)
+nrow(gg.dat)
+
+gg.dat.long <- gg.dat%>%
+  gather(sim, predicted.sim, 4:3003)
+
+gg.dat.long$sim <- as.factor(gg.dat.long$sim)
+head(gg.dat.long)
+
+str(gg.dat.long)
+# bathy effect 
+bathy.sim <- data.frame(matrix(ncol=1, nrow=1))
+x <- c("bathy.mean")
+colnames(bathy.sim) <- x
+
+
+for(i in 1:3000){
+  bathy.sim.1 <- gg.dat.long
+  bathy.sim.2 <- filter(bathy.sim.1, sim==i)
+  bathy.sim.3 <- group_by(bathy.sim.2, bathymetry)
+  bathy.sim.4 <- summarise_at(bathy.sim.3, vars(predicted.sim), list(mean))
+  print(bathy.sim.5 <- diff(range(bathy.sim.4$predicted.sim)))
+  bathy.sim <- rbind(bathy.sim, bathy.sim.5)
+  
+}
+
+bathy.sim
+
+write.csv(bathy.sim, "bayesian.bathy.predictions.2.csv")
+
+# aspect effect 
+aspect.sim <- data.frame(matrix(ncol=1, nrow=1))
+x <- c("aspect.mean")
+colnames(aspect.sim) <- x
+
+for(i in 1:3000){
+  aspect.sim.1 <- gg.dat.long
+  aspect.sim.2 <- filter(aspect.sim.1, sim==i)
+  aspect.sim.3 <- group_by(aspect.sim.2, cube.Aspect)
+  aspect.sim.4 <- summarise_at(aspect.sim.3, vars(predicted.sim), list(mean))
+  print(aspect.sim.5 <- diff(range(aspect.sim.4$predicted.sim)))
+  aspect.sim <- rbind(aspect.sim, aspect.sim.5)
+  
+}
+
+aspect.sim
+
+write.csv(aspect.sim, "bayesian.aspect.predictions.2.csv")
+
+# ramp effect 
+status.sim <- data.frame(matrix(ncol=1, nrow=1))
+x <- c("status.mean")
+colnames(status.sim) <- x
+
+for(i in 1:3000){
+  status.sim.1 <- gg.dat.long
+  status.sim.2 <- filter(status.sim.1, sim==i)
+  status.sim.3 <- group_by(status.sim.2, status)
+  status.sim.4 <- summarise_at(status.sim.3, vars(predicted.sim), list(mean))
+  print(status.sim.5 <- diff(range(status.sim.4$predicted.sim)))
+  status.sim <- rbind(status.sim, status.sim.5)
+  
+}
+
+status.sim
+
+write.csv(ramp.sim, "bayesian.status.predictions.2.csv")
+
+## Create density plot
+full.data <- cbind(status.sim, bathy.sim, aspect.sim)
+full.data <- full.data[,3:1]
+full.data.df <- as.data.frame(full.data)
+
+full.data.long <- full.data.df%>%
+  gather(variable, predicted, 1:3)
+
+effect.plot <- ggplot(full.data.long, aes(x = predicted, fill = variable)) + geom_density(alpha = 0.5)
+effect.plot
+
+
+
+
