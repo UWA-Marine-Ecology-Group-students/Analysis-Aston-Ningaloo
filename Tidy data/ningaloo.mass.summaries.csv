@@ -1,231 +1,133 @@
-"sample","scientific","maxn","type","longitude","latitude","date","time","time.out","site","location","status","depth","observer","maxn.complete.yyyymmdd","maxn.checker","successful.count","successful.length","left.cam","right.cam","rear.cam","video.notes","raw.hd","con.hd","forward.habitat.image.saved","backward.habitat.image.saved","habitat.classification","length.analyst","length.complete.date.yyyymmdd","notes"
-"1.01","total.abundance",24,"new",113.5404917,-22.84786205,12082019,09:23:00,10:33:00,1,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20199826,"Todd","Yes",NA,373,374,439,"Lifted up 20 mins in. Test Video. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20191202","Two lat and lons in file given by CSIRO"
-"1.02","total.abundance",16,"new",113.5252875,-22.85016136,12082019,09:35:00,10:50:00,1,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190912,"Todd","Yes",NA,369,370,422,"Easy test video. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20191202",NA
-"1.03","total.abundance",22,"legacy",113.51304,-22.84437,12082019,09:43:00,10:59:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190829,NA,"Yes",NA,367,368,420,"Hammer after 60 mins. On backwards photos too. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200409",NA
-"1.04","total.abundance",26,"new",113.5183981,-22.8402743,12082019,09:51:00,11:13:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190904,"Todd","Yes",NA,375,376,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191202",NA
-"1.05","total.abundance",31,"legacy",113.51601,-22.83417,12082019,09:58:00,11:20:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190904,"Todd. Can't measure Decapterus or commerson","Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191202","Measurements accepted with high RMS"
-"1.06","total.abundance",46,"new",113.523387,-22.83153691,12082019,10:06:00,11:31:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190911,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191202",NA
-"2.02","total.abundance",23,"new",113.5625852,-22.83153691,12082019,11:47:00,12:55:00,2,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd","Yes","No",378,377,423,"Right wasn't turned on. Jumping frames but no right.",1,"1","Yes","Yes","20200304",NA,"NA","Right wasn't turned on"
-"2.03","total.abundance",6,"new",113.5659111,-22.82900766,12082019,11:57:00,13:04:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190904,"Todd","Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203","Measurements accepted with high RMS"
-"2.04","total.abundance",21,"new",113.5815904,-22.82440903,12082019,12:05:00,13:15:00,2,"Ningaloo Marine Park","NA","?","Charlote Aston",20190904,"Todd","Yes",NA,375,376,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203","Measurements accepted with high RMS"
-"2.05","total.abundance",28,"new",113.5770767,-22.82256957,12082019,12:12:00,13:25:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190906,"Todd","Yes",NA,367,368,420,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203",NA
-"2.06","total.abundance",32,"new",113.5716127,-22.82164985,12082019,12:18:00,13:35:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190906,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203",NA
-"2.07","total.abundance",15,"new",113.5640106,-22.8191206,12082019,12:24:00,13:43:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,NA,"Yes",NA,373,374,439,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"3.01","total.abundance",28,"new",113.5207738,-22.81314238,12082019,14:12:00,15:21:00,3,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190912,"Todd","Yes",NA,367,368,420,"Test Video. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20191203",NA
-"3.02","total.abundance",10,"new",113.5262378,-22.81015327,12082019,14:07:00,15:13:00,3,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,"Todd","Yes",NA,369,370,422,"Right camera stopped early",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313","Right camera stopped early"
-"3.03","total.abundance",57,"new",113.5338398,-22.80693423,12082019,14:00:00,15:05:00,3,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd","Yes",NA,373,374,439,"Video for rear facing instead of stills. Right is out of focus. Pulled a minute early.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200309",NA
-"3.04","total.abundance",70,"legacy",113.51938,-22.80608,12082019,14:17:00,15:30:00,3,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd Can't measure Pristipomoides, Sphyraena","Yes",NA,375,376,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200309",NA
-"3.05","total.abundance",52,"new",113.51626,-22.80532471,12082019,14:21:00,15:37:00,3,"Ningaloo Marine Park","NA","?","Todd Bond",20190905,NA,"Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"3.06","total.abundance",43,"new",113.5105585,-22.80463491,12082019,14:25:00,15:43:00,3,"Ningaloo Marine Park","NA","?","Todd Bond",20190905,NA,"Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.01","total.abundance",26,"legacy",113.49708,-22.80504,13082019,08:05:00,09:16:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190905,NA,"Yes",NA,373,374,439,"Nice habitat",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.02","total.abundance",12,"legacy",113.51077,-22.79001,13082019,08:15:00,09:25:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190904,NA,"Yes",NA,367,368,440,"Light off (light is on but camera settings are weird TB)",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.03","total.abundance",21,"new",113.5005807,-22.78991929,13082019,08:24:00,09:37:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190904,NA,"Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.11","total.abundance",22,"new",113.496067,-22.78371114,13082019,08:33:00,09:57:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190906,NA,"Yes","?",378,377,423,"Left cam ran out of memory",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.12","total.abundance",11,"new",113.4877522,-22.78578052,13082019,08:56:00,10:03:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190906,NA,"Yes",NA,375,376,420,"Rope tangled re-deployed",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"5.02","total.abundance",48,"legacy",113.54762,-22.78253,13082019,15:37:00,16:40:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191204",NA
-"5.03","total.abundance",92,"legacy",113.56188,-22.78303,13082019,15:42:00,16:50:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,"Todd","Yes",NA,372,371,564,"Light on backwards not working",1,"1","Yes","Yes","20200304","Charlotte Aston","20191204","Measurements accepted with low RMS"
-"5.07","total.abundance",48,"new",113.57245,-22.7727833,13082019,15:49:00,17:00:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190911,"Todd","Yes",NA,375,376,420,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"5.08","total.abundance",63,"new",113.5716127,-22.76807579,13082019,15:53:00,17:08:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190916,"Todd","Yes",NA,367,368,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"5.11","total.abundance",52,"new",113.5723254,-22.76278737,13082019,16:05:00,17:16:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190916,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191204",NA
-"5.13","total.abundance",39,"legacy",113.58319,-22.76082,13082019,16:11:00,17:24:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190916,"Todd","Yes","No",373,374,439,"Nice red on backwards cam. No Right cam",1,"1","Yes","Yes","20200304",NA,"NA","No right camera"
-"6.01","total.abundance",32,"legacy",113.53596,-22.77091,13082019,13:41:00,15:22:00,6,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190918,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191204",NA
-"6.02","total.abundance",59,"legacy",113.55367,-22.75818,13082019,13:31:00,15:09:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd - find taeniorous fish","Yes",NA,372,371,564,"Light on backwards cuts out half way",1,"1","Yes","Yes","20200304","Charlotte Aston","20191204","Measurements accepted with high RMS'"
-"6.03","total.abundance",79,"legacy",113.54189,-22.75754,13082019,13:25:00,14:53:00,6,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190918,"Todd","Yes",NA,375,376,420,"Nice habitat. Nice habitat on backwards",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"6.04","total.abundance",15,"new",113.5402541,-22.75175065,13082019,13:21:00,14:42:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190916,"Todd","Yes",NA,367,368,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"6.05","total.abundance",16,"new",113.5412044,-22.7411738,13082019,13:15:00,14:31:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190918,"Todd","Yes",NA,369,370,422,"Cool habitat on way up",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"6.12","total.abundance",19,"new",113.541917,-22.73059695,13082019,13:11:00,14:16:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190918,"Todd","Yes",NA,373,374,439,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"7.01","total.abundance",20,"new",113.5509445,-22.73427585,14082019,08:24:00,09:44:00,7,"Ningaloo Marine Park","NA","85","Charlotte Aston",20190918,"Todd","Yes",NA,378,377,423,"Two whales on way up. Tiger on backwards",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"7.02","total.abundance",26,"new",113.5533202,-22.7317466,14082019,08:21:00,09:38:00,7,"Ningaloo Marine Park","NA","84","Brooke Gibbons",20190919,"Todd","Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200310",NA
-"7.03","total.abundance",53,"new",113.5554582,-22.72507859,14082019,08:16:00,09:29:00,7,"Ningaloo Marine Park","NA","82","Charlotte Aston",20190925,"Todd","Yes",NA,375,376,420,"Big rankin and baby red",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"7.04","total.abundance",17,"new",113.5630603,-22.72760784,14082019,08:13:00,09:22:00,7,"Ningaloo Marine Park","NA","75","Brooke Gibbons",20190920,"Todd","Yes",NA,367,368,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"7.05","total.abundance",52,"new",113.5732756,-22.72875749,14082019,08:08:00,09:15:00,7,"Ningaloo Marine Park","NA","72","Brooke Gibbons",20190923,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"7.08","total.abundance",59,"new",113.5756513,-22.73059695,14082019,08:03:00,09:06:00,7,"Ningaloo Marine Park","NA","72","Charlotte Aston",20190925,"Todd","Yes",NA,373,374,439,"Whale breaches at start 2:13. Backwards video instead of pictures",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"8.01","total.abundance",27,"new",113.5497567,-22.71266228,14082019,10:00:00,11:02:00,8,"Ningaloo Marine Park","NA","87","Charlotte Aston",20190925,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"8.02","total.abundance",115,"new",113.5559334,-22.70277523,14082019,10:06:00,11:12:00,8,"Ningaloo Marine Park","NA","76","Charlotte Aston",20190926,"Todd - Go back for lamark+others for pictures","Yes",NA,372,371,564,"Great habitat, massive grouper - good for cool clips, tiger on backwards photo",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205","Measurements accepted with high RMS. Sea fan covering right camera so very few actually measurements"
-"8.05","total.abundance",36,"legacy",113.57994,-22.7017,14082019,10:31:00,11:52:00,8,"Ningaloo Marine Park","NA","63","Charlotte Aston",20191001,"Todd - blennidae sp1","Yes",NA,373,374,439,"Dragged by whale",1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"8.06","total.abundance",21,"legacy",113.58157,-22.69621,14082019,10:27:00,11:45:00,8,"Ningaloo Marine Park","NA","61","Charlotte Aston",20191001,"Todd","Yes",NA,369,370,422,"Lil hammer",1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"8.07","total.abundance",57,"legacy",113.57783,-22.69542,14082019,10:23:00,11:38:00,8,"Ningaloo Marine Park","NA","63","Charlotte Aston",20191004,"Todd","Yes",NA,367,368,440,"Big red. Go back and check the grandoculis/griseus",1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"8.12","total.abundance",39,"new",113.547381,-22.69932625,14082019,10:11:00,11:22:00,8,"Ningaloo Marine Park","NA","95","Charlotte Aston",20191007,"Todd","Yes",NA,375,376,420,"Lights turned off",1,"1","Yes","Yes","20200304","Charlotte Aston","20200312",NA
-"9.01","total.abundance",40,"new",113.5359779,-22.70139564,13082019,11:16:00,12:51:00,9,"Ningaloo Marine Park","NA","?","Charlotte Aston",20191007,"Todd - Can't measure macrorhinus","Yes",NA,373,374,439,"3.1 also in the raw folder Left",1,"1","Yes","Yes","20200304","Charlotte Aston","20200312",NA
-"9.02","total.abundance",18,"new",113.5214865,-22.7025453,13082019,11:00:00,12:14:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190902,NA,"Yes",NA,378,377,423,"Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"9.06","total.abundance",22,"new",113.5319393,-22.6931181,13082019,11:10:00,12:40:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190903,NA,"Yes",NA,369,370,422,"Bait almost gone at 30 mins. Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"9.07","total.abundance",17,"new",113.5255251,-22.71082283,13082019,10:52:00,12:05:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190902,NA,"Yes",NA,372,371,564,"Check shark. DROP FRAMES ? Light on backwards not working. Bait runs low quickly and almost gone at 30 mins. Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200305","Charlotte Aston","20200316",NA
-"9.08","total.abundance",29,"new",113.5136468,-22.71220242,13082019,10:45:00,11:55:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190902,NA,"Yes",NA,375,376,420,"Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200305",NA,"NA","Still converted wrong"
-"10.01","total.abundance",29,"new",113.5564085,-22.67587323,14082019,12:13:00,13:15:00,10,"Ningaloo Marine Park","NA","93","Charlotte Aston",20191114,"Todd","Yes",NA,373,374,439,"Shark flips BRUV",1,"1","Yes","Yes","20200305","Charlotte Aston","20200312",NA
-"10.02","total.abundance",21,"new",113.5564085,-22.67334399,14082019,12:19:00,13:23:00,10,"Ningaloo Marine Park","NA","95","Charlotte Aston",20191008,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200305","Charlotte Aston","20200312",NA
-"10.03","total.abundance",145,"new",113.5628228,-22.66874535,14082019,12:24:00,13:31:00,10,"Ningaloo Marine Park","NA","88","Charlotte Aston",20191010,"Todd","Yes",NA,367,368,440,"Backwards image ridge. Really cool drop. Tim should show this one.",1,"1","Yes","Yes","20200305","Charlotte Aston","20200312",NA
-"10.09","total.abundance",39,"legacy",113.55942,-22.62918,14082019,14:34:00,16:05:00,10,"Ningaloo Marine Park","NA","160","Brooke Gibbons",20190911,"Todd - need to check shark","Yes",NA,378,377,423,"Converted wrong.",2,"1","Yes","Yes","20200305",NA,"NA","Still converted wrong"
-"10.11","total.abundance",24,"legacy",113.5636,-22.61773,14082019,14:41:00,15:52:00,10,"Ningaloo Marine Park","NA","160","Brooke Gibbons",20190925,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305","Charlotte Aston","20200316",NA
-"10.12","total.abundance",12,"legacy",113.57775,-22.59615,14082019,15:20:00,16:58:00,10,"Ningaloo Marine Park","NA","136","Brooke Gibbons",20190925,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"10.13","total.abundance",41,"new",113.579,-22.638,14082019,14:53:00,16:24:00,10,"Ningaloo Marine Park","NA","78","Brooke Gibbons",20191010,NA,"Yes",NA,367,368,440,"extra site - picked by Tim - good habitat. Skipped frames",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"10.14","total.abundance",22,"new",113.5916667,-22.624,14082019,15:02:00,16:36:00,10,"Ningaloo Marine Park","NA","74","Charlotte Aston",20191015,NA,"Yes",NA,369,370,422,"extra site - picked by Tim",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"10.15","total.abundance",20,"new",113.594,-22.6058333,14082019,15:10:00,16:47:00,10,"Ningaloo Marine Park","NA","84","Charlotte Aston",20191015,NA,"Yes",NA,373,374,439,"extra site - picked by Tim",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.01","total.abundance",20,"new",113.6215013,-22.54044354,15082019,08:06:00,09:12:00,11,"Ningaloo Marine Park","NA","84","Charlotte Aston",20191114,NA,"Yes",NA,375,376,420,"Cloudy day",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.02","total.abundance",19,"new",113.6248272,-22.5365347,15082019,08:11:00,09:18:00,11,"Ningaloo Marine Park","NA","81","Charlotte Aston",20191016,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.04","total.abundance",24,"new",113.6243521,-22.52871703,15082019,08:19:00,09:32:00,11,"Ningaloo Marine Park","NA","91","Charlotte Aston",20191017,NA,"Yes",NA,367,368,440,"Bad vis. Bouncing. Sand bar",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.06","total.abundance",10,"new",113.6345674,-22.52388847,15082019,08:31:00,09:47:00,11,"Ningaloo Marine Park","NA","77","Charlotte Aston",20191017,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.02","total.abundance",23,"legacy",113.67504,-22.46724,15082019,10:37:00,12:02:00,12,"Ningaloo Marine Park","NA","56","Charlotte Aston",20190830,"Brooke","Yes",NA,369,370,422,"Converted wrong.",2,"1","Yes","Yes","20200305","Charlotte Aston","20200303",NA
-"12.03","total.abundance",23,"new",113.6678265,-22.46824503,15082019,10:44:00,11:49:00,12,"Ningaloo Marine Park","NA","65","Charlotte Aston",20191022,NA,"Yes",NA,373,374,439,"Changed from 12.08 to 12.03",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.04","total.abundance",47,"new",113.6687767,-22.46433619,15082019,10:48:00,11:56:00,12,"Ningaloo Marine Park","NA","70","Charlotte Aston",20191022,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.05","total.abundance",16,"new",113.6599868,-22.4673253,15082019,10:29:00,11:43:00,12,"Ningaloo Marine Park","NA","86","Charlotte Aston",20191022,NA,"Yes",NA,367,368,440,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.11","total.abundance",22,"legacy",113.64333,-22.48475,15082019,10:14:00,11:23:00,12,"Ningaloo Marine Park","NA","100","Charlotte Aston",20191022,NA,"Yes",NA,372,371,564,"Bouncing. Snapped bait arm",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.02","total.abundance",19,"new",113.7058369,-22.40386419,15082019,12:32:00,13:40:00,13,"Ningaloo Marine Park","NA","69","Charlotte Aston",20191024,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.03","total.abundance",12,"new",113.7013231,-22.39903562,15082019,12:52:00,13:46:00,13,"Ningaloo Marine Park","NA","83","Charlotte Aston",20191114,NA,"Yes",NA,378,377,423,"Pulled 5 mins early",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.04","total.abundance",20,"new",113.6972845,-22.39765604,15082019,12:48:00,14:10:00,13,"Ningaloo Marine Park","NA","92","Charlotte Aston",20191024,NA,"Yes",NA,367,368,440,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.05","total.abundance",21,"new",113.6932459,-22.40087508,15082019,12:43:00,14:03:00,13,"Ningaloo Marine Park","NA","96","Charlotte Aston",20191028,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.06","total.abundance",9,"new",113.6922957,-22.40478391,15082019,12:39:00,13:56:00,13,"Ningaloo Marine Park","NA","94.5","Charlotte Aston",20191028,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.08","total.abundance",16,"new",113.7039364,-22.39328734,15082019,12:56:00,14:16:00,13,"Ningaloo Marine Park","NA","85","Charlotte Aston",20191029,NA,"Yes",NA,372,371,564,"Battery died",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.01","total.abundance",42,"legacy",113.72408,-22.32524,15082019,14:46:00,15:49:00,14,"Ningaloo Marine Park","NA","96","Charlotte Aston",20191029,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.02","total.abundance",40,"legacy",113.73251,-22.30284,15082019,15:12:00,16:21:00,14,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191115,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.06","total.abundance",10,"legacy",113.79046,-22.17832,16082019,08:12:00,09:16:00,14,"Ningaloo Marine Park","NA","100","Charlotte Aston",20191029,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.11","total.abundance",41,"new",113.7371667,-22.3266667,15082019,14:53:00,15:58:00,14,"Ningaloo Marine Park","NA","75","Charlotte Aston",20191029,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.12","total.abundance",33,"new",113.746,-22.3071667,15082019,15:05:00,16:08:00,14,"Ningaloo Marine Park","NA","82","Charlotte Aston",20191030,NA,"Yes",NA,367,368,440,"Two dolphin fish at surface at end. Big reds and lots of them",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.13","total.abundance",71,"new",113.7416667,-22.2866667,15082019,15:20:00,16:32:00,14,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191030,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"15.01","total.abundance",60,"legacy",113.7915,-22.17344,16082019,08:16:00,09:23:00,15,"Ningaloo Marine Park","NA","100","Charlotte Aston",20191031,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"15.07","total.abundance",28,"legacy",113.79163,-22.13639,16082019,08:43:00,10:03:00,15,"Ningaloo Marine Park","NA","116","Charlotte Aston",20191031,NA,"Yes",NA,372,371,564,"Sunny but windy. Clear, moray eel. Big goldband",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"15.12","total.abundance",17,"new",113.7899349,-22.14381158,16082019,08:39:00,09:53:00,15,"Ningaloo Marine Park","NA","110","Charlotte Aston",20191031,NA,"Yes",NA,373,374,439,"White whale. Missing backwards",2,"2","Yes","No","20200305",NA,"NA",NA
-"16.01","total.abundance",15,"legacy",113.80074,-22.12155,16082019,10:22:00,11:28:00,18,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191031,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"16.02","total.abundance",7,"legacy",113.79192,-22.11624,16082019,10:28:00,11:37:00,16,"Ningaloo Marine Park","NA","145","Charlotte Aston",20191031,NA,"Yes",NA,373,374,439,"Good habitat",2,"2","Yes","Yes","20200305 check for weird hydroids",NA,"NA",NA
-"16.03","total.abundance",9,"legacy",113.7967,-22.10669,16082019,10:39:00,11:48:00,16,"Ningaloo Marine Park","NA","190","Charlotte Aston",20191101,NA,"Yes",NA,367,368,440,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"16.05","total.abundance",41,"legacy",113.82563,-22.0856,16082019,11:00:00,12:23:00,16,"Ningaloo Marine Park","NA","85","Charlotte Aston",20191107,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"17.08","total.abundance",33,"new",113.8193929,-22.0943763,16082019,10:53:00,12:15:00,17,"Ningaloo Marine Park","NA","90","Charlotte Aston",20191101,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.01","total.abundance",23,"new",113.812266,-22.06954369,16082019,12:33:00,13:35:00,18,"Ningaloo Marine Park","NA","91","Charlotte Aston",20191101,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.02","total.abundance",8,"new",113.8120284,-22.06517499,16082019,12:38:00,13:42:00,18,"Ningaloo Marine Park","NA","91","Charlotte Aston",20191101,NA,"Yes",NA,378,377,423,"Cool hammer footage. Not sure about the grandoculis/griseus in these video",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.03","total.abundance",17,"new",113.8082274,-22.06563485,16082019,12:46:00,13:53:00,18,"Ningaloo Marine Park","NA","117","Charlotte Aston",20191104,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.04","total.abundance",26,"new",113.810603,-22.06172601,16082019,12:50:00,14:01:00,18,"Ningaloo Marine Park","NA","134","Charlotte Aston",20190830,"Brooke","Yes",NA,367,368,440,"Converted wrong. Hammerhead.",2,"2 (subfolder)","Yes","Yes","20200305","Charlotte Aston","20191205",NA
-"18.07","total.abundance",122,"new",113.8281828,-22.06264574,16082019,12:54:00,14:10:00,18,"Ningaloo Marine Park","NA","109","Charlotte Aston",20191104,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.08","total.abundance",13,"new",113.823194,-22.0725328,16082019,12:58:00,14:16:00,18,"Ningaloo Marine Park","NA","96","Charlotte Aston",20191104,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.01","total.abundance",18,"legacy",113.82289,-22.01347,16082019,14:42:00,15:44:00,19,"Ningaloo Marine Park","NA","107","Charlotte Aston",20191104,NA,"Yes",NA,372,371,564,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.02","total.abundance",23,"new",113.821531,-22.00792203,16082019,14:44:00,15:53:00,19,"Ningaloo Marine Park","NA","122","Charlotte Aston",20191104,NA,"Yes",NA,373,374,439,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.03","total.abundance",16,"new",113.8305585,-22.00286353,16082019,14:55:00,16:07:00,19,"Ningaloo Marine Park","NA","99","Charlotte Aston",20191105,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.04","total.abundance",16,"new",113.8255696,-22.00056422,16082019,14:49:00,15:59:00,19,"Ningaloo Marine Park","NA","109","Charlotte Aston",20191105,NA,"Yes",NA,367,368,440,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.05","total.abundance",30,"new",113.8291331,-21.99757511,16082019,14:59:00,16:15:00,19,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191106,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.08","total.abundance",115,"new",113.8234315,-21.99412613,16082019,15:03:00,16:22:00,19,"Ningaloo Marine Park","NA","130","Charlotte Aston",20191106,NA,"Yes",NA,375,376,420,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.01","total.abundance",14,"new",114.0835652,-21.68647769,17082019,13:22:00,14:40:00,23,"Ningaloo Marine Park","NA","102","Charlotte Aston",20191111,NA,"Yes",NA,373,374,439,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.02","total.abundance",15,"new",114.0785763,-21.68555797,17082019,13:28:00,14:48:00,23,"Ningaloo Marine Park","NA","106","Charlotte Aston",20191111,NA,"Yes",NA,367,368,440,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.03","total.abundance",33,"new",114.0811896,-21.68233893,17082019,13:31:00,14:54:00,23,"Ningaloo Marine Park","NA","109","Charlotte Aston",20191111,NA,"Yes",NA,378,377,423,"Backwards camera wasn't turned on. Photos start here",3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.04","total.abundance",6,"new",114.0845155,-21.67980968,17082019,13:35:00,15:01:00,23,"Ningaloo Marine Park","NA","110","Charlotte Aston",20191112,NA,"Yes",NA,369,370,422,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.06","total.abundance",53,"new",114.0944932,-21.67475118,17082019,13:46:00,15:09:00,23,"Ningaloo Marine Park","NA","107","Charlotte Aston",20191112,NA,"Yes",NA,375,376,420,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.09","total.abundance",13,"new",114.0747,-21.706867,17082019,13:13:00,14:24:00,23,"Ningaloo Marine Park","NA","67","Charlotte Aston",20191112,NA,"Yes",NA,372,371,564,"21 24.412S 114 4.482E",3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.02","total.abundance",19,"new",113.90722,-21.90687,17082019,10:08:00,11:19:00,30,"Ningaloo Marine Park","NA","69","Charlotte Aston",20191115,NA,"Yes",NA,369,370,422,"Bouncing",3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.03","total.abundance",37,"new",113.91082,-21.89999,17082019,10:13:00,11:28:00,30,"Ningaloo Marine Park","NA","67","Charlotte Aston",20191115,NA,"Yes",NA,378,377,423,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.04","total.abundance",21,"new",113.91423,-21.89513,17082019,10:16:00,11:36:00,30,"Ningaloo Marine Park","NA","69","Charlotte Aston",20191115,NA,"Yes",NA,367,368,440,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.05","total.abundance",41,"new",113.91801,-21.88983,17082019,10:20:00,11:44:00,30,"Ningaloo Marine Park","NA","68","Charlotte Aston",20191115,NA,"Yes",NA,373,374,439,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.06","total.abundance",21,"new",113.9202,-21.8876,17082019,10:23:00,11:49:00,30,"Ningaloo Marine Park","NA","66","Charlotte Aston",20190902,"Todd","Yes",NA,372,371,564,"Sunny but windy. Lobster. Converted wrong.",3,"2 (subfolder)","Yes","Yes","20200305","Charlotte Aston","20191205","Measurements accepted at high RMS. Ask about nematophorus"
-"31.02","total.abundance",24,"new",114.09,-21.6919667,17082019,15:29:00,16:36:00,31,"Ningaloo Marine Park","NA","71","Charlotte Aston",20190903,"Todd","Yes",NA,369,370,422,"Filmed 30 on lab sheet. Converted wrong.",3,"2","Yes","Yes","20200305","Charlotte Aston","20200403",NA
-"31.05","total.abundance",12,"new",114.0814333,-21.70045,17082019,15:39:00,16:52:00,31,"Ningaloo Marine Park","NA","67","Charlotte Aston",20190903,"Todd","Yes",NA,373,374,439,"Converted wrong.",3,"2 (subfolder)","Yes","Yes","20200305","Charlotte Aston","20200304",NA
-"1.01","species.richness",11,"new",113.5404917,-22.84786205,12082019,09:23:00,10:33:00,1,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20199826,"Todd","Yes",NA,373,374,439,"Lifted up 20 mins in. Test Video. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20191202","Two lat and lons in file given by CSIRO"
-"1.02","species.richness",6,"new",113.5252875,-22.85016136,12082019,09:35:00,10:50:00,1,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190912,"Todd","Yes",NA,369,370,422,"Easy test video. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20191202",NA
-"1.03","species.richness",14,"legacy",113.51304,-22.84437,12082019,09:43:00,10:59:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190829,NA,"Yes",NA,367,368,420,"Hammer after 60 mins. On backwards photos too. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200409",NA
-"1.04","species.richness",12,"new",113.5183981,-22.8402743,12082019,09:51:00,11:13:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190904,"Todd","Yes",NA,375,376,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191202",NA
-"1.05","species.richness",11,"legacy",113.51601,-22.83417,12082019,09:58:00,11:20:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190904,"Todd. Can't measure Decapterus or commerson","Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191202","Measurements accepted with high RMS"
-"1.06","species.richness",17,"new",113.523387,-22.83153691,12082019,10:06:00,11:31:00,1,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190911,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191202",NA
-"2.02","species.richness",8,"new",113.5625852,-22.83153691,12082019,11:47:00,12:55:00,2,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd","Yes","No",378,377,423,"Right wasn't turned on. Jumping frames but no right.",1,"1","Yes","Yes","20200304",NA,"NA","Right wasn't turned on"
-"2.03","species.richness",6,"new",113.5659111,-22.82900766,12082019,11:57:00,13:04:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190904,"Todd","Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203","Measurements accepted with high RMS"
-"2.04","species.richness",8,"new",113.5815904,-22.82440903,12082019,12:05:00,13:15:00,2,"Ningaloo Marine Park","NA","?","Charlote Aston",20190904,"Todd","Yes",NA,375,376,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203","Measurements accepted with high RMS"
-"2.05","species.richness",7,"new",113.5770767,-22.82256957,12082019,12:12:00,13:25:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190906,"Todd","Yes",NA,367,368,420,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203",NA
-"2.06","species.richness",7,"new",113.5716127,-22.82164985,12082019,12:18:00,13:35:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190906,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191203",NA
-"2.07","species.richness",8,"new",113.5640106,-22.8191206,12082019,12:24:00,13:43:00,2,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,NA,"Yes",NA,373,374,439,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"3.01","species.richness",14,"new",113.5207738,-22.81314238,12082019,14:12:00,15:21:00,3,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190912,"Todd","Yes",NA,367,368,420,"Test Video. Converted wrong.",1,"1","Yes","Yes","20200304","Charlotte Aston","20191203",NA
-"3.02","species.richness",8,"new",113.5262378,-22.81015327,12082019,14:07:00,15:13:00,3,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,"Todd","Yes",NA,369,370,422,"Right camera stopped early",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313","Right camera stopped early"
-"3.03","species.richness",11,"new",113.5338398,-22.80693423,12082019,14:00:00,15:05:00,3,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd","Yes",NA,373,374,439,"Video for rear facing instead of stills. Right is out of focus. Pulled a minute early.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200309",NA
-"3.04","species.richness",10,"legacy",113.51938,-22.80608,12082019,14:17:00,15:30:00,3,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd Can't measure Pristipomoides, Sphyraena","Yes",NA,375,376,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200309",NA
-"3.05","species.richness",14,"new",113.51626,-22.80532471,12082019,14:21:00,15:37:00,3,"Ningaloo Marine Park","NA","?","Todd Bond",20190905,NA,"Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"3.06","species.richness",6,"new",113.5105585,-22.80463491,12082019,14:25:00,15:43:00,3,"Ningaloo Marine Park","NA","?","Todd Bond",20190905,NA,"Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.01","species.richness",15,"legacy",113.49708,-22.80504,13082019,08:05:00,09:16:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190905,NA,"Yes",NA,373,374,439,"Nice habitat",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.02","species.richness",5,"legacy",113.51077,-22.79001,13082019,08:15:00,09:25:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190904,NA,"Yes",NA,367,368,440,"Light off (light is on but camera settings are weird TB)",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.03","species.richness",11,"new",113.5005807,-22.78991929,13082019,08:24:00,09:37:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190904,NA,"Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.11","species.richness",6,"new",113.496067,-22.78371114,13082019,08:33:00,09:57:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190906,NA,"Yes","?",378,377,423,"Left cam ran out of memory",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"4.12","species.richness",6,"new",113.4877522,-22.78578052,13082019,08:56:00,10:03:00,4,"Ningaloo Marine Park","NA","?","Todd Bond",20190906,NA,"Yes",NA,375,376,420,"Rope tangled re-deployed",1,"1","Yes","Yes","20200304","Charlotte Aston","20200316",NA
-"5.02","species.richness",13,"legacy",113.54762,-22.78253,13082019,15:37:00,16:40:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191204",NA
-"5.03","species.richness",11,"legacy",113.56188,-22.78303,13082019,15:42:00,16:50:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190910,"Todd","Yes",NA,372,371,564,"Light on backwards not working",1,"1","Yes","Yes","20200304","Charlotte Aston","20191204","Measurements accepted with low RMS"
-"5.07","species.richness",9,"new",113.57245,-22.7727833,13082019,15:49:00,17:00:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190911,"Todd","Yes",NA,375,376,420,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"5.08","species.richness",9,"new",113.5716127,-22.76807579,13082019,15:53:00,17:08:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190916,"Todd","Yes",NA,367,368,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"5.11","species.richness",8,"new",113.5723254,-22.76278737,13082019,16:05:00,17:16:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190916,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191204",NA
-"5.13","species.richness",17,"legacy",113.58319,-22.76082,13082019,16:11:00,17:24:00,5,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190916,"Todd","Yes","No",373,374,439,"Nice red on backwards cam. No Right cam",1,"1","Yes","Yes","20200304",NA,"NA","No right camera"
-"6.01","species.richness",16,"legacy",113.53596,-22.77091,13082019,13:41:00,15:22:00,6,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190918,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191204",NA
-"6.02","species.richness",12,"legacy",113.55367,-22.75818,13082019,13:31:00,15:09:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190913,"Todd - find taeniorous fish","Yes",NA,372,371,564,"Light on backwards cuts out half way",1,"1","Yes","Yes","20200304","Charlotte Aston","20191204","Measurements accepted with high RMS'"
-"6.03","species.richness",17,"legacy",113.54189,-22.75754,13082019,13:25:00,14:53:00,6,"Ningaloo Marine Park","NA","?","Charlotte Aston",20190918,"Todd","Yes",NA,375,376,420,"Nice habitat. Nice habitat on backwards",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"6.04","species.richness",9,"new",113.5402541,-22.75175065,13082019,13:21:00,14:42:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190916,"Todd","Yes",NA,367,368,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"6.05","species.richness",9,"new",113.5412044,-22.7411738,13082019,13:15:00,14:31:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190918,"Todd","Yes",NA,369,370,422,"Cool habitat on way up",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"6.12","species.richness",9,"new",113.541917,-22.73059695,13082019,13:11:00,14:16:00,6,"Ningaloo Marine Park","NA","?","Brooke Gibbons",20190918,"Todd","Yes",NA,373,374,439,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"7.01","species.richness",10,"new",113.5509445,-22.73427585,14082019,08:24:00,09:44:00,7,"Ningaloo Marine Park","NA","85","Charlotte Aston",20190918,"Todd","Yes",NA,378,377,423,"Two whales on way up. Tiger on backwards",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"7.02","species.richness",15,"new",113.5533202,-22.7317466,14082019,08:21:00,09:38:00,7,"Ningaloo Marine Park","NA","84","Brooke Gibbons",20190919,"Todd","Yes",NA,372,371,564,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200310",NA
-"7.03","species.richness",16,"new",113.5554582,-22.72507859,14082019,08:16:00,09:29:00,7,"Ningaloo Marine Park","NA","82","Charlotte Aston",20190925,"Todd","Yes",NA,375,376,420,"Big rankin and baby red",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"7.04","species.richness",8,"new",113.5630603,-22.72760784,14082019,08:13:00,09:22:00,7,"Ningaloo Marine Park","NA","75","Brooke Gibbons",20190920,"Todd","Yes",NA,367,368,440,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"7.05","species.richness",12,"new",113.5732756,-22.72875749,14082019,08:08:00,09:15:00,7,"Ningaloo Marine Park","NA","72","Brooke Gibbons",20190923,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"7.08","species.richness",9,"new",113.5756513,-22.73059695,14082019,08:03:00,09:06:00,7,"Ningaloo Marine Park","NA","72","Charlotte Aston",20190925,"Todd","Yes",NA,373,374,439,"Whale breaches at start 2:13. Backwards video instead of pictures",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"8.01","species.richness",10,"new",113.5497567,-22.71266228,14082019,10:00:00,11:02:00,8,"Ningaloo Marine Park","NA","87","Charlotte Aston",20190925,"Todd","Yes",NA,378,377,423,NA,1,"1","Yes","Yes","20200304","Charlotte Aston","20191205",NA
-"8.02","species.richness",33,"new",113.5559334,-22.70277523,14082019,10:06:00,11:12:00,8,"Ningaloo Marine Park","NA","76","Charlotte Aston",20190926,"Todd - Go back for lamark+others for pictures","Yes",NA,372,371,564,"Great habitat, massive grouper - good for cool clips, tiger on backwards photo",1,"1","Yes","Yes","20200304","Charlotte Aston","20191205","Measurements accepted with high RMS. Sea fan covering right camera so very few actually measurements"
-"8.05","species.richness",16,"legacy",113.57994,-22.7017,14082019,10:31:00,11:52:00,8,"Ningaloo Marine Park","NA","63","Charlotte Aston",20191001,"Todd - blennidae sp1","Yes",NA,373,374,439,"Dragged by whale",1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"8.06","species.richness",10,"legacy",113.58157,-22.69621,14082019,10:27:00,11:45:00,8,"Ningaloo Marine Park","NA","61","Charlotte Aston",20191001,"Todd","Yes",NA,369,370,422,"Lil hammer",1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"8.07","species.richness",15,"legacy",113.57783,-22.69542,14082019,10:23:00,11:38:00,8,"Ningaloo Marine Park","NA","63","Charlotte Aston",20191004,"Todd","Yes",NA,367,368,440,"Big red. Go back and check the grandoculis/griseus",1,"1","Yes","Yes","20200304","Charlotte Aston","20200311",NA
-"8.12","species.richness",20,"new",113.547381,-22.69932625,14082019,10:11:00,11:22:00,8,"Ningaloo Marine Park","NA","95","Charlotte Aston",20191007,"Todd","Yes",NA,375,376,420,"Lights turned off",1,"1","Yes","Yes","20200304","Charlotte Aston","20200312",NA
-"9.01","species.richness",13,"new",113.5359779,-22.70139564,13082019,11:16:00,12:51:00,9,"Ningaloo Marine Park","NA","?","Charlotte Aston",20191007,"Todd - Can't measure macrorhinus","Yes",NA,373,374,439,"3.1 also in the raw folder Left",1,"1","Yes","Yes","20200304","Charlotte Aston","20200312",NA
-"9.02","species.richness",5,"new",113.5214865,-22.7025453,13082019,11:00:00,12:14:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190902,NA,"Yes",NA,378,377,423,"Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"9.06","species.richness",10,"new",113.5319393,-22.6931181,13082019,11:10:00,12:40:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190903,NA,"Yes",NA,369,370,422,"Bait almost gone at 30 mins. Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200304","Charlotte Aston","20200313",NA
-"9.07","species.richness",9,"new",113.5255251,-22.71082283,13082019,10:52:00,12:05:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190902,NA,"Yes",NA,372,371,564,"Check shark. DROP FRAMES ? Light on backwards not working. Bait runs low quickly and almost gone at 30 mins. Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200305","Charlotte Aston","20200316",NA
-"9.08","species.richness",8,"new",113.5136468,-22.71220242,13082019,10:45:00,11:55:00,9,"Ningaloo Marine Park","NA","?","Todd Bond",20190902,NA,"Yes",NA,375,376,420,"Converted wrong. Drops Frames.",1,"1","Yes","Yes","20200305",NA,"NA","Still converted wrong"
-"10.01","species.richness",13,"new",113.5564085,-22.67587323,14082019,12:13:00,13:15:00,10,"Ningaloo Marine Park","NA","93","Charlotte Aston",20191114,"Todd","Yes",NA,373,374,439,"Shark flips BRUV",1,"1","Yes","Yes","20200305","Charlotte Aston","20200312",NA
-"10.02","species.richness",9,"new",113.5564085,-22.67334399,14082019,12:19:00,13:23:00,10,"Ningaloo Marine Park","NA","95","Charlotte Aston",20191008,"Todd","Yes",NA,369,370,422,NA,1,"1","Yes","Yes","20200305","Charlotte Aston","20200312",NA
-"10.03","species.richness",30,"new",113.5628228,-22.66874535,14082019,12:24:00,13:31:00,10,"Ningaloo Marine Park","NA","88","Charlotte Aston",20191010,"Todd","Yes",NA,367,368,440,"Backwards image ridge. Really cool drop. Tim should show this one.",1,"1","Yes","Yes","20200305","Charlotte Aston","20200312",NA
-"10.09","species.richness",11,"legacy",113.55942,-22.62918,14082019,14:34:00,16:05:00,10,"Ningaloo Marine Park","NA","160","Brooke Gibbons",20190911,"Todd - need to check shark","Yes",NA,378,377,423,"Converted wrong.",2,"1","Yes","Yes","20200305",NA,"NA","Still converted wrong"
-"10.11","species.richness",9,"legacy",113.5636,-22.61773,14082019,14:41:00,15:52:00,10,"Ningaloo Marine Park","NA","160","Brooke Gibbons",20190925,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305","Charlotte Aston","20200316",NA
-"10.12","species.richness",8,"legacy",113.57775,-22.59615,14082019,15:20:00,16:58:00,10,"Ningaloo Marine Park","NA","136","Brooke Gibbons",20190925,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"10.13","species.richness",23,"new",113.579,-22.638,14082019,14:53:00,16:24:00,10,"Ningaloo Marine Park","NA","78","Brooke Gibbons",20191010,NA,"Yes",NA,367,368,440,"extra site - picked by Tim - good habitat. Skipped frames",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"10.14","species.richness",14,"new",113.5916667,-22.624,14082019,15:02:00,16:36:00,10,"Ningaloo Marine Park","NA","74","Charlotte Aston",20191015,NA,"Yes",NA,369,370,422,"extra site - picked by Tim",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"10.15","species.richness",16,"new",113.594,-22.6058333,14082019,15:10:00,16:47:00,10,"Ningaloo Marine Park","NA","84","Charlotte Aston",20191015,NA,"Yes",NA,373,374,439,"extra site - picked by Tim",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.01","species.richness",12,"new",113.6215013,-22.54044354,15082019,08:06:00,09:12:00,11,"Ningaloo Marine Park","NA","84","Charlotte Aston",20191114,NA,"Yes",NA,375,376,420,"Cloudy day",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.02","species.richness",8,"new",113.6248272,-22.5365347,15082019,08:11:00,09:18:00,11,"Ningaloo Marine Park","NA","81","Charlotte Aston",20191016,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.04","species.richness",8,"new",113.6243521,-22.52871703,15082019,08:19:00,09:32:00,11,"Ningaloo Marine Park","NA","91","Charlotte Aston",20191017,NA,"Yes",NA,367,368,440,"Bad vis. Bouncing. Sand bar",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"11.06","species.richness",7,"new",113.6345674,-22.52388847,15082019,08:31:00,09:47:00,11,"Ningaloo Marine Park","NA","77","Charlotte Aston",20191017,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.02","species.richness",16,"legacy",113.67504,-22.46724,15082019,10:37:00,12:02:00,12,"Ningaloo Marine Park","NA","56","Charlotte Aston",20190830,"Brooke","Yes",NA,369,370,422,"Converted wrong.",2,"1","Yes","Yes","20200305","Charlotte Aston","20200303",NA
-"12.03","species.richness",9,"new",113.6678265,-22.46824503,15082019,10:44:00,11:49:00,12,"Ningaloo Marine Park","NA","65","Charlotte Aston",20191022,NA,"Yes",NA,373,374,439,"Changed from 12.08 to 12.03",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.04","species.richness",9,"new",113.6687767,-22.46433619,15082019,10:48:00,11:56:00,12,"Ningaloo Marine Park","NA","70","Charlotte Aston",20191022,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.05","species.richness",10,"new",113.6599868,-22.4673253,15082019,10:29:00,11:43:00,12,"Ningaloo Marine Park","NA","86","Charlotte Aston",20191022,NA,"Yes",NA,367,368,440,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"12.11","species.richness",14,"legacy",113.64333,-22.48475,15082019,10:14:00,11:23:00,12,"Ningaloo Marine Park","NA","100","Charlotte Aston",20191022,NA,"Yes",NA,372,371,564,"Bouncing. Snapped bait arm",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.02","species.richness",8,"new",113.7058369,-22.40386419,15082019,12:32:00,13:40:00,13,"Ningaloo Marine Park","NA","69","Charlotte Aston",20191024,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.03","species.richness",5,"new",113.7013231,-22.39903562,15082019,12:52:00,13:46:00,13,"Ningaloo Marine Park","NA","83","Charlotte Aston",20191114,NA,"Yes",NA,378,377,423,"Pulled 5 mins early",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.04","species.richness",11,"new",113.6972845,-22.39765604,15082019,12:48:00,14:10:00,13,"Ningaloo Marine Park","NA","92","Charlotte Aston",20191024,NA,"Yes",NA,367,368,440,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.05","species.richness",14,"new",113.6932459,-22.40087508,15082019,12:43:00,14:03:00,13,"Ningaloo Marine Park","NA","96","Charlotte Aston",20191028,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.06","species.richness",6,"new",113.6922957,-22.40478391,15082019,12:39:00,13:56:00,13,"Ningaloo Marine Park","NA","94.5","Charlotte Aston",20191028,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"13.08","species.richness",8,"new",113.7039364,-22.39328734,15082019,12:56:00,14:16:00,13,"Ningaloo Marine Park","NA","85","Charlotte Aston",20191029,NA,"Yes",NA,372,371,564,"Battery died",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.01","species.richness",21,"legacy",113.72408,-22.32524,15082019,14:46:00,15:49:00,14,"Ningaloo Marine Park","NA","96","Charlotte Aston",20191029,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.02","species.richness",16,"legacy",113.73251,-22.30284,15082019,15:12:00,16:21:00,14,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191115,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.06","species.richness",5,"legacy",113.79046,-22.17832,16082019,08:12:00,09:16:00,14,"Ningaloo Marine Park","NA","100","Charlotte Aston",20191029,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.11","species.richness",10,"new",113.7371667,-22.3266667,15082019,14:53:00,15:58:00,14,"Ningaloo Marine Park","NA","75","Charlotte Aston",20191029,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.12","species.richness",14,"new",113.746,-22.3071667,15082019,15:05:00,16:08:00,14,"Ningaloo Marine Park","NA","82","Charlotte Aston",20191030,NA,"Yes",NA,367,368,440,"Two dolphin fish at surface at end. Big reds and lots of them",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"14.13","species.richness",17,"new",113.7416667,-22.2866667,15082019,15:20:00,16:32:00,14,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191030,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"15.01","species.richness",8,"legacy",113.7915,-22.17344,16082019,08:16:00,09:23:00,15,"Ningaloo Marine Park","NA","100","Charlotte Aston",20191031,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"15.07","species.richness",11,"legacy",113.79163,-22.13639,16082019,08:43:00,10:03:00,15,"Ningaloo Marine Park","NA","116","Charlotte Aston",20191031,NA,"Yes",NA,372,371,564,"Sunny but windy. Clear, moray eel. Big goldband",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"15.12","species.richness",8,"new",113.7899349,-22.14381158,16082019,08:39:00,09:53:00,15,"Ningaloo Marine Park","NA","110","Charlotte Aston",20191031,NA,"Yes",NA,373,374,439,"White whale. Missing backwards",2,"2","Yes","No","20200305",NA,"NA",NA
-"16.01","species.richness",6,"legacy",113.80074,-22.12155,16082019,10:22:00,11:28:00,18,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191031,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"16.02","species.richness",5,"legacy",113.79192,-22.11624,16082019,10:28:00,11:37:00,16,"Ningaloo Marine Park","NA","145","Charlotte Aston",20191031,NA,"Yes",NA,373,374,439,"Good habitat",2,"2","Yes","Yes","20200305 check for weird hydroids",NA,"NA",NA
-"16.03","species.richness",9,"legacy",113.7967,-22.10669,16082019,10:39:00,11:48:00,16,"Ningaloo Marine Park","NA","190","Charlotte Aston",20191101,NA,"Yes",NA,367,368,440,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"16.05","species.richness",22,"legacy",113.82563,-22.0856,16082019,11:00:00,12:23:00,16,"Ningaloo Marine Park","NA","85","Charlotte Aston",20191107,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"17.08","species.richness",12,"new",113.8193929,-22.0943763,16082019,10:53:00,12:15:00,17,"Ningaloo Marine Park","NA","90","Charlotte Aston",20191101,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.01","species.richness",13,"new",113.812266,-22.06954369,16082019,12:33:00,13:35:00,18,"Ningaloo Marine Park","NA","91","Charlotte Aston",20191101,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.02","species.richness",6,"new",113.8120284,-22.06517499,16082019,12:38:00,13:42:00,18,"Ningaloo Marine Park","NA","91","Charlotte Aston",20191101,NA,"Yes",NA,378,377,423,"Cool hammer footage. Not sure about the grandoculis/griseus in these video",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.03","species.richness",6,"new",113.8082274,-22.06563485,16082019,12:46:00,13:53:00,18,"Ningaloo Marine Park","NA","117","Charlotte Aston",20191104,NA,"Yes",NA,375,376,420,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.04","species.richness",14,"new",113.810603,-22.06172601,16082019,12:50:00,14:01:00,18,"Ningaloo Marine Park","NA","134","Charlotte Aston",20190830,"Brooke","Yes",NA,367,368,440,"Converted wrong. Hammerhead.",2,"2 (subfolder)","Yes","Yes","20200305","Charlotte Aston","20191205",NA
-"18.07","species.richness",19,"new",113.8281828,-22.06264574,16082019,12:54:00,14:10:00,18,"Ningaloo Marine Park","NA","109","Charlotte Aston",20191104,NA,"Yes",NA,373,374,439,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"18.08","species.richness",5,"new",113.823194,-22.0725328,16082019,12:58:00,14:16:00,18,"Ningaloo Marine Park","NA","96","Charlotte Aston",20191104,NA,"Yes",NA,372,371,564,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.01","species.richness",7,"legacy",113.82289,-22.01347,16082019,14:42:00,15:44:00,19,"Ningaloo Marine Park","NA","107","Charlotte Aston",20191104,NA,"Yes",NA,372,371,564,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.02","species.richness",9,"new",113.821531,-22.00792203,16082019,14:44:00,15:53:00,19,"Ningaloo Marine Park","NA","122","Charlotte Aston",20191104,NA,"Yes",NA,373,374,439,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.03","species.richness",7,"new",113.8305585,-22.00286353,16082019,14:55:00,16:07:00,19,"Ningaloo Marine Park","NA","99","Charlotte Aston",20191105,NA,"Yes",NA,378,377,423,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.04","species.richness",8,"new",113.8255696,-22.00056422,16082019,14:49:00,15:59:00,19,"Ningaloo Marine Park","NA","109","Charlotte Aston",20191105,NA,"Yes",NA,367,368,440,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.05","species.richness",12,"new",113.8291331,-21.99757511,16082019,14:59:00,16:15:00,19,"Ningaloo Marine Park","NA","101","Charlotte Aston",20191106,NA,"Yes",NA,369,370,422,NA,2,"2","Yes","Yes","20200305",NA,"NA",NA
-"19.08","species.richness",7,"new",113.8234315,-21.99412613,16082019,15:03:00,16:22:00,19,"Ningaloo Marine Park","NA","130","Charlotte Aston",20191106,NA,"Yes",NA,375,376,420,"Pelagic BRUVs deployed",2,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.01","species.richness",7,"new",114.0835652,-21.68647769,17082019,13:22:00,14:40:00,23,"Ningaloo Marine Park","NA","102","Charlotte Aston",20191111,NA,"Yes",NA,373,374,439,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.02","species.richness",7,"new",114.0785763,-21.68555797,17082019,13:28:00,14:48:00,23,"Ningaloo Marine Park","NA","106","Charlotte Aston",20191111,NA,"Yes",NA,367,368,440,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.03","species.richness",7,"new",114.0811896,-21.68233893,17082019,13:31:00,14:54:00,23,"Ningaloo Marine Park","NA","109","Charlotte Aston",20191111,NA,"Yes",NA,378,377,423,"Backwards camera wasn't turned on. Photos start here",3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.04","species.richness",5,"new",114.0845155,-21.67980968,17082019,13:35:00,15:01:00,23,"Ningaloo Marine Park","NA","110","Charlotte Aston",20191112,NA,"Yes",NA,369,370,422,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.06","species.richness",9,"new",114.0944932,-21.67475118,17082019,13:46:00,15:09:00,23,"Ningaloo Marine Park","NA","107","Charlotte Aston",20191112,NA,"Yes",NA,375,376,420,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"23.09","species.richness",9,"new",114.0747,-21.706867,17082019,13:13:00,14:24:00,23,"Ningaloo Marine Park","NA","67","Charlotte Aston",20191112,NA,"Yes",NA,372,371,564,"21 24.412S 114 4.482E",3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.02","species.richness",11,"new",113.90722,-21.90687,17082019,10:08:00,11:19:00,30,"Ningaloo Marine Park","NA","69","Charlotte Aston",20191115,NA,"Yes",NA,369,370,422,"Bouncing",3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.03","species.richness",12,"new",113.91082,-21.89999,17082019,10:13:00,11:28:00,30,"Ningaloo Marine Park","NA","67","Charlotte Aston",20191115,NA,"Yes",NA,378,377,423,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.04","species.richness",15,"new",113.91423,-21.89513,17082019,10:16:00,11:36:00,30,"Ningaloo Marine Park","NA","69","Charlotte Aston",20191115,NA,"Yes",NA,367,368,440,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.05","species.richness",13,"new",113.91801,-21.88983,17082019,10:20:00,11:44:00,30,"Ningaloo Marine Park","NA","68","Charlotte Aston",20191115,NA,"Yes",NA,373,374,439,NA,3,"2","Yes","Yes","20200305",NA,"NA",NA
-"30.06","species.richness",16,"new",113.9202,-21.8876,17082019,10:23:00,11:49:00,30,"Ningaloo Marine Park","NA","66","Charlotte Aston",20190902,"Todd","Yes",NA,372,371,564,"Sunny but windy. Lobster. Converted wrong.",3,"2 (subfolder)","Yes","Yes","20200305","Charlotte Aston","20191205","Measurements accepted at high RMS. Ask about nematophorus"
-"31.02","species.richness",14,"new",114.09,-21.6919667,17082019,15:29:00,16:36:00,31,"Ningaloo Marine Park","NA","71","Charlotte Aston",20190903,"Todd","Yes",NA,369,370,422,"Filmed 30 on lab sheet. Converted wrong.",3,"2","Yes","Yes","20200305","Charlotte Aston","20200403",NA
-"31.05","species.richness",8,"new",114.0814333,-21.70045,17082019,15:39:00,16:52:00,31,"Ningaloo Marine Park","NA","67","Charlotte Aston",20190903,"Todd","Yes",NA,373,374,439,"Converted wrong.",3,"2 (subfolder)","Yes","Yes","20200305","Charlotte Aston","20200304",NA
+"sample","mass.total","mass.20cm","mass.30cm"
+"1.01",9736.73755594439,9697.28883686995,8592.80921128911
+"1.02",17518.9645865961,17517.7527914589,13988.3624919907
+"1.03",18759.480840437,18759.480840437,18736.7925212258
+"1.04",31564.9731822043,31564.9731822043,30672.3820265046
+"1.05",19799.831713635,19799.831713635,13847.7533788712
+"1.06",65625.0500450321,65625.0500450321,61671.1287315564
+"10.01",30756.8270643925,30756.8270643925,28653.0860700766
+"10.02",12628.6575204218,12499.5155243452,11672.554793851
+"10.03",48931.939433896,47251.3202813981,34308.575921992
+"10.04",14829.5363399074,14816.1087199086,14323.9110265861
+"10.07",3962.96828537549,3879.46543423951,3426.72601848114
+"10.08",457.04428051233,457.04428051233,0
+"10.09",33147.0909137182,32752.5502147559,31994.2249052607
+"10.11",15202.4852855647,14759.8370976244,13037.4959761927
+"10.12",8033.17276991076,8033.17276991076,8033.17276991076
+"10.13",61553.4703984743,61440.2033852641,60966.369838661
+"10.14",44673.949455809,44657.4000241503,43337.5569461636
+"10.15",44939.8679049784,44938.2221055669,44415.0383568268
+"11.01",5861.72133465573,5812.48934766921,4913.23070561625
+"11.02",11427.40359351,11066.8942171075,11066.8942171075
+"11.03",7566.18781924429,7453.81163789855,6953.24869220893
+"11.04",18605.1480136041,18604.9693744676,13278.5016845087
+"11.05",10742.940533234,10742.0940907963,10742.0940907963
+"11.06",1955.92689169448,1905.02923967192,1430.46186731992
+"12.02",25042.914992581,24852.6499662958,24561.1121787103
+"12.03",26784.4836832468,26647.1014666374,25380.3629864574
+"12.04",17577.1054098122,17577.1054098122,15225.2928594175
+"12.05",14403.3180494989,14403.3180494989,12486.2478513174
+"12.06",7883.81738877131,7883.81738877131,7883.81738877131
+"12.11",2447.35307928698,2247.16313821061,1683.27726864199
+"13.02",24986.3679389137,24986.3679389137,22524.5688573571
+"13.03",19213.2133171915,19213.2133171915,19213.2133171915
+"13.04",17855.814173657,17798.7623661514,16140.6319240861
+"13.05",24314.8446393353,24314.8446393353,24314.8446393353
+"13.06",89532.0412139747,89532.0412139747,89532.0412139747
+"13.08",26782.5325748946,26782.5325748946,25288.0307113768
+"14.01",21839.0629017468,21228.8902721542,18592.5579782668
+"14.02",35866.3750683047,35866.3750683047,33721.9819832998
+"14.03",14156.8829466881,14155.1141148929,12366.7395772972
+"14.06",17927.7395988483,17927.3901119844,16636.3526781578
+"14.11",34406.4874774351,34406.4874774351,32825.0960583184
+"14.12",52387.2884462036,52387.2884462036,51809.7399613833
+"14.13",55969.9890224894,54899.7537351406,53849.5811513977
+"15.01",41839.0586152318,41732.1181295172,30829.2980842185
+"15.02",36372.7002248855,36372.7002248855,32520.0892378096
+"15.05",22020.2632530023,22020.2632530023,21635.7336563904
+"15.07",21903.3062125782,21903.3062125782,18158.0578586985
+"15.12",34911.0989148761,34908.0046662864,34908.0046662864
+"16.01",14085.7004315317,14085.7004315317,13844.9817853714
+"16.02",14944.2134249349,14944.2134249349,14944.2134249349
+"16.03",5599.36163808087,5526.06269061289,5526.06269061289
+"16.04",8881.65673511143,8881.65673511143,2757.0867536833
+"16.05",17875.8579018386,17544.3678350171,15415.9058265144
+"17.08",29511.3621769258,29511.3621769258,26258.8825273799
+"18.01",12059.5376126681,12059.5376126681,9114.21051844046
+"18.02",79276.7131157554,79276.7131157554,78140.4962835764
+"18.03",13610.7519665709,13606.752219567,13135.9967582178
+"18.04",44683.7565781144,44320.3883104348,43095.2875358025
+"18.07",137409.241367948,137386.642218384,130867.781540601
+"18.08",14633.9070866124,14633.9070866124,14633.9070866124
+"19.01",14266.1008029778,14266.0832184032,10661.3206602146
+"19.02",7073.38390474519,7073.38390474519,4939.55751129695
+"19.03",27084.972535925,27084.972535925,25988.3515898557
+"19.04",19569.2420742179,19564.2178676669,19240.9278404008
+"19.05",10694.9758118705,10355.7626359132,5966.64500220733
+"19.08",19395.9729783701,18038.1697753282,14843.7390205246
+"2.02",0,0,0
+"2.03",3870.69078386095,3870.69078386095,3289.73701822303
+"2.04",5262.56456535262,5262.56456535262,4288.75634854621
+"2.05",13775.8112077321,13775.8112077321,12852.9006807366
+"2.06",22334.2188211096,22333.1672420274,21921.1863270324
+"2.07",19708.4288460022,19708.4288460022,18837.6543795569
+"23.01",11648.1376966026,11643.7716112422,8071.76543928556
+"23.02",7640.73253033712,6809.70513656594,5438.63452437532
+"23.03",17815.505912779,17489.702629072,9242.12414832635
+"23.04",3743.17617942884,3643.74673814905,3193.37778733134
+"23.06",28858.6667732469,27718.0854644166,24998.875974782
+"23.09",12822.0179689699,12700.2396696229,10747.825707169
+"3.01",12450.4200609096,12450.4200609096,11180.1674381263
+"3.02",5066.04741438094,5066.04741438094,5066.04741438094
+"3.03",23080.6125860774,22338.7224866567,12175.7720886917
+"3.04",66203.905791948,65545.4168802525,60371.9371285476
+"3.05",19996.0272364066,19010.632006289,16335.9921905746
+"3.06",10996.7600498738,10865.8075866769,6319.43574362587
+"30.01",1886.89643096395,1886.89643096395,1886.89643096395
+"30.02",17242.2573098377,17241.013536959,14042.3779035047
+"30.03",10246.1676898188,9972.22714502172,6251.23518042644
+"30.04",62992.9506342041,62954.9977688784,62954.9977688784
+"30.05",31173.5098505646,30998.7306907109,29962.0958197798
+"30.06",9338.28600765935,9202.88648727137,7910.75216587508
+"31.01",45072.9273322312,39446.4554475624,29493.3242028312
+"31.02",13005.1053622089,12496.5108423151,8589.75644551643
+"31.03",17446.0386424566,17446.0386424566,14427.8307266584
+"31.04",30849.2038799974,30806.5923876711,17883.7837669396
+"31.05",8644.66058564353,8507.68186043318,6627.82297974607
+"31.06",26579.781528402,23805.0618444281,5660.61777751432
+"4.01",18361.3121133298,18134.946270927,16670.5900359703
+"4.02",16948.4981842241,16934.6605687468,16647.2317366075
+"4.03",9044.97626273418,8981.60595144739,7390.82489036726
+"4.08",12353.8826185596,12260.5218285329,11558.7201372725
+"4.11",11440.4520050065,11440.4520050065,11440.4520050065
+"4.12",30656.3284904356,30656.3284904356,30656.3284904356
+"5.02",67907.7549839915,67907.7549839915,62047.2177723644
+"5.03",14530.4667935153,11773.1914481368,3911.0246631314
+"5.07",29472.7905502834,28801.5781955983,21651.1081177905
+"5.08",30562.0213553048,30562.0213553048,17833.676207011
+"5.11",8641.84513169451,8641.84513169451,6670.48086725771
+"5.13",0,0,0
+"6.01",33517.6102224246,33475.3735822908,32100.5508283485
+"6.02",13864.9768933554,13689.4207446647,8623.71717751348
+"6.03",14948.3231741362,12825.1595382314,10981.3350637036
+"6.04",16454.3513717654,16454.3513717654,13557.7185505412
+"6.05",13340.403830906,13338.8607974807,13338.8607974807
+"6.12",23090.5854210008,22849.128899985,22149.1531862315
+"7.01",21938.0499687746,21938.0499687746,21938.0499687746
+"7.02",20131.8252051602,19803.7097963158,17382.7571330406
+"7.03",88991.9341807039,88990.0797968238,81925.7994632508
+"7.04",24905.266596189,24905.266596189,23845.9777299287
+"7.05",36209.4106708774,36079.702937505,32415.5964331001
+"7.08",32406.2626430424,32372.5076153978,25511.9448755224
+"8.01",17763.4839597538,17626.1961503135,13893.0221786791
+"8.02",34093.7310964752,33221.4424672739,30065.2568032804
+"8.05",40024.6316143289,39853.8156081978,36082.42473423
+"8.06",46695.7217850737,46580.1887766821,45666.0525691452
+"8.07",56301.4133512715,56301.4133512715,51412.3660433087
+"8.12",23664.6684618462,23296.8311410449,18707.3573663842
+"9.01",25896.2860272837,25813.3764500461,25297.6673446654
+"9.02",23647.0423137972,23483.5885998047,20991.7346230968
+"9.05",954.97585390493,802.018874148932,802.018874148932
+"9.06",15631.2927879415,15630.2444102695,13730.8675879828
+"9.07",13743.7394686991,13743.7394686991,13513.7412882039
+"9.08",29442.9149810365,29442.9149810365,29442.9149810365
