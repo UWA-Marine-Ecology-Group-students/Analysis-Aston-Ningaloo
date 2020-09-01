@@ -1,0 +1,11 @@
+"","modname","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","sqrt.slope","cube.Aspect","log.roughness","FlowDir","distance.to.ramp","site","status","cumsum.wi"
+"cube.Aspect+distance.to.ramp","cube.Aspect+distance.to.ramp",496.974052776675,518.131884851355,0.00357,NA,13,0,0,3.58,0.293,0.042,0,1,0,0,1,0,0,0.293
+"cube.Aspect+status","cube.Aspect+status",498.578303961381,517.223995134162,0.01821,NA,10,0,1.604,2.672,0.131,0.065,0,1,0,0,0,0,1,0.424
+"distance.to.ramp","distance.to.ramp",498.579969856078,514.673661341869,0.00533,NA,9,0,1.606,0.122,0.131,0.234,0,0,0,0,1,0,0,0.555
+"distance.to.ramp+sqrt.slope","distance.to.ramp+sqrt.slope",499.048563026399,520.206395101079,0.00709,NA,13,0,2.075,5.655,0.104,0.015,1,0,0,0,1,0,0,0.659
+"sqrt.slope+status","sqrt.slope+status",499.336892693201,517.982583865982,0.04002,NA,10,0,2.363,3.431,0.09,0.045,1,0,0,0,0,0,1,0.749
+"status","status",501.20243155364,514.705295397996,0.02879,NA,6,0,4.228,0.153,0.035,0.231,0,0,0,0,0,0,1,0.784
+"cube.Aspect","cube.Aspect",501.284085019843,517.377776505634,0.00143,NA,9,0,4.31,2.826,0.034,0.061,0,1,0,0,0,0,0,0.818
+"distance.to.ramp+log.roughness","distance.to.ramp+log.roughness",501.700184210974,522.858016285654,0.00688,NA,13.04,0,4.726,8.306,0.028,0.004,0,0,1,0,1,0,0,0.846
+"log.roughness+status","log.roughness+status",502.219025587914,520.864716760696,0.03745,NA,10.04,0,5.245,6.313,0.021,0.011,0,0,1,0,0,0,1,0.867
+"distance.to.ramp+FlowDir","distance.to.ramp+FlowDir",502.330868468051,523.488700542731,0.00581,NA,13,1,5.357,8.937,0.02,0.003,0,0,0,1,1,0,0,0.887

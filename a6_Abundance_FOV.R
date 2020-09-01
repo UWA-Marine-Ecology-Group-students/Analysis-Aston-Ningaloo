@@ -135,12 +135,14 @@ all.var.imp=do.call("rbind",var.imp)
 write.csv(all.mod.fits[,-2],file=paste(name,"lme4.random.all.mod.fits.csv",sep="_"))
 write.csv(all.var.imp,file=paste(name,"lme4.all.var.imp.fov.csv",sep="_"))
 
-# Load the importance score dataset produced above
+### Plot Importance Scores separates by whether it using FOV or not ####
 setwd(d.dir)
-dat.var.imp <-read.csv("ningaloo_lme4.all.var.imp.fov.csv")%>% #from local copy
+dat.var.imp <-read.csv("ningaloo_lme4.all.var.imp.csv")%>% #from local copy
   rename(resp.var=X)%>%
   gather(key=predictor,value=importance,2:ncol(.))%>%
   glimpse()
+
+dat.var.imp.fov 
 
 # Plotting defaults----
 library(ggplot2)
