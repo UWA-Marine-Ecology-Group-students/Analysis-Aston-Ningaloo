@@ -148,8 +148,9 @@ var.imp=c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw))
 all.mod.fits=do.call("rbind",out.all)
 all.var.imp=do.call("rbind",var.imp)
 
-setwd(d.dir)
+setwd(m.dir)
 write.csv(all.mod.fits, "species.richness.models.csv")
+write.csv(all.var.imp, "species.richness.imp.nofov.csv")
 
 ## Top models
 # fit with shrinkage
@@ -895,7 +896,7 @@ var.imp=c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw))
 all.mod.fits=do.call("rbind",out.all)
 all.var.imp=do.call("rbind",var.imp)
 
-setwd(d.dir)
+setwd(m.dir)
 write.csv(all.mod.fits, "species.richness.models.fov.csv")
 write.csv(all.var.imp, "species.richness.importance.fov.csv")
 
@@ -1547,4 +1548,86 @@ predict.plot.status <- ggplot() +
   theme_classic()+
   Theme1
 predict.plot.status
+
+### Plot Importance Scores separates by whether it using FOV or not ####
+setwd(m.dir)
+dat.var.imp <-read.csv("species.richness.imp.nofov.csv")%>% #from local copy
+  rename(resp.var=X)%>%
+  gather(key=predictor,value=importance,2:ncol(.))%>%
+  glimpse()
+
+dat.var.imp.fov  <- read.csv("species.richness.importance.fov.csv")%>% #from local copy
+  rename(resp.var=X)%>%
+  gather(key=predictor,value=importance,2:ncol(.))%>%
+  glimpse()
+
+# Add column to say what model was used 
+dat.var.imp <- dat.var.imp%>%
+  mutate(model="No FOV")
+
+dat.var.imp.fov <- dat.var.imp.fov%>%
+  mutate(model="FOV")
+
+# Stick importance scores together
+all.var.imp <- rbind(dat.var.imp,dat.var.imp.fov)
+
+# Plotting defaults----
+library(ggplot2)
+
+# Theme-
+Theme1 <-
+  theme( # use theme_get() to see available options
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill="white"),
+    legend.key = element_blank(), # switch off the rectangle around symbols in the legend
+    legend.text = element_text(size=8),
+    legend.title = element_text(size=8, face="bold"),
+    legend.position = "top",
+    legend.direction="horizontal",
+    text=element_text(size=10),
+    strip.text.y = element_text(size = 10,angle = 0),
+    axis.title.x=element_text(vjust=0.3, size=10),
+    axis.title.y=element_text(vjust=0.6, angle=90, size=10),
+    axis.text.x=element_text(size=10,angle = 90, hjust=1,vjust=0.5),
+    axis.text.y=element_text(size=10,face="italic"),
+    axis.line.x=element_line(colour="black", size=0.5,linetype='solid'),
+    axis.line.y=element_line(colour="black", size=0.5,linetype='solid'),
+    strip.background = element_blank())
+
+# colour ramps-
+re <- colorRampPalette(c("lightskyblue1","royalblue3"))(200)
+
+# Labels-
+legend_title<-"Importance"
+
+# Annotations-
+dat.var.label<-all.var.imp%>%
+  mutate(label=NA)%>%
+  mutate(label=ifelse(predictor=="distance.to.ramp"&resp.var=="Legal","X",ifelse(predictor=="bathymetry"&resp.var=="Legal","X",ifelse(predictor=="sqrt.reef"&resp.var=="Legal","X",label))))%>%
+  mutate(label=ifelse(predictor=="distance.to.ramp"&resp.var=="Sublegal","X",ifelse(predictor=="bathymetry"&resp.var=="Sublegal","X",ifelse(predictor=="sd.relief"&resp.var=="Sublegal","X",label))))%>%
+  glimpse()
+
+# Plot gg.importance.scores
+gg.importance.scores <- ggplot(dat.var.label, aes(x=predictor,y=model,fill=importance))+
+  geom_tile(show.legend=T) +
+  scale_fill_gradientn(legend_title,colours=c("white", re), na.value = "grey98",
+                       limits = c(0, max(dat.var.label$importance)))+
+  scale_x_discrete(limits=c("sqrt.slope","cube.Aspect","log.roughness","distance.to.ramp", "status",
+                            "mean.relief", "sd.relief","sqrt.reef"),
+                   labels=c(
+                     "Slope (sqrt)","Aspect (cubed)","Roughness (log)","Distance to Ramp", "Status",
+                     "Mean Relief", "SD Relief","% Reef (sqrt)"
+                   ))+
+  scale_y_discrete(limits = c("FOV",
+                              "No FOV"),
+                   labels=c("FOV",
+                            "No FOV"))+
+  xlab(NULL)+
+  ylab(NULL)+
+  theme_classic()+
+  Theme1+
+  geom_text(aes(label=label))
+gg.importance.scores
+
 

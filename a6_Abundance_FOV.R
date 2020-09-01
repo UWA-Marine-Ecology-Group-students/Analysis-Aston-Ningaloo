@@ -136,13 +136,26 @@ write.csv(all.mod.fits[,-2],file=paste(name,"lme4.random.all.mod.fits.csv",sep="
 write.csv(all.var.imp,file=paste(name,"lme4.all.var.imp.fov.csv",sep="_"))
 
 ### Plot Importance Scores separates by whether it using FOV or not ####
-setwd(d.dir)
-dat.var.imp <-read.csv("ningaloo_lme4.all.var.imp.csv")%>% #from local copy
+setwd(m.dir)
+dat.var.imp <-read.csv("ningaloo_lme4.all.var.imp.nofov.csv")%>% #from local copy
   rename(resp.var=X)%>%
   gather(key=predictor,value=importance,2:ncol(.))%>%
   glimpse()
 
-dat.var.imp.fov 
+dat.var.imp.fov  <- read.csv("ningaloo_lme4.all.var.imp.fov.csv")%>% #from local copy
+  rename(resp.var=X)%>%
+  gather(key=predictor,value=importance,2:ncol(.))%>%
+  glimpse()
+
+# Add column to say what model was used 
+dat.var.imp <- dat.var.imp%>%
+  mutate(model="No FOV")
+
+dat.var.imp.fov <- dat.var.imp.fov%>%
+  mutate(model="FOV")
+
+# Stick importance scores together
+all.var.imp <- rbind(dat.var.imp,dat.var.imp.fov)
 
 # Plotting defaults----
 library(ggplot2)
@@ -175,28 +188,27 @@ re <- colorRampPalette(c("lightskyblue1","royalblue3"))(200)
 legend_title<-"Importance"
 
 # Annotations-
-dat.var.label<-dat.var.imp%>%
+dat.var.label<-all.var.imp%>%
   mutate(label=NA)%>%
   mutate(label=ifelse(predictor=="distance.to.ramp"&resp.var=="Legal","X",ifelse(predictor=="bathymetry"&resp.var=="Legal","X",ifelse(predictor=="sqrt.reef"&resp.var=="Legal","X",label))))%>%
   mutate(label=ifelse(predictor=="distance.to.ramp"&resp.var=="Sublegal","X",ifelse(predictor=="bathymetry"&resp.var=="Sublegal","X",ifelse(predictor=="sd.relief"&resp.var=="Sublegal","X",label))))%>%
   glimpse()
 
-# Plot gg.importance.scores ----
-# NEED TO ADD IN STATUS
-gg.importance.scores <- ggplot(dat.var.label, aes(x=predictor,y=resp.var,fill=importance))+
+# Plot gg.importance.scores
+gg.importance.scores <- ggplot(dat.var.label, aes(x=predictor,y=model,fill=importance))+
   geom_tile(show.legend=T) +
   scale_fill_gradientn(legend_title,colours=c("white", re), na.value = "grey98",
                        limits = c(0, max(dat.var.label$importance)))+
-  scale_x_discrete(limits=c("bathymetry","TPI","sqrt.slope","cube.aspect","log.roughness",
-                            "distance.to.ramp", "status"),
+  scale_x_discrete(limits=c("sqrt.slope","cube.Aspect","log.roughness","distance.to.ramp", "status",
+                            "mean.relief", "sd.relief","sqrt.reef"),
                    labels=c(
-                     "Bathymetry","TPI","Slope (sqrt)","Aspect (cubed)","Roughness (log)","FlowDir","Mean Relief",
-                     "SD Relief","% Reef (sqrt)","Distance to Ramp", "Status"
+                     "Slope (sqrt)","Aspect (cubed)","Roughness (log)","Distance to Ramp", "Status",
+                     "Mean Relief", "SD Relief","% Reef (sqrt)"
                    ))+
-  scale_y_discrete(limits = c("Legal",
-                              "Sublegal"),
-                   labels=c("Legal",
-                            "Sublegal"))+
+  scale_y_discrete(limits = c("FOV",
+                              "No FOV"),
+                   labels=c("FOV",
+                            "No FOV"))+
   xlab(NULL)+
   ylab(NULL)+
   theme_classic()+

@@ -60,19 +60,15 @@ dat <- dat%>%
 # Subset data 
 legal.dat <- subset(dat, model=='Legal')
 
-# Add row number 
-legal.dat <- legal.dat %>% 
-  mutate(id = row_number())
-
 #Set predictor variables 
-pred.vars=c("sqrt.slope","cube.Aspect","log.roughness","FlowDir",
-            "distance.to.ramp", "site")
+pred.vars=c("sqrt.slope","cube.Aspect","log.roughness",
+            "distance.to.ramp")
 
 #### FSSgam using lme4 + random site ####
 setwd(m.dir)
 # Remove any unused columns from the dataset 
 use.dat <- legal.dat%>%
-  dplyr::select(response, distance.to.ramp, cube.Aspect, sqrt.slope, log.roughness, status, FlowDir,
+  dplyr::select(response, distance.to.ramp, cube.Aspect, sqrt.slope, log.roughness, status,
                 bathymetry, site)
 factor.vars <- c("status")
 

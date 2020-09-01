@@ -1,11 +1,11 @@
-"","modname","formula","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","sqrt.slope","cube.Aspect","log.roughness","distance.to.ramp","site","status","cumsum.wi"
-"cube.Aspect+status","cube.Aspect+status","s(cube.Aspect, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",882.403716244791,901.049407417573,0.13851,NA,10,0,0,1.728,0.504,0.24,0,1,0,0,0,1,0.504
-"cube.Aspect","cube.Aspect","s(cube.Aspect, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",883.228108549986,899.321800035777,0.09956,NA,9,0,0.824,0,0.334,0.57,0,1,0,0,0,0,0.838
-"cube.Aspect+distance.to.ramp","cube.Aspect+distance.to.ramp","s(cube.Aspect, k = 5, bs = ""cr"") + s(distance.to.ramp, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",885.01081313337,906.16864520805,0.08642,NA,13,0,2.607,6.847,0.137,0.019,0,1,0,1,0,0,0.975
-"status","status","status + s(bathymetry, k = 5, bs = ""cr"")",890.686249049876,904.189112894232,0.10744,NA,6,0,8.283,4.867,0.008,0.05,0,0,0,0,0,1,0.983
-"null","null","s(bathymetry, k = 5, bs = ""cr"")",891.817630952193,902.691834789246,0.05474,NA,5,0,9.414,3.37,0.005,0.106,0,0,0,0,0,0,0.988
-"log.roughness+status","log.roughness+status","s(log.roughness, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",892.843529647163,911.489220819945,0.1079,NA,10,2,10.44,12.167,0.003,0.001,0,0,1,0,0,1,0.991
-"site","site","s(site, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",892.885035182016,908.978726667807,0.09161,NA,9,2,10.481,9.657,0.003,0.005,0,0,0,0,1,0,0.994
-"sqrt.slope+status","sqrt.slope+status","s(sqrt.slope, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",893.437259945205,912.082951117987,0.10355,NA,10,2,11.034,12.761,0.002,0.001,1,0,0,0,0,1,0.996
-"distance.to.ramp","distance.to.ramp","s(distance.to.ramp, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",893.570850854706,909.664542340497,0.0409,NA,9,0,11.167,10.343,0.002,0.003,0,0,0,1,0,0,0.998
-"log.roughness","log.roughness","s(log.roughness, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",894.127934119617,910.221625605408,0.04744,NA,9,2,11.724,10.9,0.001,0.002,0,0,1,0,0,0,0.999
+"","modname","formula","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","sqrt.slope","cube.Aspect","log.roughness","distance.to.ramp","status","cumsum.wi"
+"cube.Aspect+status","cube.Aspect+status","s(cube.Aspect, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",882.403716244765,901.049407417547,0.13851,NA,10,0,0,1.728,0.505,0.242,0,1,0,0,1,0.505
+"cube.Aspect","cube.Aspect","s(cube.Aspect, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",883.228108550074,899.321800035865,0.09956,NA,9,0,0.824,0,0.335,0.573,0,1,0,0,0,0.84
+"cube.Aspect+distance.to.ramp","cube.Aspect+distance.to.ramp","s(cube.Aspect, k = 5, bs = ""cr"") + s(distance.to.ramp, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",885.010813133369,906.168645208049,0.08642,NA,13,0,2.607,6.847,0.137,0.019,0,1,0,1,0,0.977
+"status","status","status + s(bathymetry, k = 5, bs = ""cr"")",890.686249049884,904.18911289424,0.10744,NA,6,0,8.283,4.867,0.008,0.05,0,0,0,0,1,0.985
+"null","null","s(bathymetry, k = 5, bs = ""cr"")",891.817630952202,902.691834789255,0.05474,NA,5,0,9.414,3.37,0.005,0.106,0,0,0,0,0,0.99
+"log.roughness+status","log.roughness+status","s(log.roughness, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",892.843529647172,911.489220819954,0.1079,NA,10,2,10.44,12.167,0.003,0.001,0,0,1,0,1,0.993
+"sqrt.slope+status","sqrt.slope+status","s(sqrt.slope, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",893.437259945228,912.082951118009,0.10355,NA,10,2,11.034,12.761,0.002,0.001,1,0,0,0,1,0.995
+"distance.to.ramp","distance.to.ramp","s(distance.to.ramp, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",893.570850854647,909.664542340437,0.0409,NA,9,0,11.167,10.343,0.002,0.003,0,0,0,1,0,0.997
+"log.roughness","log.roughness","s(log.roughness, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",894.127934119615,910.221625605406,0.04744,NA,9,2,11.724,10.9,0.001,0.002,0,0,1,0,0,0.998
+"sqrt.slope","sqrt.slope","s(sqrt.slope, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",894.494108641749,910.58780012754,0.04628,NA,9,2,12.09,11.266,0.001,0.002,1,0,0,0,0,0.999
