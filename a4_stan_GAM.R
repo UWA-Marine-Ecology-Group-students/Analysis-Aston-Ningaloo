@@ -123,7 +123,7 @@ Theme1 <-
     legend.key = element_blank(), # switch off the rectangle around symbols in the legend
     legend.text = element_text(size=15),
     legend.title = element_blank(),
-    legend.position = c(0.75, 0.8),
+    legend.position = c(0.8, 0.8),
     text=element_text(size=15),
     strip.text.y = element_text(size = 15,angle = 0),
     axis.title.x=element_text(vjust=0.3, size=15),
@@ -194,6 +194,7 @@ ggmod.legal.bathy<- ggplot() +
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_rug(data=legal.dat, aes(x=bathymetry),colour="slategrey")+
   theme_classic()+
   xlim(-180,-52)+
   Theme1
@@ -224,6 +225,7 @@ ggmod.legal.aspect<- ggplot() +
   geom_line(data=predicts.legal.aspect,aes(x=cube.Aspect,y=response), colour='darkgreen', alpha=0.75)+
   geom_line(data=predicts.legal.aspect,aes(x=cube.Aspect,y=response - se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.aspect,aes(x=cube.Aspect,y=response + se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
+  geom_rug(data=legal.dat, aes(x=cube.Aspect),colour="slategrey")+
   theme_classic()+
   Theme1
   #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
@@ -252,6 +254,7 @@ ggmod.legal.ramp<- ggplot() +
   geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response), colour='darkred', alpha=0.75)+
   geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response - se.fit), colour='darkred', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.ramp,aes(x=distance.to.ramp,y=response + se.fit), colour='darkred', linetype="dashed",alpha=0.75)+
+  geom_rug(data=legal.dat, aes(x=distance.to.ramp),colour="slategrey")+
   theme_classic()+
   Theme1
   #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
@@ -329,17 +332,24 @@ write.csv(ramp.sim, "bayesian.ramp.predictions.csv")
 
 setwd(m.dir)
 # Plot effect sizes 
+setwd(b.dir)
+ramp.sim <- read.csv("bayesian.ramp.predictions.csv")
+ramp.sim <- ramp.sim[,-1]
 ramp.sim <- ramp.sim[-1,]
 ramp.sim <- as.data.frame(ramp.sim)
 x <- c("Distance to Boat Ramp (km)")
 colnames(ramp.sim) <- x
 
+bathy.sim <- read.csv("bayesian.bathy.predictions.csv")
 bathy.sim <- bathy.sim[-1,]
+bathy.sim <- bathy.sim[,-1]
 bathy.sim <- as.data.frame(bathy.sim)
 x <- c("Bathymetry (m)")
 colnames(bathy.sim) <- x
 
+aspect.sim <- read.csv("bayesian.aspect.predictions.csv")
 aspect.sim <- aspect.sim[-1,]
+aspect.sim <- aspect.sim[,-1]
 aspect.sim <- as.data.frame(aspect.sim)
 x <- c("Cube Aspect (Degrees)")
 colnames(aspect.sim) <- x
@@ -349,12 +359,15 @@ full.data <- as.data.frame(cbind(ramp.sim, aspect.sim, bathy.sim))
 full.data.long <- full.data%>%
   gather(variable, effect.size, 1:3)
 
+colours <- c('#619CFF', '#00BA38', '#F8766D') #9590FF
+
+colours <- c('#619CFF', NA, NA) 
 effect.plot <- ggplot(full.data.long, aes(x = effect.size, fill = variable, colour = variable)) + geom_density(alpha = 0.5) +
   scale_fill_manual(values=colours)+
   scale_colour_manual(values=colours)+
   geom_vline(xintercept = 1.859307, color = "steelblue", size=0.75)+
-  geom_vline(xintercept = 1.418643, color = "tomato3", size=0.75)+
-  geom_vline(xintercept = 1.175649, color = "springgreen4", size=0.7)+
+  #geom_vline(xintercept = 1.418643, color = "tomato3", size=0.75)+
+  #geom_vline(xintercept = 1.175649, color = "springgreen4", size=0.7)+
   xlim(-1,8)+
   theme_classic()+
   labs(y="Density", x="Effect Size")+
@@ -534,7 +547,7 @@ effect.dat.2 <- expand.grid(cube.Aspect=seq(min(legal.dat$cube.Aspect),max(legal
 
 
 # calcualte frequentist effects
-predicted <- predict.gam(Model.2$gam, newdata=effect.dat.2, type='response', se.fit=T)
+predicted <- predict.gam(Model.2$gam, newdata=effect.dat.2, type='response')
 effect.dat.2 <- cbind(effect.dat.2, predicted)
 
 # bathy effect 
@@ -546,6 +559,9 @@ bathy.E.2 <- diff(range(bathy.P.2$predicted))
 bathy.E.2
 
 # Plot predicted
+predicted <- predict.gam(Model.2$gam, newdata=effect.dat.2, type='response', se.fit=T)
+effect.dat.2 <- cbind(effect.dat.2, predicted)
+
 predicts.legal.bathy = effect.dat.2%>%data.frame(predicted)%>%
   group_by(bathymetry)%>% #only change here
   summarise(response=mean(fit),se.fit=mean(se.fit))%>%
@@ -561,13 +577,17 @@ ggmod.legal.bathy<- ggplot() +
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_rug(data=legal.dat, aes(x=bathymetry),colour="slategrey")+
   theme_classic()+
-  Theme1+
-  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+  Theme1
+  #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
 ggmod.legal.bathy
 
 
 # aspect effect 
+predicted <- predict.gam(Model.2$gam, newdata=effect.dat.2, type='response')
+effect.dat.2 <- cbind(effect.dat.2, predicted)
+
 aspect.P.2 <- effect.dat.2%>%
   group_by(cube.Aspect)%>%
   summarise_at(vars(predicted), list(mean))
@@ -591,9 +611,10 @@ ggmod.legal.aspect<- ggplot() +
   geom_line(data=predicts.legal.aspect,aes(x=cube.Aspect,y=response), colour='darkgreen', alpha=0.75)+
   geom_line(data=predicts.legal.aspect,aes(x=cube.Aspect,y=response - se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.aspect,aes(x=cube.Aspect,y=response + se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
+  geom_rug(data=legal.dat, aes(x=cube.Aspect),colour="slategrey")+
   theme_classic()+
-  Theme1+
-  annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
+  Theme1
+  #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
 ggmod.legal.aspect
 
 # status effect 
@@ -625,6 +646,9 @@ ggmod.gam.status<- ggplot(aes(x=status,y=response,colour=status), data=legal.dat
 ggmod.gam.status
 
 # use the bayesian models to calculate a posterior distribution of the effect size
+effect.dat.2 <- expand.grid(cube.Aspect=seq(min(legal.dat$cube.Aspect),max(legal.dat$cube.Aspect),length.out = 20),
+                            bathymetry=seq(min(legal.dat$bathymetry),max(legal.dat$bathymetry), length.out = 20),
+                            status=unique(legal.dat$status))
 effect.dat.sim.2 <- effect.dat.2
 gg <- t(posterior_predict(stangam.s.2, effect.dat.sim.2, re.form=NA))
 #colnames(gg) <- paste("sim",1:ncol(gg),sep="_")
@@ -638,7 +662,7 @@ gg.dat.long.2 <- gg.dat%>%
 gg.dat.long.2$sim <- as.factor(gg.dat.long.2$sim)
 head(gg.dat.long)
 
-str(gg.dat.long)
+str(gg.dat.long.2)
 # bathy effect 
 bathy.sim <- data.frame(matrix(ncol=1, nrow=1))
 x <- c("bathy.mean")
@@ -684,7 +708,7 @@ x <- c("status.mean")
 colnames(status.sim) <- x
 
 for(i in 1:1002){
-  status.sim.1 <- gg.dat.long
+  status.sim.1 <- gg.dat.long.2
   status.sim.2 <- filter(status.sim.1, sim==i)
   status.sim.3 <- group_by(status.sim.2, status)
   status.sim.4 <- summarise_at(status.sim.3, vars(predicted.sim), list(mean))
@@ -708,12 +732,14 @@ colnames(status.sim) <- x
 
 bathy.sim <- read.csv("bayesian.bathy.predictions.2.csv")
 bathy.sim <- as.data.frame(bathy.sim[,-1])
+bathy.sim <- as.data.frame(bathy.sim[-1,])
 bathy.sim <- as.data.frame(bathy.sim)
 x <- 'Bathymetry (m)'
 colnames(bathy.sim) <- x
 
 aspect.sim <- read.csv("bayesian.aspect.predictions.2.csv")
 aspect.sim <- as.data.frame(aspect.sim[,-1])
+aspect.sim <- as.data.frame(aspect.sim[-1,])
 aspect.sim <- as.data.frame(aspect.sim)
 x <- 'Cube Aspect (degrees)'
 colnames(aspect.sim) <- x
@@ -728,16 +754,17 @@ full.data <- as.data.frame(cbind(bathy.sim, aspect.sim, status.sim))
 full.data.long <- full.data%>%
   gather(variable, predicted, 1:3)
 
-
+colours <- c('#619CFF', '#00BA38', '#F8766D') #9590FF
+colours <- c('#619CFF', NA, NA) 
 effect.plot <- ggplot(full.data.long, aes(x = predicted, fill=variable, colour=variable))+ 
   geom_density(alpha = 0.5)+
   scale_color_manual(values=colours)+
   scale_fill_manual(values=colours)+
   geom_vline(xintercept = 2.348731, color = "steelblue", size=0.75)+
-  geom_vline(xintercept = 1.236803, color = "tomato3", size=0.75)+
-  geom_vline(xintercept = 1.544218, color = "springgreen4", size=0.7)+
+  #geom_vline(xintercept = 1.236803, color = "tomato3", size=0.75)+
+  #geom_vline(xintercept = 1.544218, color = "springgreen4", size=0.7)+
   labs(y="Density", x="Effect Size")+
-  xlim(-1,8)+
+  xlim(-1,6)+
   theme_classic()+
   Theme1
 effect.plot

@@ -132,6 +132,7 @@ var.imp=c(var.imp,list(out.list$variable.importance$aic$variable.weights.raw))
 all.mod.fits=do.call("rbind",out.all)
 all.var.imp=do.call("rbind",var.imp)
 
+
 write.csv(all.mod.fits[,-2],file=paste(name,"lme4.random.all.mod.fits.csv",sep="_"))
 write.csv(all.var.imp,file=paste(name,"lme4.all.var.imp.fov.csv",sep="_"))
 

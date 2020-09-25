@@ -1,0 +1,11 @@
+"","modname","formula","AICc","BIC","r2.vals","r2.vals.unique","edf","edf.less.1","delta.AICc","delta.BIC","wi.AICc","wi.BIC","sqrt.slope","cube.Aspect","log.roughness","distance.to.ramp","status","cumsum.wi"
+"cube.Aspect","cube.Aspect","s(cube.Aspect, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",909.39370660644,928.039397779222,0.11539,NA,9,4,0,2.886,0.405,0.148,0,1,0,0,0,0.405
+"cube.Aspect+status","cube.Aspect+status","s(cube.Aspect, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",910.753989676159,931.91182175084,0.13794,NA,10,3,1.36,6.759,0.205,0.021,0,1,0,0,1,0.61
+"status","status","status + s(bathymetry, k = 5, bs = ""cr"")",911.563418418056,927.657109903847,0.03974,NA,6,0,2.17,2.504,0.137,0.18,0,0,0,0,1,0.747
+"null","null","s(bathymetry, k = 5, bs = ""cr"")",911.650182082717,925.153045927073,0.00591,NA,5,1,2.256,0,0.131,0.629,0,0,0,0,0,0.878
+"cube.Aspect+distance.to.ramp","cube.Aspect+distance.to.ramp","s(cube.Aspect, k = 5, bs = ""cr"") + s(distance.to.ramp, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",913.966831476352,937.595878021809,0.11141,NA,13,6,4.573,12.443,0.041,0.001,0,1,0,1,0,0.919
+"distance.to.ramp","distance.to.ramp","s(distance.to.ramp, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",915.582379412834,934.228070585616,0.00532,NA,9,2,6.189,9.075,0.018,0.007,0,0,0,1,0,0.937
+"sqrt.slope","sqrt.slope","s(sqrt.slope, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",916.037923135329,934.683614308111,0.00625,NA,9,3,6.644,9.531,0.015,0.005,1,0,0,0,0,0.952
+"log.roughness+status","log.roughness+status","s(log.roughness, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",916.040791923546,937.198623998227,0.04388,NA,10,2,6.647,12.046,0.015,0.002,0,0,1,0,1,0.967
+"log.roughness","log.roughness","s(log.roughness, k = 5, bs = ""cr"") + s(bathymetry, k = 5, bs = ""cr"")",916.103752795962,934.749443968744,0.00569,NA,9,3,6.71,9.596,0.014,0.005,0,0,1,0,0,0.981
+"sqrt.slope+status","sqrt.slope+status","s(sqrt.slope, k = 5, bs = ""cr"") + status + s(bathymetry, k = 5, bs = ""cr"")",916.105890762413,937.263722837093,0.04004,NA,10,2,6.712,12.111,0.014,0.001,1,0,0,0,1,0.995

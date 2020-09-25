@@ -40,7 +40,7 @@ Theme1 <-
     legend.key = element_blank(), # switch off the rectangle around symbols in the legend
     legend.text = element_text(size=15),
     legend.title = element_blank(),
-    legend.position = c(0.75, 0.8),
+    legend.position = c(0.8, 0.8),
     text=element_text(size=15),
     strip.text.y = element_text(size = 15,angle = 0),
     axis.title.x=element_text(vjust=0.3, size=15),
@@ -202,6 +202,7 @@ ggmod.legal.bathy<- ggplot() +
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=bathymetry),colour="slategrey")+
   theme_classic()+
   Theme1
   #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
@@ -242,6 +243,7 @@ ggmod.aspect<- ggplot() +
   geom_line(data=predicts.aspect,aes(x=cube.Aspect,y=response), colour='darkgreen', alpha=0.75)+
   geom_line(data=predicts.aspect,aes(x=cube.Aspect,y=response - se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.aspect,aes(x=cube.Aspect,y=response + se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=cube.Aspect),colour="slategrey")+
   theme_classic()+
   Theme1
   #annotate("text", x = -Inf, y=Inf, label = "NT",vjust = 2, hjust = -.1,size=5)
@@ -375,13 +377,14 @@ full.data.long <- full.data%>%
   gather(variable, predicted, 1:3)
 
 colours <- c('#619CFF', '#00BA38', '#F8766D')
+colours <- c('#619CFF', NA, NA)
 effect.plot <- ggplot(full.data.long, aes(x = predicted, fill=variable, colour=variable))+ 
   geom_density(alpha = 0.5)+
   scale_color_manual(values=colours)+
   scale_fill_manual(values=colours)+
   geom_vline(xintercept = 7.496373, color = "steelblue", size=0.75)+
-  geom_vline(xintercept = 1.924486, color = "tomato3", size=0.75)+
-  geom_vline(xintercept = 6.250768, color = "springgreen4", size=0.75)+
+  #geom_vline(xintercept = 1.924486, color = "tomato3", size=0.75)+
+  #geom_vline(xintercept = 6.250768, color = "springgreen4", size=0.75)+
   labs(y="Density", x="Effect Size")+
   xlim(-1,15)+
   theme_classic()+
@@ -525,7 +528,7 @@ predict.plot.status <- ggplot() +
              alpha=0.2) +
   geom_boxplot(data=status.mean.long, aes(x=status, y=mean), colour='black', fill=NA, width=0.14)+
   geom_point(data=status.means, aes(x = status, y = status.means), colour='darkred', shape=17, size=3) +
-  labs(y="PredictedSpecies Richness", x="Status")+
+  labs(y="Predicted Species Richness", x="Status")+
   #geom_jitter()+
   theme_classic()+
   Theme1
@@ -580,6 +583,7 @@ ggmod.legal.bathy<- ggplot() +
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=bathymetry),colour="slategrey")+
   theme_classic()+
   Theme1
 #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
@@ -622,6 +626,7 @@ ggmod.aspect<- ggplot() +
   geom_line(data=predicts.aspect,aes(x=cube.Aspect,y=response), colour='darkgreen', alpha=0.75)+
   geom_line(data=predicts.aspect,aes(x=cube.Aspect,y=response - se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.aspect,aes(x=cube.Aspect,y=response + se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=cube.Aspect),colour="slategrey")+
   theme_classic()+
   Theme1
 #annotate("text", x = -Inf, y=Inf, label = "NT",vjust = 2, hjust = -.1,size=5)
@@ -692,12 +697,13 @@ full.data <- as.data.frame(cbind(bathy.sim, aspect.sim))
 full.data.long <- full.data%>%
   gather(variable, predicted, 1:2)
 
-colours2 <- c('#619CFF', '#00BA38')
+colours <- c('#619CFF', '#00BA38', '#F8766D')
+colours2 <- c(NA, '#00BA38')
 effect.plot <- ggplot(full.data.long, aes(x = predicted, fill=variable, colour=variable))+ 
   geom_density(alpha = 0.5)+
   scale_color_manual(values=colours2)+
   scale_fill_manual(values=colours2)+
-  geom_vline(xintercept = 7.80625, color = "steelblue", size=0.75)+
+  #geom_vline(xintercept = 7.80625, color = "steelblue", size=0.75)+
   geom_vline(xintercept = 6.112132, color = "springgreen4", size=0.75)+
   labs(y="Density", x="Effect Size")+
   xlim(-1,18)+
@@ -800,7 +806,7 @@ predict.plot.aspect <- ggplot() +
   Theme1
 predict.plot.aspect
 
-#### Species Ricness model FOV 1 ####
+#### Species Richness model FOV 1 ####
 # Bring in and format the data
 name <- 'ningaloo' # for the study
 
@@ -949,6 +955,7 @@ ggmod.legal.bathy<- ggplot() +
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=bathymetry),colour="slategrey")+
   theme_classic()+
   Theme1
 #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
@@ -980,14 +987,15 @@ predicts.relief = effect.dat.richness%>%data.frame(predicted)%>%
 
 ggmod.relief<- ggplot() +
   ylab("Predicted Species Richness")+
-  xlab('relief (cubed)')+
+  xlab('SD Relief (cubed)')+
   #   ggtitle(substitute(italic(name)))+
   #scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=full.data.rich,aes(x=sd.relief,y=response), colour="lightgreen", alpha=0.75, size=2,show.legend=F)+
-  geom_line(data=predicts.relief,aes(x=sd.relief,y=response), colour='darkgreen', alpha=0.75)+
-  geom_line(data=predicts.relief,aes(x=sd.relief,y=response - se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
-  geom_line(data=predicts.relief,aes(x=sd.relief,y=response + se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
+  geom_point(data=full.data.rich,aes(x=sd.relief,y=response), colour="lightgoldenrod1", alpha=0.75, size=2,show.legend=F)+
+  geom_line(data=predicts.relief,aes(x=sd.relief,y=response), colour='darkgoldenrod1', alpha=0.75)+
+  geom_line(data=predicts.relief,aes(x=sd.relief,y=response - se.fit), colour='darkgoldenrod1', linetype="dashed",alpha=0.75)+
+  geom_line(data=predicts.relief,aes(x=sd.relief,y=response + se.fit), colour='darkgoldenrod1', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=sd.relief),colour="slategrey")+
   theme_classic()+
   Theme1
 #annotate("text", x = -Inf, y=Inf, label = "NT",vjust = 2, hjust = -.1,size=5)
@@ -1023,7 +1031,7 @@ for(i in 1:1002){
 
 bathy.sim
 
-write.csv(bathy.sim, "bayesian.bathy.richness.csv")
+write.csv(bathy.sim, "bayesian.bathy.richness.fov1.csv")
 
 # relief effect 
 relief.sim <- data.frame(matrix(ncol=1, nrow=1))
@@ -1041,7 +1049,7 @@ for(i in 1:1002){
 }
 
 relief.sim
-write.csv(aspect.sim, "bayesian.aspect.richness.csv")
+write.csv(relief.sim, "bayesian.relief.richness.fov1.csv")
 
 ## Create density plot
 bathy.sim <- as.data.frame(bathy.sim[-1,])
@@ -1058,12 +1066,13 @@ full.data.long <- full.data%>%
   gather(variable, predicted, 1:2)
 
 colours2 <- c('#619CFF', '#00BA38')
+colours2 <- c(NA, "lightgoldenrod1")
 effect.plot <- ggplot(full.data.long, aes(x = predicted, fill=variable, colour=variable))+ 
   geom_density(alpha = 0.5)+
   scale_color_manual(values=colours2)+
   scale_fill_manual(values=colours2)+
-  geom_vline(xintercept = 9.047447, color = "steelblue", size=0.75)+
-  geom_vline(xintercept = 15.81526, color = "springgreen4", size=0.75)+
+  #geom_vline(xintercept = 9.047447, color = "steelblue", size=0.75)+
+  geom_vline(xintercept = 15.81526, color = "darkgoldenrod1", size=0.75)+
   labs(y="Density", x="Effect Size")+
   xlim(-1,35)+
   theme_classic()+
@@ -1156,17 +1165,13 @@ relief.mean.long <- relief.mean.full%>%
 
 # Plot the results relief
 predict.plot.relief <- ggplot() +
-  geom_line(data=relief.mean.long, aes(x = sd.relief, y = mean, group=sim), colour='lightgreen',
+  geom_line(data=relief.mean.long, aes(x = sd.relief, y = mean, group=sim), colour='lightgoldenrod1',
             alpha=0.2) +
-  geom_line(data=relief.means, aes(x = relief, y = relief.means), colour='darkgreen') +
+  geom_line(data=relief.means, aes(x = relief, y = relief.means), colour='darkgoldenrod1') +
   labs(y="Predicted Species Richness", x="SD Relief")+
   theme_classic()+
   Theme1
 predict.plot.relief
-
-
-
-
 
 
 #### Species Richness model FOV 2 ####
@@ -1220,6 +1225,7 @@ ggmod.legal.bathy<- ggplot() +
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
   geom_line(data=predicts.legal.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=bathymetry),colour="slategrey")+
   theme_classic()+
   Theme1
 #annotate("text", x = -Inf, y=Inf, label = "(c)",vjust = 1, hjust = -.1,size=5)
@@ -1245,21 +1251,22 @@ relief.E
 predicted <- predict.gam(Model.richness.fov.2$gam, newdata=effect.dat.richness, type='response', se.fit=T)
 effect.dat.richness <- cbind(effect.dat.richness, predicted)
 
-predicts.relief = effect.dat.richness%>%data.frame(predicted)%>%
+predicts.relief <- effect.dat.richness%>%data.frame(predicted)%>%
   group_by(sd.relief)%>% #only change here
   summarise(response=mean(fit),se.fit=mean(se.fit))%>%
   ungroup()
 
 ggmod.relief<- ggplot() +
   ylab("Predicted Species Richness")+
-  xlab('relief (cubed)')+
+  xlab('SD Relief (cubed)')+
   #   ggtitle(substitute(italic(name)))+
   #scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=full.data.rich,aes(x=sd.relief,y=response), colour="lightgreen", alpha=0.75, size=2,show.legend=F)+
-  geom_line(data=predicts.relief,aes(x=sd.relief,y=response), colour='darkgreen', alpha=0.75)+
-  geom_line(data=predicts.relief,aes(x=sd.relief,y=response - se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
-  geom_line(data=predicts.relief,aes(x=sd.relief,y=response + se.fit), colour='darkgreen', linetype="dashed",alpha=0.75)+
+  geom_point(data=full.data.rich,aes(x=sd.relief,y=response), colour="lightgoldenrod1", alpha=0.75, size=2,show.legend=F)+
+  geom_line(data=predicts.relief,aes(x=sd.relief,y=response), colour='darkgoldenrod1', alpha=0.75)+
+  geom_line(data=predicts.relief,aes(x=sd.relief,y=response - se.fit), colour='darkgoldenrod1', linetype="dashed",alpha=0.75)+
+  geom_line(data=predicts.relief,aes(x=sd.relief,y=response + se.fit), colour='darkgoldenrod1', linetype="dashed",alpha=0.75)+
+  geom_rug(data=full.data.rich, aes(x=sd.relief),colour="slategrey")+
   theme_classic()+
   Theme1
 #annotate("text", x = -Inf, y=Inf, label = "NT",vjust = 2, hjust = -.1,size=5)
@@ -1335,7 +1342,7 @@ for(i in 1:1002){
 
 bathy.sim
 
-write.csv(bathy.sim, "bayesian.bathy.richness.csv")
+write.csv(bathy.sim, "bayesian.bathy.richness.fov2.csv")
 
 # relief effect by status
 relief.sim <- data.frame(matrix(ncol=1, nrow=1))
@@ -1353,7 +1360,7 @@ for(i in 1:1002){
 }
 
 relief.sim
-write.csv(relief.sim, "bayesian.relief.richness.csv")
+write.csv(relief.sim, "bayesian.relief.richness.fov2.csv")
 
 # Status effect
 status.sim <- data.frame(matrix(ncol=1, nrow=1))
@@ -1372,7 +1379,7 @@ for(i in 1:1002){
 
 status.sim
 
-write.csv(status.sim, "bayesian.status.richness.csv")
+write.csv(status.sim, "bayesian.status.richness..fov2csv")
 
 ## Create density plot
 status.sim <- as.data.frame(status.sim[-1,])
@@ -1392,14 +1399,16 @@ full.data <- as.data.frame(cbind(bathy.sim, relief.sim, status.sim))
 full.data.long <- full.data%>%
   gather(variable, predicted, 1:3)
 
-colours <- c('#619CFF', '#00BA38', '#F8766D')
+
+colours <- c('#619CFF', 'lightgoldenrod1','#F8766D')
+colours <- c(NA, NA, '#F8766D')
 effect.plot <- ggplot(full.data.long, aes(x = predicted, fill=variable, colour=variable))+ 
   geom_density(alpha = 0.5)+
   scale_color_manual(values=colours)+
   scale_fill_manual(values=colours)+
-  geom_vline(xintercept = 8.96545, color = "steelblue", size=0.75)+
+  #geom_vline(xintercept = 8.96545, color = "steelblue", size=0.75)+
   geom_vline(xintercept = 0.6136397, color = "tomato3", size=0.75)+
-  geom_vline(xintercept = 15.55588, color = "springgreen4", size=0.75)+
+  #geom_vline(xintercept = 15.55588, color = "darkgoldenrod1", size=0.75)+
   labs(y="Density", x="Effect Size")+
   xlim(-2,33)+
   theme_classic()+
@@ -1492,9 +1501,9 @@ relief.mean.long <- relief.mean.full%>%
 
 # Plot the results relief NT
 predict.plot.relief <- ggplot() +
-  geom_line(data=relief.mean.long, aes(x = sd.relief, y = mean, group=sim), colour='lightgreen',
+  geom_line(data=relief.mean.long, aes(x = sd.relief, y = mean, group=sim), colour='lightgoldenrod1',
             alpha=0.2) +
-  geom_line(data=relief.means, aes(x = relief, y = relief.means), colour='darkgreen') +
+  geom_line(data=relief.means, aes(x = relief, y = relief.means), colour='darkgoldenrod1') +
   labs(y="Predicted Species Richness", x="SD Relief")+
   theme_classic()+
   Theme1
