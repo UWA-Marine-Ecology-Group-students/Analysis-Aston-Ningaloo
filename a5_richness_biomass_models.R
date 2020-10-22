@@ -1066,13 +1066,13 @@ full.data.long <- full.data%>%
   gather(variable, predicted, 1:2)
 
 colours2 <- c('#619CFF', '#00BA38')
-colours2 <- c(NA, "lightgoldenrod1")
+colours2 <- c(NA, "goldenrod1")
 effect.plot <- ggplot(full.data.long, aes(x = predicted, fill=variable, colour=variable))+ 
   geom_density(alpha = 0.5)+
   scale_color_manual(values=colours2)+
   scale_fill_manual(values=colours2)+
   #geom_vline(xintercept = 9.047447, color = "steelblue", size=0.75)+
-  geom_vline(xintercept = 15.81526, color = "darkgoldenrod1", size=0.75)+
+  geom_vline(xintercept = 15.81526, color = "darkgoldenrod3", size=0.75)+
   labs(y="Density", x="Effect Size")+
   xlim(-1,35)+
   theme_classic()+
@@ -1167,8 +1167,9 @@ relief.mean.long <- relief.mean.full%>%
 predict.plot.relief <- ggplot() +
   geom_line(data=relief.mean.long, aes(x = sd.relief, y = mean, group=sim), colour='lightgoldenrod1',
             alpha=0.2) +
-  geom_line(data=relief.means, aes(x = relief, y = relief.means), colour='darkgoldenrod1') +
+  geom_line(data=relief.means, aes(x = relief, y = relief.means), colour='darkgoldenrod2') +
   labs(y="Predicted Species Richness", x="SD Relief")+
+  geom_rug(data=full.data.rich, aes(x=sd.relief),colour="slategrey")+
   theme_classic()+
   Theme1
 predict.plot.relief

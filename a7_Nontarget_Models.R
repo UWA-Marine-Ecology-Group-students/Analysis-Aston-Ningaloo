@@ -114,8 +114,7 @@ use.dat <- full.non.target%>%
   dplyr::select(response, distance.to.ramp, cube.Aspect, sqrt.slope, log.roughness, status,
                 bathymetry,site, sd.relief, mean.relief, sqrt.reef, ID)
 pred.vars=c("sqrt.slope","cube.Aspect","log.roughness",
-            "distance.to.ramp")
-            #"sd.relief", "mean.relief", "sqrt.reef")
+            "distance.to.ramp","sd.relief", "mean.relief", "sqrt.reef")
 factor.vars <- c("status")
 
 out.all <- list()
@@ -828,15 +827,15 @@ predicts.FOV1.bathy = effect.dat.fit%>%data.frame(predicted.fit)%>%
   ungroup()
 
 ggmod.FOV1.bathy<- ggplot() +
-  ylab("Predicted Abundance of Non-target Species")+
+  ylab("Predicted Abundance of Non-fished Species")+
   xlab('Bathymetry (m)')+
   #   ggtitle(substitute(italic(name)))+
   #scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=full.non.target,aes(x=bathymetry,y=response), colour="lightblue", alpha=0.75, size=2,show.legend=F)+
-  geom_line(data=predicts.FOV1.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
-  geom_line(data=predicts.FOV1.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
-  geom_line(data=predicts.FOV1.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_point(data=full.non.target,aes(x=bathymetry,y=response), colour="skyblue", alpha=0.75, size=2,show.legend=F)+
+  geom_line(data=predicts.FOV1.bathy,aes(x=bathymetry,y=response), colour='deepskyblue4')+
+  geom_line(data=predicts.FOV1.bathy,aes(x=bathymetry,y=response - se.fit), colour='deepskyblue4', linetype="dashed")+
+  geom_line(data=predicts.FOV1.bathy,aes(x=bathymetry,y=response + se.fit), colour='deepskyblue4', linetype="dashed")+
   theme_classic()+
   geom_rug(data=full.non.target, aes(x=bathymetry),colour="slategrey")+
   xlim(-180,-52)+
@@ -859,15 +858,15 @@ predicts.FOV1.relief = effect.dat.fit%>%data.frame(predicted.fit)%>%
   ungroup()
 
 ggmod.FOV1.relief<- ggplot() +
-  ylab("Predicted Abundance of Non-target Species")+
+  ylab("Predicted Abundance of Non-fished Species")+
   xlab('Standard Deviation of Relief')+
   #   ggtitle(substitute(italic(name)))+
   #scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=full.non.target,aes(x=sd.relief,y=response), colour='lightgoldenrod1', alpha=0.75, size=2,show.legend=F)+
-  geom_line(data=predicts.FOV1.relief,aes(x=sd.relief,y=response), colour='darkgoldenrod3', alpha=0.75)+
-  geom_line(data=predicts.FOV1.relief,aes(x=sd.relief,y=response - se.fit), colour='darkgoldenrod3', linetype="dashed",alpha=0.75)+
-  geom_line(data=predicts.FOV1.relief,aes(x=sd.relief,y=response + se.fit), colour='darkgoldenrod3', linetype="dashed",alpha=0.75)+
+  geom_point(data=full.non.target,aes(x=sd.relief,y=response), colour='goldenrod1', alpha=0.5, size=2,show.legend=F)+
+  geom_line(data=predicts.FOV1.relief,aes(x=sd.relief,y=response), colour='darkgoldenrod3')+
+  geom_line(data=predicts.FOV1.relief,aes(x=sd.relief,y=response - se.fit), colour='darkgoldenrod3', linetype="dashed")+
+  geom_line(data=predicts.FOV1.relief,aes(x=sd.relief,y=response + se.fit), colour='darkgoldenrod3', linetype="dashed")+
   geom_rug(data=full.non.target, aes(x=sd.relief),colour="slategrey")+
   theme_classic()+
   Theme1
@@ -941,20 +940,19 @@ bathy.sim.FOV1 <- as.data.frame(bathy.sim.FOV1)
 x <- c("Bathymetry (m)")
 colnames(bathy.sim.FOV1) <- x
 
-
 full.data.FOV1 <- as.data.frame(cbind(relief.sim.FOV1, bathy.sim.FOV1))
 
 full.data.long.FOV1 <- full.data.FOV1%>%
   gather(variable, effect.size, 1:2)
 
-colours <- c(NA, 'lightgoldenrod1') #00BA3, #F8766D
+colours <- c('skyblue', NA) #00BA3, #F8766D
 effect.plot.FOV1 <- ggplot(full.data.long.FOV1, aes(x = effect.size, fill = variable, colour = variable)) + geom_density(alpha = 0.5) +
   scale_fill_manual(values=colours)+
   scale_colour_manual(values=colours)+
-  #geom_vline(xintercept = 6.170516, color = "steelblue", size=0.75)+
+  geom_vline(xintercept = 6.170516, color = "deepskyblue4", size=0.75)+
   #geom_vline(xintercept = 0.8757575, color = "tomato3", size=0.75)+
   #geom_vline(xintercept = 9.650483, color = "springgreen4", size=0.75)+
-  geom_vline(xintercept= 19.93631, color= "darkgoldenrod1", size=0.75)+
+  #geom_vline(xintercept= 19.93631, color= "darkgoldenrod3", size=0.75)+
   xlim(-10,110)+
   theme_classic()+
   labs(y="Density", x="Effect Size")+
@@ -1003,10 +1001,10 @@ bathy.mean.long.FOV1 <- bathy.mean.full.FOV1%>%
 
 # Plot the results bathy
 predict.plot.bathy.FOV1 <- ggplot() +
-  geom_line(data=bathy.mean.long.FOV1, aes(x = bathymetry, y = mean, group=sim), colour='lightblue'
+  geom_line(data=bathy.mean.long.FOV1, aes(x = bathymetry, y = mean, group=sim), colour='skyblue'
             , alpha=0.2)+
-  geom_line(data=bathy.means.FOV1, aes(x = depths, y = bathy.means.FOV1), colour='darkblue') +
-  labs(y="Predicted Abundance Non-target Fish", x="Bathymetry (m)")+
+  geom_line(data=bathy.means.FOV1, aes(x = depths, y = bathy.means.FOV1), colour='deepskyblue4') +
+  labs(y="Predicted Abundance Non-fished Species", x="Bathymetry (m)")+
   theme_classic()+
   geom_rug(data=full.non.target, aes(x=bathymetry),colour="slategrey")+
   xlim(-180,-51)+
@@ -1051,10 +1049,10 @@ relief.mean.long.FOV1 <- relief.mean.full.FOV1%>%
 
 # Plot the results relief
 predict.plot.relief.FOV1 <- ggplot() +
-  geom_line(data=relief.mean.long.FOV1, aes(x = sd.relief, y = mean, group=sim), colour='lightgoldenrod1',
-            alpha=0.2) +
-  geom_line(data=relief.means.FOV1, aes(x = relief, y = relief.means.FOV1), colour='darkgoldenrod1') +
-  labs(y="Predicted Abundance Non-target Species", x="Standard Deviaion of Relief")+
+  geom_line(data=relief.mean.long.FOV1, aes(x = sd.relief, y = mean, group=sim), colour='goldenrod1',
+            alpha=0.07) +
+  geom_line(data=relief.means.FOV1, aes(x = relief, y = relief.means.FOV1), colour='darkgoldenrod3', size=0.85) +
+  labs(y="Predicted Abundance Non-fished Species", x="Standard Deviation of Relief")+
   theme_classic()+
   geom_rug(data=full.non.target, aes(x=sd.relief),colour="slategrey")+
   Theme1
@@ -1103,15 +1101,15 @@ predicts.FOV2.bathy = effect.dat.fit%>%data.frame(predicted.fit)%>%
   ungroup()
 
 ggmod.FOV2.bathy<- ggplot() +
-  ylab("Predicted Abundance of Non-target Species")+
+  ylab("Predicted Abundance of Non-fished Species")+
   xlab('Bathymetry (m)')+
   #   ggtitle(substitute(italic(name)))+
   #scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=full.non.target,aes(x=bathymetry,y=response), colour="lightblue", alpha=0.75, size=2,show.legend=F)+
-  geom_line(data=predicts.FOV2.bathy,aes(x=bathymetry,y=response), colour='darkblue', alpha=0.75)+
-  geom_line(data=predicts.FOV2.bathy,aes(x=bathymetry,y=response - se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
-  geom_line(data=predicts.FOV2.bathy,aes(x=bathymetry,y=response + se.fit), colour='darkblue', linetype="dashed",alpha=0.75)+
+  geom_point(data=full.non.target,aes(x=bathymetry,y=response), colour="skyblue", alpha=0.75, size=2,show.legend=F)+
+  geom_line(data=predicts.FOV2.bathy,aes(x=bathymetry,y=response), colour='deepskyblue4')+
+  geom_line(data=predicts.FOV2.bathy,aes(x=bathymetry,y=response - se.fit), colour='deepskyblue', linetype="dashed")+
+  geom_line(data=predicts.FOV2.bathy,aes(x=bathymetry,y=response + se.fit), colour='deepskyblue', linetype="dashed")+
   theme_classic()+
   geom_rug(data=full.non.target,aes(x=bathymetry), colour="slategrey")+
   xlim(-180,-52)+
@@ -1134,15 +1132,15 @@ predicts.FOV2.reef = effect.dat.fit%>%data.frame(predicted.fit)%>%
   ungroup()
 
 ggmod.FOV2.reef<- ggplot() +
-  ylab("Predicted Abundance of Non-target Species")+
-  xlab('Standard Deviation of reef')+
+  ylab("Predicted Abundance of Non-fished Species")+
+  xlab('Percent Reef Cover (square root)')+
   #   ggtitle(substitute(italic(name)))+
   #scale_color_manual(labels = c("Fished", "No-take"),values=c("royalblue2", "slategrey"))+
   geom_jitter(width = 0.25,height = 0)+
-  geom_point(data=full.non.target,aes(x=sqrt.reef,y=response), colour="orangered1", alpha=0.75, size=2,show.legend=F)+
-  geom_line(data=predicts.FOV2.reef,aes(x=sqrt.reef,y=response), colour='orangered', alpha=0.75)+
-  geom_line(data=predicts.FOV2.reef,aes(x=sqrt.reef,y=response - se.fit), colour='orangered', linetype="dashed",alpha=0.75)+
-  geom_line(data=predicts.FOV2.reef,aes(x=sqrt.reef,y=response + se.fit), colour='orangered', linetype="dashed",alpha=0.75)+
+  geom_point(data=full.non.target,aes(x=sqrt.reef,y=response), colour="darkslateblue", alpha=0.5, size=2,show.legend=F)+
+  geom_line(data=predicts.FOV2.reef,aes(x=sqrt.reef,y=response), colour='mediumpurple4')+
+  geom_line(data=predicts.FOV2.reef,aes(x=sqrt.reef,y=response - se.fit), colour='mediumpurple4', linetype="dashed")+
+  geom_line(data=predicts.FOV2.reef,aes(x=sqrt.reef,y=response + se.fit), colour='mediumpurple4', linetype="dashed")+
   geom_rug(data=full.non.target,aes(x=sqrt.reef), colour="slategrey")+
   theme_classic()+
   Theme1
@@ -1221,12 +1219,12 @@ full.data.FOV2 <- as.data.frame(cbind(reef.sim.FOV2, bathy.sim.FOV2))
 full.data.long.FOV2 <- full.data.FOV2%>%
   gather(variable, effect.size, 1:2)
 
-colours <- c('#619CFF', NA) #
+colours <- c(NA, 'darkslateblue') #
 effect.plot.FOV2 <- ggplot(full.data.long.FOV2, aes(x = effect.size, fill = variable, colour = variable)) + geom_density(alpha = 0.5) +
   scale_fill_manual(values=colours)+
   scale_colour_manual(values=colours)+
-  geom_vline(xintercept = 4.124249, color = "steelblue", size=0.75)+
-  #geom_vline(xintercept = 6.686027, color = "orangered2", size=0.75)+
+  #geom_vline(xintercept = 4.124249, color = "deepskyblue4", size=0.75)+
+  geom_vline(xintercept = 6.686027, color = "mediumpurple4", size=0.75)+
   #geom_vline(xintercept = 9.783041, color = "springgreen4", size=0.75)+
   xlim(-10,100)+
   theme_classic()+
@@ -1276,10 +1274,10 @@ bathy.mean.long.FOV2 <- bathy.mean.full.FOV2%>%
 
 # Plot the results bathy
 predict.plot.bathy.FOV2 <- ggplot() +
-  geom_line(data=bathy.mean.long.FOV2, aes(x = bathymetry, y = mean, group=sim), colour='lightblue'
+  geom_line(data=bathy.mean.long.FOV2, aes(x = bathymetry, y = mean, group=sim), colour='skyblue'
             , alpha=0.2)+
-  geom_line(data=bathy.means.FOV2, aes(x = depths, y = bathy.means.FOV2), colour='darkblue') +
-  labs(y="Predicted Abundance Legal of Sized Fish", x="Bathymetry (m)")+
+  geom_line(data=bathy.means.FOV2, aes(x = depths, y = bathy.means.FOV2), colour='deepskyblue4') +
+  labs(y="Predicted Abundance of Non-fished Species", x="Bathymetry (m)")+
   theme_classic()+
   geom_rug(data=full.non.target, aes(x = bathymetry), colour="slategrey")+
   xlim(-180,-51)+
@@ -1323,10 +1321,10 @@ reef.mean.long.FOV2 <- reef.mean.full.FOV2%>%
 
 # Plot the results reef
 predict.plot.reef.FOV2 <- ggplot() +
-  geom_line(data=reef.mean.long.FOV2, aes(x = sqrt.reef, y = mean, group=sim), colour='orange2',
-            alpha=0.2) +
-  geom_line(data=reef.means.FOV2, aes(x = reef, y = reef.means.FOV2), colour='orangered') +
-  labs(y="Predicted Abundance Non-target Species", x="% Cover Reef (square root)")+
+  geom_line(data=reef.mean.long.FOV2, aes(x = sqrt.reef, y = mean, group=sim), colour='mediumpurple3',
+            alpha=0.02) +
+  geom_line(data=reef.means.FOV2, aes(x = reef, y = reef.means.FOV2), colour='mediumpurple4') +
+  labs(y="Predicted Abundance Non-fished Species", x="Percent Cover Reef (square root)")+
   theme_classic()+
   geom_rug(data=full.non.target, aes(x=sqrt.reef), colour="slategrey")+
   Theme1
