@@ -273,3 +273,14 @@ write.fst(complete.length.number.mass,"complete.mass.fst")
 
 length(unique(complete.maxn$sample)) # 123
 length(unique(complete.length.number$sample)) #117
+
+
+maxn.samples<-complete.maxn%>%distinct(sample)
+
+length.samples<-complete.length.number%>%distinct(sample)
+
+#which records occur in maxn.samples but not in length.samples
+test<-anti_join(maxn.samples,length.samples) # these are ok
+
+
+test2<-anti_join(length.samples,maxn.samples) # yew
