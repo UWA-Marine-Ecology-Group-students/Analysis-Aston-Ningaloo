@@ -55,7 +55,7 @@ working.dir<-dirname(rstudioapi::getActiveDocumentContext()$path) # sets working
 dir()
 
 ## Save these directory names to use later----
-to.be.checked.dir<-paste(working.dir,"Data to be checked",sep="/") 
+to.be.checked.dir<-paste(working.dir,"Staging",sep="/") 
 download.dir<-paste(working.dir,"Downloads",sep="/")
 tidy.dir<-paste(working.dir,"Tidy data",sep="/")
 plots.dir=paste(working.dir,"Plots",sep="/")
@@ -68,6 +68,7 @@ dir.create(file.path(working.dir, "Errors to check"))
 
 # Import unchecked data from staging folder----
 setwd(to.be.checked.dir)
+dir()
 
 # Import metadata ---
 metadata<-read.csv(paste(study,"metadata.csv",sep="_"))
@@ -325,21 +326,21 @@ length<-length%>%
   filter(range<7000)%>%
   glimpse()
 
-# CAUTION Remove taxa that don't match from the final data ----
-maxn<-anti_join(maxn,maxn.taxa.not.match.life.history)
-length<-anti_join(length,length.taxa.not.match)
+# # CAUTION Remove taxa that don't match from the final data ----
+# maxn<-anti_join(maxn,maxn.taxa.not.match.life.history)
+# length<-anti_join(length,length.taxa.not.match)
 
-# CAUTION Drop wrong lengths ----
-drop.length<-wrong.length.taxa%>% # TO REMOVE LENGTHS OUTSIDE THE MIN/MAX OF MASTER LIST
-  distinct(family,genus,species,length)%>%
-  dplyr::select(family,genus,species,length)%>%
-  dplyr::mutate(key = paste(family,genus,species,length, sep = '_'))
-
-length<-length%>%
-  dplyr::mutate(key = paste(family,genus,species,length, sep = '_'))%>%
-  anti_join(drop.length,by="key")%>% # for dropping wrong.lengths
-  dplyr::select(-c(key))%>%
-  glimpse()
+# # CAUTION Drop wrong lengths ----
+# drop.length<-wrong.length.taxa%>% # TO REMOVE LENGTHS OUTSIDE THE MIN/MAX OF MASTER LIST
+#   distinct(family,genus,species,length)%>%
+#   dplyr::select(family,genus,species,length)%>%
+#   dplyr::mutate(key = paste(family,genus,species,length, sep = '_'))
+# 
+# length<-length%>%
+#   dplyr::mutate(key = paste(family,genus,species,length, sep = '_'))%>%
+#   anti_join(drop.length,by="key")%>% # for dropping wrong.lengths
+#   dplyr::select(-c(key))%>%
+#   glimpse()
 
 # WRITE FINAL checked data----
 setwd(tidy.dir)

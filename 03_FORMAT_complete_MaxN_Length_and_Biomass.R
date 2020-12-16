@@ -270,3 +270,6 @@ complete.length.number<-complete.length.number%>%
 write.fst(complete.maxn, "complete.maxn.fst")
 write.fst(complete.length.number,"complete.length.fst")
 write.fst(complete.length.number.mass,"complete.mass.fst")
+
+length(unique(complete.maxn$sample)) # 123
+length(unique(complete.length.number$sample)) #117

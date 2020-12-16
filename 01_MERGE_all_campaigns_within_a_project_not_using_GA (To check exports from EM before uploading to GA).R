@@ -70,7 +70,8 @@ dir.create(file.path(working.dir, "Tidy data"))
 
 # For csv file ----
 setwd(tidy.dir)
-metadata <-read.csv("ningaloo_metadata.csv")%>% # list all files ending in "_Metadata.csv"
+dir()
+metadata <-read.csv("ningaloo_metadata_fixed.csv")%>% # list all files ending in "_Metadata.csv"
   ga.clean.names()%>%
   mutate(sample=as.factor(sample))%>%
   # dplyr::select(sample,latitude,longitude,date,time,location,status,site,depth,observer,successful.count,successful.length,comment)%>% # This line ONLY keep the 15 columns listed. Remove or turn this line off to keep all columns (Turn off with a # at the front).
@@ -79,6 +80,7 @@ metadata <-read.csv("ningaloo_metadata.csv")%>% # list all files ending in "_Met
 dir()
 
 unique(metadata$campaignid) # check the number of campaigns in metadata, and the campaign name
+unique(metadata$sample) # 132
 
 setwd(staging.dir)
 write.csv(metadata,paste(study,"metadata.csv",sep="_"),row.names = FALSE)
@@ -89,6 +91,8 @@ maxn<-ga.create.em.maxn()%>%
   dplyr::filter(successful.count=="Yes")%>%
   dplyr::filter(maxn>0)
 
+length(unique(maxn$sample)) #123
+
 # Save MaxN file ----
 setwd(staging.dir)
 write.csv(maxn,paste(study,"maxn.csv",sep="_"),row.names = FALSE)
@@ -97,8 +101,10 @@ write.csv(maxn,paste(study,"maxn.csv",sep="_"),row.names = FALSE)
 length3dpoints<-ga.create.em.length3dpoints()%>%
   dplyr::select(-c(time,comment))%>% # take time out as there is also a time column in the metadata
   dplyr::inner_join(metadata)%>%
-  # dplyr::filter(successful.length=="Yes")%>% charlotte to add later
+  dplyr::filter(successful.length=="Yes")%>% #charlotte to add later
   glimpse()
+
+length(unique(length3dpoints$sample)) # 117
 
 ## Save length files ----
 setwd(staging.dir)
